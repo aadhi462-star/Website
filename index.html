@@ -1665,12 +1665,14 @@
 
         /* Product Familiarity Section */
         .products-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
             gap: 2rem;
         }
 
         .product-card {
+            flex: 0 1 200px;
             background: rgba(26, 17, 8, 0.6);
             border: 1px solid rgba(148, 163, 184, 0.08);
             border-radius: 20px;
@@ -1891,7 +1893,10 @@
                 grid-template-columns: 1fr;
             }
             .products-grid {
-                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+                gap: 1rem;
+            }
+            .product-card {
+                flex: 0 1 150px;
             }
         }
 
@@ -2549,34 +2554,9 @@
                     <span class="product-tags">Email · Productivity</span>
                 </div>
                 <div class="product-card">
-                    <img src="Images/writer.png" alt="Zoho Writer" class="product-logo">
-                    <h3>Zoho Writer</h3>
-                    <span class="product-tags">Documents · Editing</span>
-                </div>
-                <div class="product-card">
                     <img src="Images/Analytics.png" alt="Zoho Analytics" class="product-logo">
                     <h3>Zoho Analytics</h3>
                     <span class="product-tags">BI · Dashboards</span>
-                </div>
-                <div class="product-card">
-                    <img src="Images/Zoho Cliq Logo.png" alt="Zoho Cliq" class="product-logo">
-                    <h3>Zoho Cliq</h3>
-                    <span class="product-tags">Communication · Teams</span>
-                </div>
-                <div class="product-card">
-                    <img src="Images/Show.png" alt="Zoho Show" class="product-logo">
-                    <h3>Zoho Show</h3>
-                    <span class="product-tags">Presentations · Design</span>
-                </div>
-                <div class="product-card">
-                    <img src="Images/notebook.png" alt="Zoho Notebook" class="product-logo">
-                    <h3>Zoho Notebook</h3>
-                    <span class="product-tags">Notes · Organization</span>
-                </div>
-                <div class="product-card">
-                    <img src="Images/Zoho Vault Logo.png" alt="Zoho Vault" class="product-logo">
-                    <h3>Zoho Vault</h3>
-                    <span class="product-tags">Security · Passwords</span>
                 </div>
                 <div class="product-card">
                     <img src="Images/Sites.png" alt="Zoho Sites" class="product-logo">
@@ -2597,16 +2577,6 @@
                     <img src="Images/Zoho Workplace Logo.png" alt="Zoho Workplace" class="product-logo">
                     <h3>Zoho Workplace</h3>
                     <span class="product-tags">Suite · Productivity</span>
-                </div>
-                <div class="product-card">
-                    <img src="Images/Translator.png" alt="Zoho Translator" class="product-logo">
-                    <h3>Zia Translator</h3>
-                    <span class="product-tags">AI · Translation</span>
-                </div>
-                <div class="product-card">
-                    <img src="Images/Toolkit.png" alt="Zoho Toolkit" class="product-logo">
-                    <h3>Zoho Toolkit</h3>
-                    <span class="product-tags">Utilities · Tools</span>
                 </div>
             </div>
         </div>
