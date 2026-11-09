@@ -6,7 +6,7 @@
  *
  *   id            unique, lowercase-with-dashes (URL: #work/<id>)
  *   title         project name
- *   category      e.g. "Product", "Tool", "Coursework"
+ *   category      e.g. "Product", "Tool"
  *   year          e.g. "2026" (optional)
  *   role          what you did, e.g. "Designed & built" (optional)
  *   summary       one or two sentences
@@ -126,32 +126,5 @@ window.PROJECTS = [
       "Designed and built the extension, from selecting elements visually on the page to gathering what you picked into a usable format.",
     // Add a Chrome Web Store or GitHub link here when it's public
     tags: ["Chrome extension", "JavaScript", "Automation"]
-  },
-  {
-    id: "business-model-canvas",
-    title: "Business Model Canvas",
-    category: "Coursework",
-    summary:
-      "Applying the Business Model Canvas to real-world products: partners, value propositions and revenue streams in one strategic view.",
-    tags: ["Product management", "Business strategy"],
-    links: [{ label: "View works", url: "https://workdrive.zohoexternal.in/external/337fe70466d8c05ae4a7c672ec5943a9798b55f06fa3f0b012002b11c32ca066" }]
-  },
-  {
-    id: "product-ideation",
-    title: "Product Ideation",
-    category: "Coursework",
-    summary:
-      "Design Thinking and Mind Mapping used to generate solutions for everyday consumer pain points, through to a product pitch.",
-    tags: ["Design thinking", "Ideation", "Pitching"],
-    links: [{ label: "View works", url: "https://workdrive.zohoexternal.in/external/337fe70466d8c05ae4a7c672ec5943a9798b55f06fa3f0b012002b11c32ca066" }]
-  },
-  {
-    id: "psychographic-research",
-    title: "Psychographic Research",
-    category: "Coursework",
-    summary:
-      "Demographics say who buys; psychographics say why. A study of the values, lifestyles and personalities of target segments.",
-    tags: ["Consumer research", "Marketing"],
-    links: [{ label: "View works", url: "https://workdrive.zohoexternal.in/external/337fe70466d8c05ae4a7c672ec5943a9798b55f06fa3f0b012002b11c32ca066" }]
   }
 ];

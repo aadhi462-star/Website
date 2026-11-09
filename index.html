@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jaswant R — Explorer, learner, builder</title>
     <meta name="description" content="Jaswant R — a curious generalist at Zoho School of Business. I explore how things work, then build with what I learn. Projects, experience and contact.">
-    <meta name="theme-color" content="#0d0e0e">
+    <meta name="theme-color" content="#0d0e0e" media="(prefers-color-scheme: dark)">
+    <meta name="theme-color" content="#f3f0ea" media="(prefers-color-scheme: light)">
     <link rel="canonical" href="https://jaswantrportfolio.onslate.in/">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://jaswantrportfolio.onslate.in/">
@@ -17,10 +18,11 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300..900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/styles.css?v=20261109">
+    <link rel="stylesheet" href="css/styles.css?v=20261109b">
     <!-- Bump ?v= on the CSS/JS links whenever they change, so browsers fetch the new files -->
     <script>
         document.documentElement.classList.add('js');
+        try { var t = localStorage.getItem('jr-theme'); if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t; } catch (e) {}
         // Safety net: if main.js fails or is slow, show everything instead of a blank page
         setTimeout(function () { if (!window.__jrReady) document.documentElement.classList.remove('js'); }, 3000);
     </script>
@@ -62,11 +64,16 @@
                 <a href="#contact" data-nav="contact">Contact</a>
             </nav>
 
-            <a class="header-cta link-line" href="mailto:jaswant0520@zohomail.in">Say hello <svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
-
-            <button class="menu-btn" type="button" aria-label="Open menu" aria-haspopup="dialog">
-                <span></span><span></span>
-            </button>
+            <div class="header-right">
+                <a class="header-cta link-line" href="mailto:jaswant0520@zohomail.in">Say hello <svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+                <button class="theme-btn" type="button" aria-label="Switch colour theme">
+                    <svg class="i icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+                    <svg class="i icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+                </button>
+                <button class="menu-btn" type="button" aria-label="Open menu" aria-haspopup="dialog">
+                    <span></span><span></span>
+                </button>
+            </div>
         </div>
     </header>
 
@@ -162,7 +169,7 @@
             <div class="container">
                 <header class="section-head">
                     <p class="section-index mono reveal"><span>01</span> Work</p>
-                    <h2 id="work-title" class="section-title" data-split>Things I've built <span class="dim">&amp; studied.</span></h2>
+                    <h2 id="work-title" class="section-title" data-split>Things I've designed <span class="dim">&amp; built.</span></h2>
                     <p class="section-note mono reveal" id="work-count"></p>
                 </header>
 
@@ -414,7 +421,7 @@
 
     <div class="toast mono" id="toast" role="status" aria-live="polite"></div>
 
-    <script src="js/projects.js?v=20261109"></script>
-    <script src="js/main.js?v=20261109"></script>
+    <script src="js/projects.js?v=20261109b"></script>
+    <script src="js/main.js?v=20261109b"></script>
 </body>
 </html>

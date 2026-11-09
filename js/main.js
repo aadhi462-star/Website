@@ -292,6 +292,22 @@
     document.fonts && document.fonts.ready.then(() => moveIndicator(activeLink));
     addEventListener('resize', () => moveIndicator(activeLink));
 
+    /* ─── Theme toggle ───────────────────────────────────── */
+    const themeBtn = $('.theme-btn');
+    const isLight = () => root.dataset.theme
+        ? root.dataset.theme === 'light'
+        : matchMedia('(prefers-color-scheme: light)').matches;
+    const labelTheme = () => themeBtn.setAttribute('aria-label', isLight() ? 'Switch to dark mode' : 'Switch to light mode');
+    labelTheme();
+    themeBtn.addEventListener('click', () => {
+        root.classList.add('theme-anim');
+        root.dataset.theme = isLight() ? 'dark' : 'light';
+        try { localStorage.setItem('jr-theme', root.dataset.theme); } catch (e) {}
+        labelTheme();
+        setTimeout(() => root.classList.remove('theme-anim'), 450);
+    });
+    matchMedia('(prefers-color-scheme: light)').addEventListener('change', labelTheme);
+
     /* ─── Mobile menu ──────────────────────────────────────── */
     const menu = $('#menu');
     $('.menu-btn').addEventListener('click', () => menu.showModal());
