@@ -374,4 +374,6 @@
     const yearFrac = now.getFullYear() + now.getMonth() / 12;
     const pct = Math.min(100, Math.max(0, (yearFrac - 2010) / 17 * 100));
     $('#edu-now').style.setProperty('--now', `${pct}%`);
+
+    window.__jrReady = true;
 })();

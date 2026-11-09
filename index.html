@@ -17,8 +17,13 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300..900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/styles.css">
-    <script>document.documentElement.classList.add('js');</script>
+    <link rel="stylesheet" href="css/styles.css?v=20261109">
+    <!-- Bump ?v= on the CSS/JS links whenever they change, so browsers fetch the new files -->
+    <script>
+        document.documentElement.classList.add('js');
+        // Safety net: if main.js fails or is slow, show everything instead of a blank page
+        setTimeout(function () { if (!window.__jrReady) document.documentElement.classList.remove('js'); }, 3000);
+    </script>
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
@@ -409,7 +414,7 @@
 
     <div class="toast mono" id="toast" role="status" aria-live="polite"></div>
 
-    <script src="js/projects.js"></script>
-    <script src="js/main.js"></script>
+    <script src="js/projects.js?v=20261109"></script>
+    <script src="js/main.js?v=20261109"></script>
 </body>
 </html>
