@@ -29,17 +29,19 @@ window.PROJECTS = [
     title: "StartaPath",
     category: "Product",
     featured: true,
-    role: "Product & strategy",
+    role: "Designed & built",
     summary:
-      "An AI business validator that helps founders test a startup idea and leave with a clear direction, bridging the gap between ideation and execution.",
+      "An AI decision-intelligence platform that turns a short description of a startup idea into a structured venture audit: viability score, market sizing, competitors, a 90-day roadmap, a Business Model Canvas and a pitch deck.",
     problem:
-      "Aspiring founders often hesitate to take the first step because they can't tell whether their idea is worth pursuing.",
-    // TODO: add `contribution` — what you personally did on StartaPath
+      "Founders, especially students and first-time entrepreneurs, have no fast, structured and affordable way to check whether an idea is worth building. Market reports are costly, consultants are slow, and chatbots give free-form answers that can't be compared.",
+    contribution:
+      "Prototyped StartaPath in Google AI Studio and built it into a React 19 + TypeScript single-page app (about 6,900 lines across 33 components). Designed a fixed JSON schema so every Gemini 2.5 Flash audit has the same sections, then added on-demand SWOT, PEST and market-need analyses, a Google Maps-grounded local ecosystem scan, an action tracker that suggests the next step, text and real-time voice advisors, a Zoho Product Lab, version history and a full PDF report.",
     details: [
-      "With a structured validation framework, StartaPath turns abstract ideas into clear, actionable plans. Instead of relying on guesswork or opinions, founders evaluate their idea through systematic analysis before committing time or money.",
-      "Building a startup can feel lonely and overwhelming. StartaPath offers structure, guidance and a clear path forward, moving founders from uncertainty to confident action."
+      "Every audit includes a 0–10 viability score split into feasibility, market fit, readiness and risk; TAM/SAM/SOM market sizing; competitor analysis; MVP scope; pricing; a 90-day roadmap; a nine-block Business Model Canvas and a 7–10 slide pitch deck. Founders can edit all of it and export the whole audit as one printable report.",
+      "The key design decision is schema-constrained generation. A general chatbot answers in a different shape every time; StartaPath makes the model fill a typed contract, so its output can be rendered, edited, scored and compared like regular app data.",
+      "It runs entirely in the browser with no backend: data is saved locally, failed requests retry with exponential backoff, and a live quota meter keeps usage within the Gemini free tier."
     ],
-    tags: ["Product thinking", "AI", "Startup validation"],
+    tags: ["React 19", "TypeScript", "Gemini 2.5 Flash", "Gemini Live API", "Vite", "Tailwind CSS"],
     image: "Images/StartaPath.png",
     links: [{ label: "Visit website", url: "https://startapath-ai-businessvalidator.onslate.in/" }]
   },
@@ -79,17 +81,28 @@ window.PROJECTS = [
     id: "warranty-vault-pro",
     title: "Warranty Vault Pro",
     category: "Tool",
-    // TODO: check this description; add problem / contribution and a screenshot
-    summary: "An app for keeping every product warranty in one place, so nothing expires unnoticed.",
-    tags: ["Google AI Studio", "Prompting"],
+    role: "Designed & built",
+    summary:
+      "A personal vault for product warranties: purchases, receipts and warranty periods kept in one place, so you can see at a glance what's still covered.",
+    problem:
+      "Warranty cards and receipts get lost, so when something breaks it's hard to know whether it's still under warranty.",
+    contribution:
+      "Designed and built the app in Google AI Studio, shaping how a warranty is added, stored and checked through prompting and iteration.",
+    tags: ["Google AI Studio", "Prompting", "Product design"],
     links: [{ label: "Open app", url: "https://ai.studio/apps/drive/1GHWw8ckcAHaHVOTmQuCD9ZB0Ew_MKRO3?fullscreenApplet=true" }]
   },
   {
     id: "jas-visual-scraper",
     title: "Jas Visual Scraper",
     category: "Tool",
-    // TODO: check this description; add a store / GitHub link when public
-    summary: "A Chrome extension for visually picking and collecting data from web pages, no code needed.",
+    role: "Designed & built",
+    summary:
+      "A Chrome extension that collects data from web pages by pointing and clicking: pick the parts of a page you want and turn them into structured data, no code needed.",
+    problem:
+      "Copying information out of web pages by hand is slow, and most scraping tools assume you can write code.",
+    contribution:
+      "Designed and built the extension, from selecting elements visually on the page to gathering what you picked into a usable format.",
+    // Add a Chrome Web Store or GitHub link here when it's public
     tags: ["Chrome extension", "JavaScript", "Automation"]
   },
   {
