@@ -14,10 +14,10 @@
         return `<div class="cover cover-mono" style="--c:${esc(p.color || '#e2571c')}"><span>${esc(initials(p.title))}</span></div>`;
     }
 
-    function card(p) {
+    function card(p, i) {
         const meta = [p.category, p.year].filter(Boolean).map(esc).join(' · ');
         return `
-            <article class="project${p.featured ? ' project-featured' : ''}" data-category="${esc(p.category)}">
+            <article class="project${p.featured ? ' project-featured' : ''}" data-category="${esc(p.category)}" style="--n:${i % 3}">
                 <button class="project-hit" type="button" data-id="${esc(p.id)}" aria-label="Open ${esc(p.title)} details"></button>
                 ${cover(p)}
                 <div class="project-body">
@@ -49,9 +49,13 @@
         filtersEl.querySelectorAll('.chip-btn').forEach(b => b.setAttribute('aria-pressed', b.dataset.cat === cat));
     }
 
-    function openProject(id, push = true) {
+    let currentId = null;
+    const visibleIds = () => [...grid.querySelectorAll('.project:not([hidden]) .project-hit')].map(b => b.dataset.id);
+
+    function openProject(id, push = true, dir = 0) {
         const p = projects.find(x => x.id === id);
         if (!p) return;
+        currentId = id;
         const meta = [p.category, p.year, p.role].filter(Boolean).map(esc).join(' · ');
         const paras = (p.details && p.details.length ? p.details : [p.summary]).map(t => `<p>${esc(t)}</p>`).join('');
         const links = (p.links || []).map(l =>
@@ -65,8 +69,25 @@
                 <ul class="tags">${(p.tags || []).map(t => `<li>${esc(t)}</li>`).join('')}</ul>
                 ${links ? `<div class="dialog-links">${links}</div>` : ''}
             </div>`;
+        const ids = visibleIds();
+        const pos = ids.indexOf(id);
+        document.getElementById('dialog-count').textContent = pos >= 0 ? `${pos + 1} / ${ids.length}` : '';
+        dialogBody.classList.remove('swap');
+        if (dir) {
+            dialogBody.style.setProperty('--dir', `${dir * 16}px`);
+            void dialogBody.offsetWidth; // restart the animation
+            dialogBody.classList.add('swap');
+            dialog.scrollTop = 0;
+        }
         if (!dialog.open) dialog.showModal();
         if (push) history.replaceState(null, '', `#work/${p.id}`);
+    }
+
+    function stepProject(step) {
+        const ids = visibleIds();
+        if (!ids.length) return;
+        const i = ids.indexOf(currentId);
+        openProject(ids[(i + step + ids.length) % ids.length], true, step);
     }
 
     function closeProject() {
@@ -89,6 +110,11 @@
     });
 
     dialog.querySelector('.dialog-close').addEventListener('click', closeProject);
+    dialog.querySelectorAll('[data-step]').forEach(b => b.addEventListener('click', () => stepProject(+b.dataset.step)));
+    dialog.addEventListener('keydown', e => {
+        if (e.key === 'ArrowRight') stepProject(1);
+        if (e.key === 'ArrowLeft') stepProject(-1);
+    });
     dialog.addEventListener('click', e => { if (e.target === dialog) closeProject(); }); // backdrop
     dialog.addEventListener('close', () => {
         if (location.hash.startsWith('#work/')) history.replaceState(null, '', '#work');
@@ -113,8 +139,16 @@
 
     // Header shadow once scrolled
     const header = document.querySelector('.site-header');
-    const onScroll = () => header.classList.toggle('scrolled', scrollY > 8);
-    addEventListener('scroll', onScroll, { passive: true });
+    const toTop = document.querySelector('.to-top');
+    let scrollQueued = false;
+    const onScroll = () => {
+        scrollQueued = false;
+        header.classList.toggle('scrolled', scrollY > 8);
+        toTop.classList.toggle('show', scrollY > innerHeight * 0.8);
+    };
+    addEventListener('scroll', () => {
+        if (!scrollQueued) { scrollQueued = true; requestAnimationFrame(onScroll); }
+    }, { passive: true });
     onScroll();
 
     // Highlight the nav link of the section in view
@@ -135,4 +169,66 @@
         });
     }, { threshold: 0.12 });
     document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+    const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // Pointer spotlight + card glow. Pointer events only record the latest
+    // position; the DOM is touched at most once per animation frame.
+    if (matchMedia('(pointer: fine)').matches && !reduceMotion) {
+        const spot = document.querySelector('.bg-spot');
+        let px = 0, py = 0, target = null, queued = false;
+        const paint = () => {
+            queued = false;
+            spot.style.setProperty('--px', `${px}px`);
+            spot.style.setProperty('--py', `${py}px`);
+            if (target) {
+                const r = target.getBoundingClientRect();
+                target.style.setProperty('--mx', `${px - r.left}px`);
+                target.style.setProperty('--my', `${py - r.top}px`);
+            }
+        };
+        addEventListener('pointermove', e => {
+            px = e.clientX; py = e.clientY;
+            target = e.target.closest ? e.target.closest('.project, .exp-card') : null;
+            if (!queued) { queued = true; requestAnimationFrame(paint); }
+        }, { passive: true });
+        document.documentElement.classList.add('has-pointer');
+    }
+
+    // Pause background animation while the tab is hidden
+    document.addEventListener('visibilitychange', () =>
+        root.classList.toggle('is-hidden', document.hidden));
+
+    // Count up the hero stats once
+    if (!reduceMotion) {
+        document.getElementById('stat-projects').dataset.count = projects.length;
+        document.querySelectorAll('[data-count]').forEach(el => {
+            const end = +el.dataset.count, t0 = performance.now() + 500, dur = 900;
+            const tick = now => {
+                const k = Math.min(1, Math.max(0, (now - t0) / dur));
+                el.textContent = Math.round(end * (1 - Math.pow(1 - k, 3)));
+                if (k < 1) requestAnimationFrame(tick);
+            };
+            requestAnimationFrame(tick);
+        });
+    }
+
+    // Copy email with a toast confirmation
+    const toast = document.getElementById('toast');
+    let toastTimer;
+    const showToast = msg => {
+        toast.textContent = msg;
+        toast.classList.add('show');
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => toast.classList.remove('show'), 2200);
+    };
+    document.querySelector('.copy-email').addEventListener('click', async e => {
+        const email = e.currentTarget.dataset.email;
+        try {
+            await navigator.clipboard.writeText(email);
+            showToast('Email copied to clipboard');
+        } catch (err) {
+            showToast(email);
+        }
+    });
 })();

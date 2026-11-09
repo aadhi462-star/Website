@@ -18,7 +18,18 @@
 <body>
     <a class="skip-link" href="#work">Skip to projects</a>
 
+    <!-- Decorative background: drifting colour orbs, dot grid, grain, pointer spotlight -->
+    <div class="bg" aria-hidden="true">
+        <span class="orb orb-1"></span>
+        <span class="orb orb-2"></span>
+        <span class="orb orb-3"></span>
+        <span class="bg-grid"></span>
+        <span class="bg-spot"></span>
+        <span class="bg-grain"></span>
+    </div>
+
     <header class="site-header">
+        <span class="scroll-progress" aria-hidden="true"></span>
         <div class="container header-inner">
             <a href="#top" class="logo" aria-label="Jaswant R, home">JR<span>.</span></a>
             <nav class="nav" aria-label="Main">
@@ -37,17 +48,16 @@
     <main id="top">
         <!-- Hero -->
         <section class="hero container">
-            <p class="eyebrow"><span class="dot"></span>Zoho School of Business · 2025 – 2027</p>
-            <h1>Hi, I'm Jaswant.<br><span class="muted">I take things apart to see how they work, then build with what I learn.</span></h1>
-            <p class="lede">I enjoy exploring how technology works and experimenting with different tools, and I like testing both physical and software products to their limits.</p>
-            <div class="hero-actions">
+            <p class="eyebrow intro" style="--i:0"><span class="dot"></span>Zoho School of Business · 2025 – 2027</p>
+            <h1 class="intro" style="--i:1">Hi, I'm <span class="gradient-text">Jaswant.</span><br><span class="muted">I take things apart to see how they work, then build with what I learn.</span></h1>
+            <p class="lede intro" style="--i:2">I enjoy exploring how technology works and experimenting with different tools, and I like testing both physical and software products to their limits.</p>
+            <div class="hero-actions intro" style="--i:3">
                 <a href="#work" class="btn btn-primary">See my work <span aria-hidden="true">↓</span></a>
                 <a href="#contact" class="btn btn-ghost">Get in touch</a>
             </div>
-            <dl class="stats" id="stats">
+            <dl class="stats intro" id="stats" style="--i:4">
                 <div><dt>Projects</dt><dd id="stat-projects">—</dd></div>
-                <div><dt>Zoho products used</dt><dd>11</dd></div>
-                <div><dt>Events hosted</dt><dd>2</dd></div>
+                <div><dt>Events hosted</dt><dd data-count="2">2</dd></div>
             </dl>
         </section>
 
@@ -113,6 +123,10 @@
                     <img src="Images/User%20Original%20from%20Zoho%20Cliq.png" alt="Portrait of Jaswant R" width="400" height="400">
                 </div>
                 <div class="about-text reveal">
+                    <div class="now">
+                        <span class="now-label"><span class="dot"></span>Currently</span>
+                        <p><strong>Technical Writer</strong>, ZS trainee at Zoho Community Spaces</p>
+                    </div>
                     <p>I'm a curious learner who likes understanding how technology works and exploring different tools and ideas. I learn by experimenting, and I keep improving by trying new technologies.</p>
                     <p>I'd rather build knowledge across several domains than limit myself to one. My goal is to keep learning, gain practical experience and get good at solving real-world problems.</p>
 
@@ -137,22 +151,6 @@
                         <li>Deluge scripting <em>(learning)</em></li>
                     </ul>
                 </div>
-                <div>
-                    <h3 class="sub">Tools I use</h3>
-                    <ul class="tools">
-                        <li><img src="Images/Zoho%20CRM%20Logo.png" alt="">CRM</li>
-                        <li><img src="Images/Zoho%20Sheets%20Logo.png" alt="">Sheet</li>
-                        <li><img src="Images/Zoho%20creator.png" alt="">Creator</li>
-                        <li><img src="Images/Zoho%20desk.png" alt="">Desk</li>
-                        <li><img src="Images/Zoho%20Forms%20Logo.png" alt="">Forms</li>
-                        <li><img src="Images/mail-logo-.png" alt="">Mail</li>
-                        <li><img src="Images/Analytics.png" alt="">Analytics</li>
-                        <li><img src="Images/Sites.png" alt="">Sites</li>
-                        <li><img src="Images/Backstage.png" alt="">Backstage</li>
-                        <li><img src="Images/Catalyst.png" alt="">Catalyst</li>
-                        <li><img src="Images/Zoho%20Workplace%20Logo.png" alt="">Workplace</li>
-                    </ul>
-                </div>
             </div>
         </section>
 
@@ -162,7 +160,12 @@
                 <p class="section-tag">04 — Contact</p>
                 <h2>Let's build something.</h2>
                 <p class="lede">Open to internships, collaborations and good conversations about products.</p>
-                <a class="btn btn-primary btn-lg" href="mailto:jaswant0520@zohomail.in">jaswant0520@zohomail.in</a>
+                <div class="email-row">
+                    <a class="btn btn-primary btn-lg" href="mailto:jaswant0520@zohomail.in">jaswant0520@zohomail.in</a>
+                    <button type="button" class="btn btn-ghost btn-icon copy-email" data-email="jaswant0520@zohomail.in" aria-label="Copy email address">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h8"/></svg>
+                    </button>
+                </div>
                 <div class="socials">
                     <a href="https://www.linkedin.com/in/jaswant-r-0a90192a8/" target="_blank" rel="noopener">
                         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.75h4v11H3zM9.5 9.75h3.8v1.5h.06c.53-1 1.83-2.06 3.77-2.06 4.03 0 4.77 2.65 4.77 6.1v5.46h-4v-4.84c0-1.16-.02-2.64-1.6-2.64-1.62 0-1.86 1.26-1.86 2.56v4.92h-4z"/></svg>
@@ -186,7 +189,15 @@
     <dialog id="project-dialog" class="dialog" aria-labelledby="dialog-title">
         <button class="dialog-close" type="button" aria-label="Close">×</button>
         <div id="dialog-body"></div>
+        <div class="dialog-nav">
+            <button type="button" class="btn btn-ghost" data-step="-1"><span aria-hidden="true">←</span> <span class="dialog-nav-label">Previous</span></button>
+            <span class="dialog-count" id="dialog-count"></span>
+            <button type="button" class="btn btn-ghost" data-step="1"><span class="dialog-nav-label">Next</span> <span aria-hidden="true">→</span></button>
+        </div>
     </dialog>
+
+    <a href="#top" class="to-top" aria-label="Back to top">↑</a>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
     <script src="js/projects.js"></script>
     <script src="js/main.js"></script>
