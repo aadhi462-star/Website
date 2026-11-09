@@ -89,34 +89,6 @@ window.PROJECTS = [
     color: "#0d9488"
   },
   {
-    id: "newsletter",
-    title: "Newsletter Articles",
-    category: "Writing",
-    summary:
-      "Monthly newsletter articles that bridge administration and students, keeping everyone informed and building a sense of community.",
-    details: [
-      "The newsletter is the main communication channel between the administration and the student body. The goal: timely information that also fosters a sense of belonging.",
-      "Each article is researched and written to simplify complex topics so every reader stays informed and engaged."
-    ],
-    tags: ["Content writing", "Research", "Editing"],
-    color: "#9333ea",
-    links: [{ label: "View works", url: "https://workdrive.zohoexternal.in/external/337fe70466d8c05ae4a7c672ec5943a9798b55f06fa3f0b012002b11c32ca066" }]
-  },
-  {
-    id: "market-sizing",
-    title: "Market Sizing: TAM · SAM · SOM",
-    category: "Academic",
-    summary:
-      "Sizing a market layer by layer to check business viability, set realistic growth targets and make a credible case to investors.",
-    details: [
-      "A deep dive into Total Addressable Market (TAM), Serviceable Addressable Market (SAM) and Serviceable Obtainable Market (SOM).",
-      "Understanding the three layers lets a business set realistic growth targets and attract investment effectively."
-    ],
-    tags: ["Market research", "Marketing strategy"],
-    color: "#ea580c",
-    links: [{ label: "View works", url: "https://workdrive.zohoexternal.in/external/337fe70466d8c05ae4a7c672ec5943a9798b55f06fa3f0b012002b11c32ca066" }]
-  },
-  {
     id: "business-model-canvas",
     title: "Business Model Canvas",
     category: "Academic",
