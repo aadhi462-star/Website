@@ -19,6 +19,7 @@
  *                 rest appear in the index list below them.
  *   links         [{ label, url }] (optional)
  *   featured      true = large case study (optional)
+ *   inspiredBy    { label, url } credit for an idea you built on (optional)
  *
  * Only write what's true — leave a field out rather than guess.
  * ──────────────────────────────────────────────────────────────────
@@ -76,6 +77,27 @@ window.PROJECTS = [
     tags: ["Web app", "Community platform", "Product design"],
     image: "Images/alumnizone.jpg",
     links: [{ label: "Visit website", url: "https://community.onslate.in/" }]
+  },
+  {
+    id: "time-zone-buddy",
+    title: "Time Zone Buddy",
+    category: "Tool",
+    featured: true,
+    year: "2026",
+    role: "Designed & built",
+    summary:
+      "A Chrome extension that puts world clocks, a time converter and a meeting planner in one popup, with daylight saving handled for you.",
+    problem:
+      "Working with people across time zones means juggling clocks, converting times in your head and guessing when a meeting suits everyone.",
+    contribution:
+      "Built it as a Manifest V3 Chrome extension: about 400 built-in cities plus every IANA time zone and online town search, custom named locations, favourites and pinned clocks, a converter, and a meeting planner that suggests times across everyone's working hours. Added meeting reminders that ring as Chrome notifications, with snooze, even when the popup is closed.",
+    details: [
+      "Everything stays in the browser with no account. Settings sync through Chrome storage, while reminders stay on each device so the same reminder doesn't ring on every computer you're signed in to.",
+      "Daylight-saving offsets come from the browser's own time-zone data, so clocks stay correct without a hand-maintained table."
+    ],
+    tags: ["Chrome extension", "Manifest V3", "JavaScript", "Intl API"],
+    image: "Images/timezonebuddy.jpg",
+    inspiredBy: { label: "RandomZone's Time Zone Buddy", url: "https://randomzone.buildbetter.co.in/timezone-buddy/" }
   },
   {
     id: "warranty-vault-pro",

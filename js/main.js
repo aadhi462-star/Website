@@ -91,13 +91,14 @@
         const meta = [
             p.role && ['Role', p.role],
             p.problem && ['Problem', p.problem],
-            p.tags && p.tags.length && ['Built with', p.tags.join(', ')]
+            p.tags && p.tags.length && ['Built with', p.tags.join(', ')],
+            p.inspiredBy && ['Inspired by', p.inspiredBy.label]
         ].filter(Boolean);
         return `
         <article class="case" id="case-${esc(p.id)}">
             <div class="case-media" data-parallax-img>
                 <button type="button" class="case-frame" data-open="${esc(p.id)}" aria-label="Open case study: ${esc(p.title)}">
-                    <span class="case-chrome" aria-hidden="true"><i></i><i></i><i></i>${link ? `<span class="mono">${esc(host(link.url))}</span>` : ''}</span>
+                    <span class="case-chrome" aria-hidden="true"><i></i><i></i><i></i><span class="mono">${esc(link ? host(link.url) : (p.tags || [])[0] || '')}</span></span>
                     <span class="case-shot"><img src="${esc(p.image)}" alt="Screenshot of ${esc(p.title)}" loading="lazy" width="1440" height="900"></span>
                     <span class="case-open" aria-hidden="true">Case study ${arrow}</span>
                 </button>
@@ -148,7 +149,8 @@
             p.problem && ['Problem', `<p class="lead">${esc(p.problem)}</p>`],
             p.contribution && ['Contribution', `<p>${esc(p.contribution)}</p>`],
             p.details && p.details.length && ['Overview', p.details.map(t => `<p>${esc(t)}</p>`).join('')],
-            p.tags && p.tags.length && ['Tools & skills', `<p>${esc(p.tags.join(' · '))}</p>`]
+            p.tags && p.tags.length && ['Tools & skills', `<p>${esc(p.tags.join(' · '))}</p>`],
+            p.inspiredBy && ['Inspired by', `<p><a class="link-line" href="${esc(p.inspiredBy.url)}" target="_blank" rel="noopener">${esc(p.inspiredBy.label)} ${arrow}</a></p>`]
         ].filter(Boolean);
         const links = (p.links || []).map(l =>
             `<a class="btn btn-accent" href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.label)} ${arrow}</a>`).join('');
