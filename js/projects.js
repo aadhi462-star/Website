@@ -8,6 +8,7 @@
  *   title         project name
  *   category      e.g. "Product", "Tool"
  *   year          e.g. "2026" (optional)
+ *   platforms     where it works, e.g. "Desktop & mobile" (optional)
  *   role          what you did, e.g. "Designed & built" (optional)
  *   summary       one or two sentences
  *   problem       the problem it addresses (optional)
@@ -56,6 +57,7 @@ window.PROJECTS = [
     title: "GameRush",
     category: "Product",
     featured: true,
+    platforms: "Desktop & mobile", // platforms: checked at phone width (390px) on 10 Nov 2026, and confirmed by you
     role: "Designed & built",
     summary:
       "44 free browser games — typing races, board classics, puzzles and arcade — with no downloads and no sign-up.",
@@ -72,6 +74,7 @@ window.PROJECTS = [
     title: "AlumniZone",
     category: "Product",
     featured: true,
+    platforms: "Desktop & mobile", // platforms: checked at phone width (390px) on 10 Nov 2026, and confirmed by you
     role: "Designed & built",
     summary:
       "An all-in-one alumni community: a wall, groups, events, real-time channels, forums and manuals under one login.",
@@ -111,6 +114,7 @@ window.PROJECTS = [
     id: "warranty-vault-pro",
     title: "Warranty Vault Pro",
     category: "Tool",
+    platforms: "Desktop & mobile", // platforms: confirmed by you (the app needs a Google sign-in, so not checked here)
     role: "Designed & built",
     // Verified: a tool you built (original site, "Tools I Built"), published as a Google AI Studio app.
     // TODO: describe what it does in one or two sentences, plus problem / contribution if you like.

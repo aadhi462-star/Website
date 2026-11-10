@@ -91,6 +91,7 @@
         const link = (p.links || [])[0];
         const meta = [
             p.role && ['Role', p.role],
+            p.platforms && ['Works on', p.platforms],
             p.problem && ['Problem', p.problem],
             p.tags && p.tags.length && ['Built with', p.tags.join(', ')],
             p.inspiredBy && ['Inspired by', p.inspiredBy.label]
@@ -146,7 +147,7 @@
     let currentId = null;
 
     function sheetHTML(p) {
-        const facts = [['Category', p.category], ['Role', p.role], ['Year', p.year]].filter(([, v]) => v);
+        const facts = [['Category', p.category], ['Role', p.role], ['Works on', p.platforms], ['Year', p.year]].filter(([, v]) => v);
         const blocks = [
             p.problem && ['Problem', `<p class="lead">${esc(p.problem)}</p>`],
             p.approach && ['Approach', `<p>${esc(p.approach)}</p>`],
