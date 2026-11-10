@@ -1,5 +1,5 @@
 /* ════════════════════════════════════════════════════════════
-   Jaswant R — Portfolio
+   Jaswant R — personal site
    A personal workspace: warm ivory paper, near-black ink, teal accent.
    Manrope (text) · IBM Plex Mono (labels & annotations)
    12-column grid · 8px spacing scale · hairline borders.
@@ -378,7 +378,7 @@ em { font-style: normal; }
 
 /* ─── Snapshot ───────────────────────────────────────────── */
 .snapshot { border-block: 1px solid var(--line); background: color-mix(in srgb, var(--card) 55%, transparent); }
-.snap-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.snap-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
 .snap { padding: var(--s4) var(--s3) var(--s4) 0; border-right: 1px solid var(--line); }
 .snap + .snap { padding-left: var(--s3); }
 .snap:last-child { border-right: 0; }
@@ -685,6 +685,9 @@ em { font-style: normal; }
 .portrait figcaption { color: var(--dim); margin-top: 12px; }
 .about-body { grid-column: 6 / -1; align-self: center; }
 .about-lead { font-size: clamp(1.35rem, 2.2vw, 1.9rem); line-height: 1.32; letter-spacing: -0.025em; font-weight: 500; }
+/* Journey timeline, nested under About */
+.about-journey { margin-top: clamp(4.5rem, 10vw, 8rem); scroll-margin-top: 5rem; }
+.sub-head .section-title { font-size: clamp(1.9rem, 4.2vw, 3.2rem); }
 .philosophy { margin-block: var(--s5); padding-left: var(--s3); border-left: 2px solid var(--accent); }
 .philosophy p { font-size: clamp(1.1rem, 1.7vw, 1.4rem); letter-spacing: -0.02em; line-height: 1.4; font-weight: 500; }
 .philosophy footer { color: var(--dim); margin-top: 10px; }

@@ -90,7 +90,6 @@
     function caseHTML(p) {
         const link = (p.links || [])[0];
         const meta = [
-            p.role && ['Role', p.role],
             p.platforms && ['Works on', p.platforms],
             p.problem && ['Problem', p.problem],
             p.tags && p.tags.length && ['Built with', p.tags.join(', ')],
@@ -316,9 +315,10 @@
     navLinks.forEach(a => a.addEventListener('pointerenter', () => moveIndicator(a)));
     nav.addEventListener('pointerleave', () => moveIndicator(activeLink));
     const spy = new IntersectionObserver(entries => {
-        entries.forEach(en => { if (en.isIntersecting) setActive(en.target.id); });
+        // The snapshot band sits under About, so it lights up About in the nav
+        entries.forEach(en => { if (en.isIntersecting) setActive(en.target.id === 'snapshot' ? 'about' : en.target.id); });
     }, { rootMargin: '-45% 0px -50% 0px' });
-    ['home', 'work', 'process', 'journey', 'about', 'journal', 'contact'].forEach(id => {
+    ['home', 'about', 'snapshot', 'work', 'process', 'journal', 'contact'].forEach(id => {
         const el = document.getElementById(id);
         if (el && !el.hidden) spy.observe(el);
     });
