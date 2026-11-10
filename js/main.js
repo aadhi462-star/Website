@@ -1,5 +1,6 @@
 (() => {
     const projects = window.PROJECTS || [];
+    const journal = window.JOURNAL || [];
     const root = document.documentElement;
     const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
     const finePointer = matchMedia('(pointer: fine)').matches;
@@ -94,13 +95,18 @@
             p.tags && p.tags.length && ['Built with', p.tags.join(', ')],
             p.inspiredBy && ['Inspired by', p.inspiredBy.label]
         ].filter(Boolean);
+        const peek = p.contribution || p.problem || p.summary;
         return `
         <article class="case" id="case-${esc(p.id)}">
-            <div class="case-media" data-parallax-img>
+            <div class="case-media">
                 <button type="button" class="case-frame" data-open="${esc(p.id)}" aria-label="Open case study: ${esc(p.title)}">
                     <span class="case-chrome" aria-hidden="true"><i></i><i></i><i></i><span class="mono">${esc(link ? host(link.url) : (p.tags || [])[0] || '')}</span></span>
                     <span class="case-shot"><img src="${esc(p.image)}" alt="Screenshot of ${esc(p.title)}" loading="lazy" width="1440" height="900"></span>
-                    <span class="case-open" aria-hidden="true">Case study ${arrow}</span>
+                    <span class="case-reveal" aria-hidden="true">
+                        <span class="mono">${p.contribution ? 'What I did' : 'The problem'}</span>
+                        <p>${esc(peek.length > 150 ? peek.slice(0, peek.lastIndexOf(' ', 150)) + '…' : peek)}</p>
+                        <b>Case study ${arrow}</b>
+                    </span>
                 </button>
             </div>
             <div class="case-text reveal">
@@ -132,7 +138,7 @@
     $('#index').innerHTML = rest.map(indexHTML).join('');
     $('#work-count').textContent = projects.length ? `(${pad(projects.length)}) projects` : '';
     if (!projects.length) $('#empty-state').hidden = false;
-    if (!rest.length) $('.index-head').hidden = true;
+    if (!rest.length) $('#index-wrap').hidden = true;
 
     /* ─── Case study sheet ─────────────────────────────────── */
     const sheet = $('#sheet');
@@ -140,15 +146,13 @@
     let currentId = null;
 
     function sheetHTML(p) {
-        const facts = [
-            ['Category', p.category],
-            ['Role', p.role],
-            ['Year', p.year]
-        ].filter(([, v]) => v);
+        const facts = [['Category', p.category], ['Role', p.role], ['Year', p.year]].filter(([, v]) => v);
         const blocks = [
             p.problem && ['Problem', `<p class="lead">${esc(p.problem)}</p>`],
+            p.approach && ['Approach', `<p>${esc(p.approach)}</p>`],
             p.contribution && ['Contribution', `<p>${esc(p.contribution)}</p>`],
             p.details && p.details.length && ['Overview', p.details.map(t => `<p>${esc(t)}</p>`).join('')],
+            p.learnings && p.learnings.length && ['Learnings', `<ul>${p.learnings.map(t => `<li>${esc(t)}</li>`).join('')}</ul>`],
             p.tags && p.tags.length && ['Tools & skills', `<p>${esc(p.tags.join(' · '))}</p>`],
             p.inspiredBy && ['Inspired by', `<p><a class="link-line" href="${esc(p.inspiredBy.url)}" target="_blank" rel="noopener">${esc(p.inspiredBy.label)} ${arrow}</a></p>`]
         ].filter(Boolean);
@@ -164,6 +168,7 @@
             ${blocks.map(([h, body]) => `<section class="sheet-block"><h3>${h}</h3><div>${body}</div></section>`).join('')}`;
     }
 
+    let opener = null;
     function openProject(id, { dir = 0, push = true } = {}) {
         const p = order.find(x => x.id === id);
         if (!p) return;
@@ -188,7 +193,6 @@
         sheetBody.focus({ preventScroll: true });
         if (push) history.replaceState(null, '', `#work/${p.id}`);
     }
-
     function closeSheet() {
         if (!sheet.open) return;
         if (reduceMotion) { sheet.close(); return; }
@@ -199,9 +203,7 @@
         sheet.classList.remove('closing');
         document.body.style.overflow = '';
         if (location.hash.startsWith('#work/')) history.replaceState(null, '', '#work');
-        // Return focus to whatever opened this project
-        const opener = $(`[data-open="${CSS.escape(currentId || '')}"]`);
-        if (opener) opener.focus({ preventScroll: true });
+        if (opener && document.contains(opener)) opener.focus({ preventScroll: true });
     });
     sheet.addEventListener('cancel', e => { e.preventDefault(); closeSheet(); });
     sheet.addEventListener('click', e => { if (e.target === sheet) closeSheet(); });
@@ -217,10 +219,8 @@
     });
     document.addEventListener('click', e => {
         const b = e.target.closest('[data-open]');
-        if (b) openProject(b.dataset.open);
+        if (b) { opener = b; openProject(b.dataset.open); }
     });
-
-    // Deep link: #work/<id>
     const deep = location.hash.match(/^#work\/(.+)$/);
     if (deep) openProject(decodeURIComponent(deep[1]), { push: false });
 
@@ -251,7 +251,33 @@
         });
     }
 
-    /* ─── Header: scrolled state, hide on scroll down ──────── */
+    /* ─── Journal (only shown when entries exist) ──────────── */
+    if (journal.length) {
+        const fmt = d => { const t = new Date(d + 'T00:00:00'); return isNaN(t) ? d : t.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' }); };
+        const entries = [...journal].sort((a, b) => String(b.date).localeCompare(String(a.date)));
+        $('#journal-list').innerHTML = entries.map(j => `
+            <li class="jn-entry reveal">
+                <details>
+                    <summary>
+                        <span class="jn-date mono">${esc(fmt(j.date))}</span>
+                        <span class="jn-title">${esc(j.title)}</span>
+                        <span class="jn-tags">${(j.tags || []).map(t => `<span class="mono">${esc(t)}</span>`).join('')}</span>
+                        <span class="jn-toggle" aria-hidden="true">+</span>
+                    </summary>
+                    <div class="jn-body">
+                        ${(j.body || []).map(t => `<p>${esc(t)}</p>`).join('')}
+                        ${j.link ? `<p><a class="link-line" href="${esc(j.link.url)}" target="_blank" rel="noopener">${esc(j.link.label)} ${arrow}</a></p>` : ''}
+                    </div>
+                </details>
+            </li>`).join('');
+        $('#journal-count').textContent = `(${pad(entries.length)}) ${entries.length === 1 ? 'note' : 'notes'}`;
+        $('#journal').hidden = false;
+        $$('a[href="#journal"]').forEach(a => { a.hidden = false; });
+        // Keep the journal entries inside <details> as one block for the reveal
+        $$('.jn-entry details').forEach(d => d.addEventListener('toggle', () => d.closest('.jn-entry').classList.add('in')));
+    }
+
+    /* ─── Header: scrolled state, hide on scroll down, progress ─ */
     const header = $('.site-header');
     let lastY = scrollY, scrollQueued = false;
     const onScroll = () => {
@@ -261,7 +287,10 @@
         header.classList.toggle('tucked', y > 480 && y > lastY + 4);
         if (y < lastY - 4 || y < 480) header.classList.remove('tucked');
         lastY = y;
+        const max = document.documentElement.scrollHeight - innerHeight;
+        header.style.setProperty('--sp', max > 0 ? (y / max).toFixed(4) : 0);
         parallax();
+        if (typeof updateStep === 'function') updateStep();
     };
     addEventListener('scroll', () => {
         if (!scrollQueued) { scrollQueued = true; requestAnimationFrame(onScroll); }
@@ -273,7 +302,7 @@
     const navLinks = $$('.nav a');
     let activeLink = navLinks[0];
     const moveIndicator = link => {
-        if (!link || !nav.offsetParent) return;
+        if (!link || !nav.offsetParent || link.hidden) return;
         indicator.style.setProperty('--x', `${link.offsetLeft}px`);
         indicator.style.setProperty('--w', `${link.offsetWidth}px`);
         indicator.style.setProperty('--o', 1);
@@ -288,25 +317,45 @@
     const spy = new IntersectionObserver(entries => {
         entries.forEach(en => { if (en.isIntersecting) setActive(en.target.id); });
     }, { rootMargin: '-45% 0px -50% 0px' });
-    ['home', 'work', 'experience', 'about', 'contact'].forEach(id => spy.observe(document.getElementById(id)));
+    ['home', 'work', 'process', 'journey', 'about', 'journal', 'contact'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el && !el.hidden) spy.observe(el);
+    });
     document.fonts && document.fonts.ready.then(() => moveIndicator(activeLink));
     addEventListener('resize', () => moveIndicator(activeLink));
 
-    /* ─── Theme toggle ───────────────────────────────────── */
+    /* ─── Theme toggle (circular reveal from the button) ───── */
     const themeBtn = $('.theme-btn');
-    const isLight = () => root.dataset.theme
-        ? root.dataset.theme === 'light'
-        : matchMedia('(prefers-color-scheme: light)').matches;
-    const labelTheme = () => themeBtn.setAttribute('aria-label', isLight() ? 'Switch to dark mode' : 'Switch to light mode');
-    labelTheme();
+    const metaTheme = $('meta[name="theme-color"]');
+    const isDark = () => root.dataset.theme === 'dark';
+    const syncTheme = () => {
+        themeBtn.setAttribute('aria-label', isDark() ? 'Switch to light mode' : 'Switch to dark mode');
+        metaTheme.setAttribute('content', isDark() ? '#121312' : '#F5F2EB');
+    };
+    syncTheme();
     themeBtn.addEventListener('click', () => {
-        root.classList.add('theme-anim');
-        root.dataset.theme = isLight() ? 'dark' : 'light';
-        try { localStorage.setItem('jr-theme', root.dataset.theme); } catch (e) {}
-        labelTheme();
-        setTimeout(() => root.classList.remove('theme-anim'), 450);
+        const next = isDark() ? 'light' : 'dark';
+        const apply = () => {
+            root.dataset.theme = next;
+            try { localStorage.setItem('jr-theme', next); } catch (e) {}
+            syncTheme();
+        };
+        if (document.startViewTransition && !reduceMotion) {
+            const r = themeBtn.getBoundingClientRect();
+            const cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+            const radius = Math.hypot(Math.max(cx, innerWidth - cx), Math.max(cy, innerHeight - cy));
+            document.startViewTransition(apply).ready.then(() => {
+                root.animate(
+                    { clipPath: [`circle(0px at ${cx}px ${cy}px)`, `circle(${radius}px at ${cx}px ${cy}px)`] },
+                    { duration: 650, easing: 'cubic-bezier(.16, 1, .3, 1)', pseudoElement: '::view-transition-new(root)' }
+                );
+            });
+        } else {
+            root.classList.add('theme-anim');
+            apply();
+            setTimeout(() => root.classList.remove('theme-anim'), 450);
+        }
     });
-    matchMedia('(prefers-color-scheme: light)').addEventListener('change', labelTheme);
 
     /* ─── Mobile menu ──────────────────────────────────────── */
     const menu = $('#menu');
@@ -320,6 +369,127 @@
         history.replaceState(null, '', a.getAttribute('href'));
     }));
 
+    /* ─── Hero: the working loop ───────────────────────────── */
+    const STAGES = [
+        ['Explore', 'Look closely first. Take the product, tool or problem apart to see how it really works.'],
+        ['Experiment', 'Try it cheaply and quickly. A rough prototype teaches more than a long plan.'],
+        ['Understand', 'Make it make sense. Writing it down shows what I actually know.'],
+        ['Build', 'Ship something people can use, then keep improving it.']
+    ];
+    const pulse = $('#lp-pulse');
+    const nodes = $$('.lp-node');
+    const lpBtns = $$('.lp-btn');
+    const card = $('.loop-card');
+    let stage = -1;
+    function showStage(i) {
+        if (i === stage) return;
+        stage = i;
+        nodes.forEach((n, k) => n.classList.toggle('on', k === i));
+        lpBtns.forEach((b, k) => b.classList.toggle('on', k === i));
+        $('#loop-num').textContent = `${pad(i + 1)} / 04`;
+        $('#loop-title').textContent = STAGES[i][0];
+        $('#loop-text').textContent = STAGES[i][1];
+        card.classList.remove('swap'); void card.offsetWidth; card.classList.add('swap');
+    }
+    // The pulse travels the loop once every 8s; the node it last passed is the active stage
+    const CYCLE = 8000;
+    let progress = 0, last = 0, held = false, running = false, heroVisible = true;
+    const setPulse = p => pulse.style.strokeDashoffset = (7 - p * 100).toFixed(2);
+    function frame(now) {
+        if (!running) return;
+        // rAF timestamps can precede the performance.now() taken at start, so never step backwards
+        if (!held) progress = (progress + Math.max(0, now - last) / CYCLE) % 1;
+        last = Math.max(last, now);
+        setPulse(progress);
+        showStage(Math.floor(progress * 4) % 4);
+        requestAnimationFrame(frame);
+    }
+    const startLoop = () => { if (running || reduceMotion || !heroVisible || document.hidden) return; running = true; last = performance.now(); requestAnimationFrame(frame); };
+    const stopLoop = () => { running = false; };
+    const hold = i => { held = true; progress = i / 4 + 0.001; setPulse(progress); showStage(i); };
+    lpBtns.forEach(b => {
+        const i = +b.dataset.stage;
+        b.addEventListener('pointerenter', () => hold(i));
+        b.addEventListener('focus', () => hold(i));
+        b.addEventListener('click', () => hold(i));
+        b.addEventListener('pointerleave', () => { if (document.activeElement !== b) held = false; });
+        b.addEventListener('blur', () => { held = false; });
+    });
+    showStage(0);
+    new IntersectionObserver(([en]) => { heroVisible = en.isIntersecting; heroVisible ? startLoop() : stopLoop(); }).observe($('.loop'));
+    document.addEventListener('visibilitychange', () => document.hidden ? stopLoop() : startLoop());
+
+    /* ─── Process: steps activate as they cross the middle ─── */
+    const steps = $$('.step');
+    const pvNum = $('#pv-num'), pvName = $('#pv-name'), pvFill = $('#pv-fill');
+    const pvDots = $$('.pv-track i');
+    let activeStep = -1;
+    const setStep = i => {
+        if (i === activeStep) return;
+        activeStep = i;
+        steps.forEach((s, k) => s.classList.toggle('on', k === i));
+        pvDots.forEach((d, k) => d.classList.toggle('on', k <= i));
+        pvFill.style.setProperty('--pf', i / 3);
+        pvNum.textContent = pad(i + 1);
+        pvName.textContent = STAGES[i][0];
+        [pvNum, pvName].forEach(el => { el.classList.remove('swap'); void el.offsetWidth; el.classList.add('swap'); });
+    };
+    setStep(0);
+    // The active step is the last one whose top has passed the middle of the screen
+    function updateStep() {
+        const mid = innerHeight * 0.5;
+        let i = 0;
+        steps.forEach((s, k) => { if (s.getBoundingClientRect().top < mid) i = k; });
+        setStep(i);
+    }
+
+    /* ─── Journey: an accessible tab list ──────────────────── */
+    const stops = $$('.jr-stop');
+    const panels = $$('.jr-panel');
+    const jrFill = $('#jr-fill');
+    let journeyI = -1;
+    function selectStop(i, focus = false) {
+        if (i === journeyI) return;
+        journeyI = i;
+        stops.forEach((s, k) => {
+            const on = k === i;
+            s.setAttribute('aria-selected', on);
+            s.tabIndex = on ? 0 : -1;
+            s.classList.toggle('passed', k < i);
+        });
+        panels.forEach((p, k) => {
+            p.hidden = k !== i;
+            if (k === i) { p.classList.remove('swap'); void p.offsetWidth; p.classList.add('swap'); }
+        });
+        layoutJourneyLine();
+        const s = stops[i];
+        if (focus) s.focus();
+        // Keep the selected stop visible on the scrolling rail (tablet / mobile)
+        const wrap = $('.jr-track-wrap');
+        if (wrap.scrollWidth > wrap.clientWidth) wrap.scrollTo({ left: s.offsetLeft - 20, behavior: reduceMotion ? 'auto' : 'smooth' });
+    }
+    // The line runs from the first dot to the last; the fill stops at the selected dot
+    const jrLine = $('.jr-line');
+    function layoutJourneyLine() {
+        const track = $('.jr-track');
+        const dot = s => track.offsetLeft + s.offsetLeft + 12 + 6.5; // dot: left 12px, 13px wide
+        const first = dot(stops[0]), lastX = dot(stops[stops.length - 1]);
+        jrLine.style.setProperty('--jl', `${first}px`);
+        jrLine.style.setProperty('--jw', `${lastX - first}px`);
+        jrFill.style.setProperty('--jf', journeyI < 0 ? 0 : (dot(stops[journeyI]) - first) / (lastX - first));
+    }
+    addEventListener('resize', layoutJourneyLine);
+    stops.forEach((s, k) => {
+        s.addEventListener('click', () => selectStop(k));
+        s.addEventListener('keydown', e => {
+            const keys = { ArrowRight: 1, ArrowDown: 1, ArrowLeft: -1, ArrowUp: -1 };
+            if (e.key in keys) { e.preventDefault(); selectStop((journeyI + keys[e.key] + stops.length) % stops.length, true); }
+            if (e.key === 'Home') { e.preventDefault(); selectStop(0, true); }
+            if (e.key === 'End') { e.preventDefault(); selectStop(stops.length - 1, true); }
+        });
+    });
+    selectStop(stops.length - 1); // open on "Now"
+
     /* ─── Scroll reveals (staggered per batch) ─────────────── */
     const io = new IntersectionObserver(entries => {
         const visible = entries.filter(en => en.isIntersecting);
@@ -328,10 +498,10 @@
             en.target.classList.add('in');
             io.unobserve(en.target);
         });
-    }, { threshold: 0.15, rootMargin: '0px 0px -6% 0px' });
-    $$('.reveal, [data-split], .case, .exp-item, .section-index, .edu').forEach(el => io.observe(el));
+    }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
+    $$('.reveal, [data-split], .case, .section, .section-index').forEach(el => io.observe(el));
 
-    /* ─── Parallax (transform only, desktop/tablet) ────────── */
+    /* ─── Parallax (transform only, tablet and up) ─────────── */
     const parallaxEls = reduceMotion ? [] : $$('[data-parallax]');
     function parallax() {
         if (!parallaxEls.length || innerWidth < 768) return;
@@ -339,14 +509,28 @@
         parallaxEls.forEach(el => {
             const r = el.getBoundingClientRect();
             if (r.bottom < -200 || r.top > innerHeight + 200) return;
-            const offset = (r.top + r.height / 2 - mid) * parseFloat(el.dataset.parallax);
-            el.style.translate = `0 ${offset.toFixed(1)}px`;
+            el.style.translate = `0 ${((r.top + r.height / 2 - mid) * parseFloat(el.dataset.parallax)).toFixed(1)}px`;
         });
     }
     onScroll();
 
-    /* ─── Magnetic buttons ─────────────────────────────────── */
+    /* ─── Pointer effects: spotlight + magnetic buttons ────── */
     if (finePointer && !reduceMotion) {
+        const spot = $('.spotlight');
+        let px = 0, py = 0, queued = false;
+        addEventListener('pointermove', e => {
+            px = e.clientX; py = e.clientY;
+            if (!queued) {
+                queued = true;
+                requestAnimationFrame(() => {
+                    queued = false;
+                    spot.style.setProperty('--px', `${px}px`);
+                    spot.style.setProperty('--py', `${py}px`);
+                });
+            }
+        }, { passive: true });
+        root.classList.add('has-pointer');
+
         $$('[data-magnetic]').forEach(el => {
             el.addEventListener('pointermove', e => {
                 const r = el.getBoundingClientRect();
@@ -383,13 +567,6 @@
         }
     });
 
-    /* ─── Small facts ──────────────────────────────────────── */
     $('#year').textContent = new Date().getFullYear();
-    // "Now" marker on the education timeline (2010 → 2027 scale)
-    const now = new Date();
-    const yearFrac = now.getFullYear() + now.getMonth() / 12;
-    const pct = Math.min(100, Math.max(0, (yearFrac - 2010) / 17 * 100));
-    $('#edu-now').style.setProperty('--now', `${pct}%`);
-
     window.__jrReady = true;
 })();

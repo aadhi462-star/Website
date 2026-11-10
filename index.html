@@ -4,9 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jaswant R — Explorer, learner, builder</title>
-    <meta name="description" content="Jaswant R — a curious generalist at Zoho School of Business. I explore how things work, then build with what I learn. Projects, experience and contact.">
-    <meta name="theme-color" content="#0d0e0e" media="(prefers-color-scheme: dark)">
-    <meta name="theme-color" content="#f3f0ea" media="(prefers-color-scheme: light)">
+    <meta name="description" content="Jaswant R — a curious generalist at Zoho School of Business. I explore how things work, then build with what I learn. Projects, process, journey and contact.">
+    <meta name="theme-color" content="#F5F2EB">
     <link rel="canonical" href="https://jaswantrportfolio.onslate.in/">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://jaswantrportfolio.onslate.in/">
@@ -14,15 +13,16 @@
     <meta property="og:description" content="I explore how things work. Then I build with what I learn.">
     <meta property="og:image" content="https://jaswantrportfolio.onslate.in/Images/gamerush.jpg">
     <meta name="twitter:card" content="summary_large_image">
-    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230d0e0e'/%3E%3Ctext x='50%25' y='56%25' text-anchor='middle' dominant-baseline='middle' font-family='Inter,Arial,sans-serif' font-weight='800' font-size='30' fill='%23ece8e1'%3EJR%3C/text%3E%3Ccircle cx='50' cy='16' r='5' fill='%235eead4'/%3E%3C/svg%3E">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23F5F2EB'/%3E%3Ctext x='50%25' y='56%25' text-anchor='middle' dominant-baseline='middle' font-family='Manrope,Arial,sans-serif' font-weight='800' font-size='30' fill='%23191918'%3EJR%3C/text%3E%3Ccircle cx='50' cy='16' r='5' fill='%23087F75'/%3E%3C/svg%3E">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300..900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/styles.css?v=20261109b">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300..800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css?v=20261110">
     <!-- Bump ?v= on the CSS/JS links whenever they change, so browsers fetch the new files -->
     <script>
         document.documentElement.classList.add('js');
-        try { var t = localStorage.getItem('jr-theme'); if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t; } catch (e) {}
+        // Light is the default; a saved choice wins
+        try { var t = localStorage.getItem('jr-theme'); if (t === 'dark' || t === 'light') document.documentElement.dataset.theme = t; } catch (e) {}
         // Safety net: if main.js fails or is slow, show everything instead of a blank page
         setTimeout(function () { if (!window.__jrReady) document.documentElement.classList.remove('js'); }, 3000);
     </script>
@@ -41,17 +41,24 @@
 <body>
     <a class="skip-link" href="#work">Skip to work</a>
 
-    <!-- First-visit loader (skipped for reduced motion and repeat visits) -->
+    <!-- Ambient layers: page-wide column guides, paper grain, pointer spotlight -->
+    <div class="ambient" aria-hidden="true">
+        <div class="guides container"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        <span class="spotlight"></span>
+    </div>
+
+    <!-- First-visit loader -->
     <div class="loader" aria-hidden="true">
         <div class="loader-inner">
             <span class="loader-name">Jaswant R.</span>
-            <span class="loader-count mono"><span id="loader-num">00</span></span>
+            <span class="loader-count mono" id="loader-num">00</span>
         </div>
         <span class="loader-bar"></span>
     </div>
 
     <!-- ═══ Header ═══ -->
     <header class="site-header">
+        <span class="progress" aria-hidden="true"></span>
         <div class="container header-inner">
             <a href="#home" class="wordmark" aria-label="Jaswant R, home">Jaswant R<span>.</span></a>
 
@@ -59,14 +66,16 @@
                 <span class="nav-indicator" aria-hidden="true"></span>
                 <a href="#home" data-nav="home">Home</a>
                 <a href="#work" data-nav="work">Work</a>
-                <a href="#experience" data-nav="experience">Experience</a>
+                <a href="#process" data-nav="process">Process</a>
+                <a href="#journey" data-nav="journey">Journey</a>
                 <a href="#about" data-nav="about">About</a>
+                <a href="#journal" data-nav="journal" hidden>Journal</a>
                 <a href="#contact" data-nav="contact">Contact</a>
             </nav>
 
             <div class="header-right">
                 <a class="header-cta link-line" href="mailto:jaswant0520@zohomail.in">Say hello <svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
-                <button class="theme-btn" type="button" aria-label="Switch colour theme">
+                <button class="theme-btn" type="button" aria-label="Switch to dark mode">
                     <svg class="i icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
                     <svg class="i icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
                 </button>
@@ -81,16 +90,18 @@
     <dialog class="menu" id="menu" aria-label="Menu">
         <div class="menu-top container">
             <span class="wordmark">Jaswant R<span>.</span></span>
-            <button class="menu-close" type="button" aria-label="Close menu">
+            <button class="icon-btn menu-close" type="button" aria-label="Close menu">
                 <svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
             </button>
         </div>
         <nav class="menu-links container" aria-label="Mobile">
             <a href="#home"><span class="mono">01</span>Home</a>
             <a href="#work"><span class="mono">02</span>Work</a>
-            <a href="#experience"><span class="mono">03</span>Experience</a>
-            <a href="#about"><span class="mono">04</span>About</a>
-            <a href="#contact"><span class="mono">05</span>Contact</a>
+            <a href="#process"><span class="mono">03</span>Process</a>
+            <a href="#journey"><span class="mono">04</span>Journey</a>
+            <a href="#about"><span class="mono">05</span>About</a>
+            <a href="#journal" hidden><span class="mono">06</span>Journal</a>
+            <a href="#contact"><span class="mono">07</span>Contact</a>
         </nav>
         <div class="menu-foot container mono">
             <a href="mailto:jaswant0520@zohomail.in">jaswant0520@zohomail.in</a>
@@ -100,8 +111,6 @@
     <main>
         <!-- ═══ Hero ═══ -->
         <section id="home" class="hero" aria-labelledby="hero-title">
-            <div class="hero-guides container" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
-
             <div class="container hero-grid">
                 <div class="hero-meta mono reveal">
                     <span>Jaswant R — Portfolio</span>
@@ -122,156 +131,267 @@
                     </div>
                 </div>
 
-                <!-- Circuit schematic of the method: a pulse travels Explore → Experiment → Understand → Build -->
-                <figure class="schematic reveal" data-parallax="0.06" aria-label="My process: explore, experiment, understand, build — a loop that repeats.">
-                    <svg viewBox="0 0 440 440" role="img" aria-hidden="true">
-                        <g class="sc-grid">
-                            <path d="M20 20h400v400H20z"/>
-                            <path d="M20 220h20M400 220h20M220 20v20M220 400v20"/>
-                        </g>
-                        <path class="sc-trace" d="M100 100H340V340H100Z"/>
-                        <path class="sc-trace thin" d="M220 170V100M270 220H340M220 270V340M170 220H100"/>
-                        <circle class="sc-via" cx="220" cy="100" r="4"/>
-                        <circle class="sc-via" cx="340" cy="220" r="4"/>
-                        <circle class="sc-via" cx="220" cy="340" r="4"/>
-                        <circle class="sc-via" cx="100" cy="220" r="4"/>
-                        <path class="sc-pulse" pathLength="100" d="M100 100H340V340H100Z"/>
-                        <g class="sc-chip">
-                            <rect x="170" y="170" width="100" height="100" rx="8"/>
-                            <path d="M185 170v-10M205 170v-10M235 170v-10M255 170v-10M185 270v10M205 270v10M235 270v10M255 270v10M170 185h-10M170 205h-10M170 235h-10M170 255h-10M270 185h10M270 205h10M270 235h10M270 255h10"/>
-                            <text x="220" y="216" text-anchor="middle">JR</text>
-                            <text x="220" y="240" text-anchor="middle" class="sc-small">ECE · ZSB</text>
-                        </g>
-                        <g class="sc-node n1"><circle cx="100" cy="100" r="9"/><text x="100" y="72" text-anchor="middle"><tspan class="sc-num">01</tspan> Explore</text></g>
-                        <g class="sc-node n2"><circle cx="340" cy="100" r="9"/><text x="340" y="72" text-anchor="middle"><tspan class="sc-num">02</tspan> Experiment</text></g>
-                        <g class="sc-node n3"><circle cx="340" cy="340" r="9"/><text x="340" y="378" text-anchor="middle"><tspan class="sc-num">03</tspan> Understand</text></g>
-                        <g class="sc-node n4"><circle cx="100" cy="340" r="9"/><text x="100" y="378" text-anchor="middle"><tspan class="sc-num">04</tspan> Build</text></g>
-                    </svg>
-                    <figcaption class="mono">Fig. 01 — The loop I work in</figcaption>
+                <!-- Signature interaction: the working loop. A pulse travels the traces; each node lights in turn.
+                     Hover, focus or tap a stage to read about it. -->
+                <figure class="loop reveal" data-parallax="0.05">
+                    <div class="loop-stage">
+                        <svg viewBox="0 0 440 440" aria-hidden="true">
+                            <g class="lp-grid"><path d="M20 20h400v400H20z"/><path d="M20 220h20M400 220h20M220 20v20M220 400v20"/></g>
+                            <path class="lp-trace" d="M100 100H340V340H100Z"/>
+                            <path class="lp-trace thin" d="M220 170V100M270 220H340M220 270V340M170 220H100"/>
+                            <circle class="lp-via" cx="220" cy="100" r="4"/><circle class="lp-via" cx="340" cy="220" r="4"/>
+                            <circle class="lp-via" cx="220" cy="340" r="4"/><circle class="lp-via" cx="100" cy="220" r="4"/>
+                            <path class="lp-pulse" id="lp-pulse" pathLength="100" d="M100 100H340V340H100Z"/>
+                            <g class="lp-chip">
+                                <rect x="170" y="170" width="100" height="100" rx="10"/>
+                                <path d="M185 170v-10M205 170v-10M235 170v-10M255 170v-10M185 270v10M205 270v10M235 270v10M255 270v10M170 185h-10M170 205h-10M170 235h-10M170 255h-10M270 185h10M270 205h10M270 235h10M270 255h10"/>
+                                <text x="220" y="218" text-anchor="middle">JR</text>
+                                <text x="220" y="242" text-anchor="middle" class="lp-small">ECE · ZSB</text>
+                            </g>
+                            <circle class="lp-node" data-node="0" cx="100" cy="100" r="9"/>
+                            <circle class="lp-node" data-node="1" cx="340" cy="100" r="9"/>
+                            <circle class="lp-node" data-node="2" cx="340" cy="340" r="9"/>
+                            <circle class="lp-node" data-node="3" cx="100" cy="340" r="9"/>
+                        </svg>
+                        <!-- Real buttons over the nodes, so the diagram works with keyboard and touch -->
+                        <button type="button" class="lp-btn n0" data-stage="0"><span class="mono">01</span> Explore</button>
+                        <button type="button" class="lp-btn n1" data-stage="1"><span class="mono">02</span> Experiment</button>
+                        <button type="button" class="lp-btn n2" data-stage="2"><span class="mono">03</span> Understand</button>
+                        <button type="button" class="lp-btn n3" data-stage="3"><span class="mono">04</span> Build</button>
+                    </div>
+                    <figcaption class="loop-card" aria-live="polite">
+                        <span class="mono loop-card-num" id="loop-num">01 / 04</span>
+                        <strong id="loop-title">Explore</strong>
+                        <span id="loop-text">Look closely first. Take the product, tool or problem apart to see how it really works.</span>
+                    </figcaption>
                 </figure>
-
-                <!-- Compact process strip (mobile) -->
-                <ol class="process-strip mono reveal" aria-hidden="true">
-                    <li>Explore</li><li>Experiment</li><li>Understand</li><li>Build</li>
-                </ol>
             </div>
+        </section>
 
-            <dl class="container hero-facts">
-                <div class="reveal"><dt class="mono">Studying</dt><dd>Zoho School of Business, 2025 – 27</dd></div>
-                <div class="reveal"><dt class="mono">Now</dt><dd>Technical Writer trainee, Zoho Community Spaces</dd></div>
-                <div class="reveal"><dt class="mono">Background</dt><dd>Diploma, Electronics &amp; Communication</dd></div>
-                <div class="reveal hero-scroll"><dt class="mono">Scroll</dt><dd><span class="scroll-line" aria-hidden="true"></span></dd></div>
-            </dl>
+        <!-- ═══ Snapshot ═══ -->
+        <section id="snapshot" class="snapshot" aria-label="Personal snapshot">
+            <div class="container">
+                <dl class="snap-grid">
+                    <div class="snap reveal">
+                        <dt class="mono"><span>A</span> Current role</dt>
+                        <dd>
+                            <p class="snap-lead">Technical Writer trainee</p>
+                            <p>Zoho Community Spaces</p>
+                            <p class="snap-sub">Student, Zoho School of Business · 2025 – 27</p>
+                        </dd>
+                    </div>
+                    <div class="snap reveal">
+                        <dt class="mono"><span>B</span> Interested in</dt>
+                        <dd><ul class="snap-tags"><li>Product thinking</li><li>AI tools</li><li>Accessibility</li><li>SaaS products</li><li>Electronics</li></ul></dd>
+                    </div>
+                    <div class="snap reveal">
+                        <dt class="mono"><span>C</span> Can do</dt>
+                        <dd><ul class="snap-list">
+                            <li>Observation &amp; critical thinking</li>
+                            <li>Problem-solving</li>
+                            <li>Adaptability</li>
+                            <li>AI &amp; prompt engineering</li>
+                            <li>Building web apps &amp; extensions</li>
+                            <li>Clear customer communication</li>
+                        </ul></dd>
+                    </div>
+                    <div class="snap reveal">
+                        <dt class="mono"><span>D</span> Learning now</dt>
+                        <dd><ul class="snap-list learning">
+                            <li>Technical documentation</li>
+                            <li>Deluge scripting</li>
+                        </ul></dd>
+                    </div>
+                </dl>
+            </div>
         </section>
 
         <!-- ═══ Work ═══ -->
         <section id="work" class="section" aria-labelledby="work-title">
             <div class="container">
                 <header class="section-head">
-                    <p class="section-index mono reveal"><span>01</span> Work</p>
+                    <p class="section-index mono reveal"><span>01</span> Selected explorations</p>
                     <h2 id="work-title" class="section-title" data-split>Things I've designed <span class="dim">&amp; built.</span></h2>
                     <p class="section-note mono reveal" id="work-count"></p>
                 </header>
 
                 <div class="cases" id="cases"></div>
 
-                <div class="index-wrap">
+                <div class="index-wrap" id="index-wrap">
                     <div class="index-head mono reveal">
-                        <span>Index</span><span>Category</span><span class="ih-tags">Tools</span><span></span>
+                        <span>More work</span><span>Category</span><span class="ih-tags">Built with</span><span></span>
                     </div>
                     <ol class="index" id="index"></ol>
-                    <div class="empty-state reveal" id="empty-state" hidden>
-                        <p class="mono">Nº 00</p>
-                        <p>New work is on the bench. Check back soon.</p>
-                    </div>
+                </div>
+                <div class="empty-state reveal" id="empty-state" hidden>
+                    <p class="mono">Nº 00</p>
+                    <p>New work is on the bench. Check back soon.</p>
                 </div>
             </div>
-            <!-- Floating preview for index rows (pointer devices) -->
             <div class="index-preview" aria-hidden="true"><div class="index-preview-inner"></div></div>
         </section>
 
-        <!-- ═══ Experience ═══ -->
-        <section id="experience" class="section" aria-labelledby="exp-title">
+        <!-- ═══ Process ═══ -->
+        <section id="process" class="section process" aria-labelledby="process-title">
             <div class="container">
                 <header class="section-head">
-                    <p class="section-index mono reveal"><span>02</span> Experience</p>
-                    <h2 id="exp-title" class="section-title" data-split>Work, support <span class="dim">&amp; leadership.</span></h2>
+                    <p class="section-index mono reveal"><span>02</span> How I work</p>
+                    <h2 id="process-title" class="section-title" data-split>Four steps, <span class="dim">on repeat.</span></h2>
                 </header>
 
-                <ol class="exp">
-                    <!-- Technical writing -->
-                    <li class="exp-item reveal">
-                        <div class="exp-when mono"><span class="tag-now">Now</span></div>
-                        <div class="exp-main">
-                            <p class="exp-org mono">Zoho Community Spaces · ZS trainee</p>
-                            <h3>Technical Writer</h3>
-                            <p class="exp-desc">Writing and documenting: turning how a product works into clear, usable explanations.</p>
+                <div class="process-grid">
+                    <!-- Sticky visual (desktop): a vertical trace that fills as you scroll the steps -->
+                    <div class="process-visual" aria-hidden="true">
+                        <div class="pv-inner">
+                            <span class="pv-num mono" id="pv-num">01</span>
+                            <span class="pv-name" id="pv-name">Explore</span>
+                            <div class="pv-track">
+                                <span class="pv-fill" id="pv-fill"></span>
+                                <i data-pv="0"></i><i data-pv="1"></i><i data-pv="2"></i><i data-pv="3"></i>
+                            </div>
                         </div>
-                        <div class="exp-visual v-doc" aria-hidden="true">
-                            <span class="doc-h"></span><span></span><span></span><span class="short"></span>
-                            <span class="doc-h2"></span><span></span><span class="short"></span>
-                            <span class="doc-caret"></span>
-                        </div>
-                    </li>
+                    </div>
 
-                    <!-- Zoho Mail -->
-                    <li class="exp-item exp-item-feature reveal">
-                        <div class="exp-when mono">Support</div>
-                        <div class="exp-main">
-                            <p class="exp-org mono">Zoho Mail</p>
-                            <h3>Customer Support</h3>
-                            <ul class="exp-points">
-                                <li>Handled customer tickets and closed out every ticket in the bin each day</li>
-                                <li>Troubleshot account issues</li>
-                                <li>Clear, well-drafted customer communication</li>
-                                <li>Product knowledge built through independent problem-solving</li>
+                    <ol class="steps">
+                        <li class="step" data-step-i="0">
+                            <p class="step-num mono">01 — Explore</p>
+                            <h3>Look closely first.</h3>
+                            <p class="step-text">I take a product, tool or problem apart to see how it really works before deciding anything.</p>
+                            <p class="step-practice"><span class="mono">In practice</span>Learning the Zoho Mail ecosystem one support ticket at a time, and searching for answers myself before asking.</p>
+                        </li>
+                        <li class="step" data-step-i="1">
+                            <p class="step-num mono">02 — Experiment</p>
+                            <h3>Try it cheaply and quickly.</h3>
+                            <p class="step-text">A rough prototype teaches more than a long plan. I'd rather test an idea than argue about it.</p>
+                            <p class="step-practice"><span class="mono">In practice</span>StartaPath and Warranty Vault Pro both began as prototypes in Google AI Studio. <button type="button" class="link-line inline-open" data-open="startapath">See StartaPath</button></p>
+                        </li>
+                        <li class="step" data-step-i="2">
+                            <p class="step-num mono">03 — Understand</p>
+                            <h3>Make it make sense.</h3>
+                            <p class="step-text">Writing things down shows me what I actually know, and what I only thought I knew.</p>
+                            <p class="step-practice"><span class="mono">In practice</span>Technical writing at Zoho Community Spaces, and documenting StartaPath in a full project report.</p>
+                        </li>
+                        <li class="step" data-step-i="3">
+                            <p class="step-num mono">04 — Build</p>
+                            <h3>Ship something people can use.</h3>
+                            <p class="step-text">Then keep improving it. Building is where the other three steps get tested for real.</p>
+                            <p class="step-practice"><span class="mono">In practice</span>GameRush and AlumniZone are live, and Time Zone Buddy is on version 1.1.0. <button type="button" class="link-line inline-open" data-open="gamerush">See GameRush</button></p>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══ Journey ═══ -->
+        <section id="journey" class="section" aria-labelledby="journey-title">
+            <div class="container">
+                <header class="section-head">
+                    <p class="section-index mono reveal"><span>03</span> My journey</p>
+                    <h2 id="journey-title" class="section-title" data-split>From circuits <span class="dim">to products.</span></h2>
+                    <p class="section-note mono reveal">Select a stop · ← → keys</p>
+                </header>
+
+                <div class="journey reveal">
+                    <div class="jr-track-wrap">
+                        <div class="jr-track" role="tablist" aria-label="Journey stops">
+                            <button role="tab" id="jt-0" aria-controls="jp-0" class="jr-stop"><span class="mono">2010 – 22</span><strong>School</strong></button>
+                            <button role="tab" id="jt-1" aria-controls="jp-1" class="jr-stop"><span class="mono">2022 – 25</span><strong>Diploma, ECE</strong></button>
+                            <button role="tab" id="jt-2" aria-controls="jp-2" class="jr-stop"><span class="mono">2025 – 27</span><strong>Zoho School of Business</strong></button>
+                            <button role="tab" id="jt-3" aria-controls="jp-3" class="jr-stop"><span class="mono">2025</span><strong>ZS Sportsday</strong></button>
+                            <button role="tab" id="jt-4" aria-controls="jp-4" class="jr-stop"><span class="mono">At ZSB</span><strong>WCAG Treasure Hunt</strong></button>
+                            <button role="tab" id="jt-5" aria-controls="jp-5" class="jr-stop"><span class="mono">At ZSB</span><strong>Zoho Mail Support</strong></button>
+                            <button role="tab" id="jt-6" aria-controls="jp-6" class="jr-stop now"><span class="mono">Now</span><strong>Technical Writer</strong></button>
+                        </div>
+                        <span class="jr-line" aria-hidden="true"><span class="jr-line-fill" id="jr-fill"></span></span>
+                    </div>
+
+                    <div class="jr-panels">
+                        <article class="jr-panel" role="tabpanel" id="jp-0" aria-labelledby="jt-0">
+                            <div class="jr-main">
+                                <p class="jr-kicker mono">Education · 2010 – 2022</p>
+                                <h3>NSN Matriculation Higher Secondary School</h3>
+                                <p>K–12. Primary and secondary education: the foundation for everything after.</p>
+                            </div>
+                            <div class="jr-visual v-books" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
+                        </article>
+                        <article class="jr-panel" role="tabpanel" id="jp-1" aria-labelledby="jt-1">
+                            <div class="jr-main">
+                                <p class="jr-kicker mono">Education · 2022 – 2025</p>
+                                <h3>Diploma in Electronics &amp; Communication Engineering</h3>
+                                <p>Foundational knowledge in electronic circuits and communication systems, plus practical technical skills through academic projects and hands-on learning.</p>
+                            </div>
+                            <div class="jr-visual v-signal" aria-hidden="true">
+                                <svg viewBox="0 0 240 90"><path class="sig-grid" d="M0 45h240"/><path class="sig" d="M0 45 C20 5, 40 5, 60 45 S100 85, 120 45 S160 5, 180 45 S220 85, 240 45"/><path class="sig sq" d="M0 75h30v-20h30v20h30v-20h30v20h30v-20h30v20h30"/></svg>
+                            </div>
+                        </article>
+                        <article class="jr-panel" role="tabpanel" id="jp-2" aria-labelledby="jt-2">
+                            <div class="jr-main">
+                                <p class="jr-kicker mono">Education · 2025 – 2027</p>
+                                <h3>Zoho School of Business</h3>
+                                <p>Fundamental business concepts, while developing skills in analysis, communication and practical problem-solving through real-world applications.</p>
+                            </div>
+                            <div class="jr-visual v-shift" aria-hidden="true"><span class="mono">ECE</span><i></i><span class="mono">Business</span></div>
+                        </article>
+                        <article class="jr-panel" role="tabpanel" id="jp-3" aria-labelledby="jt-3">
+                            <div class="jr-main">
+                                <p class="jr-kicker mono">Leadership · 2025 · Host</p>
+                                <h3>ZS Sportsday 2025</h3>
+                                <p>Organised and hosted the sports day, end to end.</p>
+                            </div>
+                            <ul class="jr-visual v-runsheet mono" aria-label="Responsibilities">
+                                <li><span class="tick" aria-hidden="true"></span>Event organisation</li>
+                                <li><span class="tick" aria-hidden="true"></span>Logistics</li>
+                                <li><span class="tick" aria-hidden="true"></span>Vendor coordination</li>
+                                <li><span class="tick" aria-hidden="true"></span>Participant experience</li>
+                                <li><span class="tick" aria-hidden="true"></span>Hosting</li>
                             </ul>
-                        </div>
-                        <figure class="testimonial">
-                            <span class="quote-mark" aria-hidden="true">“</span>
-                            <blockquote>
-                                <p>Jaswant was very much proactive and showed his interest in learning new things right from day one. He consistently handled support tickets on time and ensured that all tickets in his bin were completed before ending the day. His drafting skills were also very good, and he showed curiosity about the product. He always made an effort to search for answers on his own before reaching out with any doubts, which was truly impressive.</p>
-                            </blockquote>
-                            <figcaption>
-                                <span class="avatar" aria-hidden="true">GD</span>
-                                <span><strong>Gopinath D.</strong><span class="mono">Zoho Mail Lead, Technical Support</span></span>
-                            </figcaption>
-                        </figure>
-                    </li>
-
-                    <!-- Sportsday -->
-                    <li class="exp-item reveal">
-                        <div class="exp-when mono">2025</div>
-                        <div class="exp-main">
-                            <p class="exp-org mono">ZS · Host</p>
-                            <h3>ZS Sportsday 2025</h3>
-                            <p class="exp-desc">Organised and hosted the school's sports day, end to end.</p>
-                        </div>
-                        <ul class="exp-visual v-runsheet mono" aria-label="Responsibilities">
-                            <li><span class="tick" aria-hidden="true"></span>Event organisation</li>
-                            <li><span class="tick" aria-hidden="true"></span>Logistics</li>
-                            <li><span class="tick" aria-hidden="true"></span>Vendor coordination</li>
-                            <li><span class="tick" aria-hidden="true"></span>Participant experience</li>
-                            <li><span class="tick" aria-hidden="true"></span>Hosting</li>
-                        </ul>
-                    </li>
-
-                    <!-- WCAG -->
-                    <li class="exp-item reveal">
-                        <div class="exp-when mono">Organiser</div>
-                        <div class="exp-main">
-                            <p class="exp-org mono">Accessibility event</p>
-                            <h3>WCAG Treasure Hunt</h3>
-                            <p class="exp-desc">An accessibility-themed interactive activity that taught WCAG principles through challenges.</p>
-                        </div>
-                        <div class="exp-visual v-clues" aria-hidden="true">
-                            <span><b class="mono">P</b>Perceivable</span>
-                            <span><b class="mono">O</b>Operable</span>
-                            <span><b class="mono">U</b>Understandable</span>
-                            <span><b class="mono">R</b>Robust</span>
-                        </div>
-                    </li>
-                </ol>
+                        </article>
+                        <article class="jr-panel" role="tabpanel" id="jp-4" aria-labelledby="jt-4">
+                            <div class="jr-main">
+                                <p class="jr-kicker mono">Leadership · Organiser</p>
+                                <h3>WCAG Treasure Hunt</h3>
+                                <p>An accessibility-themed interactive activity that taught WCAG principles through challenges.</p>
+                            </div>
+                            <div class="jr-visual v-clues" aria-hidden="true">
+                                <span><b class="mono">P</b>Perceivable</span><span><b class="mono">O</b>Operable</span>
+                                <span><b class="mono">U</b>Understandable</span><span><b class="mono">R</b>Robust</span>
+                            </div>
+                        </article>
+                        <article class="jr-panel jr-panel-wide" role="tabpanel" id="jp-5" aria-labelledby="jt-5">
+                            <div class="jr-main">
+                                <p class="jr-kicker mono">Professional · Customer support</p>
+                                <h3>Zoho Mail — Customer Support</h3>
+                                <ul class="jr-points">
+                                    <li>Handled customer tickets and closed out every ticket in the bin each day</li>
+                                    <li>Troubleshot account issues</li>
+                                    <li>Clear, well-drafted customer communication</li>
+                                    <li>Product knowledge built through independent problem-solving</li>
+                                </ul>
+                            </div>
+                            <figure class="testimonial">
+                                <span class="quote-mark" aria-hidden="true">“</span>
+                                <blockquote>
+                                    <p>Jaswant was very much proactive and showed his interest in learning new things right from day one. He consistently handled support tickets on time and ensured that all tickets in his bin were completed before ending the day. His drafting skills were also very good, and he showed curiosity about the product. He always made an effort to search for answers on his own before reaching out with any doubts, which was truly impressive.</p>
+                                </blockquote>
+                                <figcaption>
+                                    <span class="avatar" aria-hidden="true">GD</span>
+                                    <span><strong>Gopinath D.</strong><span class="mono">Zoho Mail Lead, Technical Support</span></span>
+                                </figcaption>
+                            </figure>
+                        </article>
+                        <article class="jr-panel" role="tabpanel" id="jp-6" aria-labelledby="jt-6">
+                            <div class="jr-main">
+                                <p class="jr-kicker mono"><span class="tag-now">Now</span> · ZS trainee</p>
+                                <h3>Technical Writer, Zoho Community Spaces</h3>
+                                <p>Writing and documenting: turning how a product works into clear, usable explanations.</p>
+                            </div>
+                            <div class="jr-visual v-doc" aria-hidden="true">
+                                <span class="doc-h"></span><span></span><span></span><span class="short"></span>
+                                <span class="doc-h2"></span><span></span><span class="short"></span><span class="doc-caret"></span>
+                            </div>
+                        </article>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -279,13 +399,13 @@
         <section id="about" class="section" aria-labelledby="about-title">
             <div class="container">
                 <header class="section-head">
-                    <p class="section-index mono reveal"><span>03</span> About</p>
+                    <p class="section-index mono reveal"><span>04</span> About</p>
                     <h2 id="about-title" class="section-title" data-split>A curious <span class="dim">generalist.</span></h2>
                 </header>
 
                 <div class="about">
                     <figure class="portrait reveal">
-                        <div class="portrait-frame" data-parallax="-0.05">
+                        <div class="portrait-frame" data-parallax="-0.04">
                             <img src="Images/User%20Original%20from%20Zoho%20Cliq.png" alt="Portrait of Jaswant R" width="400" height="400" loading="lazy">
                         </div>
                         <figcaption class="mono">Jaswant R. — ECE → Business</figcaption>
@@ -293,73 +413,32 @@
 
                     <div class="about-body">
                         <p class="about-lead reveal">I'm a curious learner who likes understanding how technology works and exploring different tools and ideas. I learn by experimenting, and I keep improving by trying new technologies.</p>
-
                         <blockquote class="philosophy reveal">
                             <p>“I'd rather build knowledge across several domains than limit myself to one.”</p>
                             <footer class="mono">— Personal philosophy</footer>
                         </blockquote>
-
                         <p class="reveal muted-p">I started in electronics, with circuits and communication systems, and moved on to business studies. Along the way: customer support, technical writing, hosting events and building products of my own. My goal is to keep learning, gain practical experience and get good at solving real-world problems.</p>
-
-                        <!-- Education timeline: spans drawn to scale, 2010 → 2027 -->
-                        <div class="edu reveal">
-                            <h3 class="sub mono">Education</h3>
-                            <div class="edu-bars" aria-hidden="true"><i></i><i></i><i class="current"></i><span class="edu-now mono" id="edu-now">Now</span></div>
-                            <div class="edu-track">
-                                <div class="edu-span" style="--from:2010;--to:2022">
-                                    <span class="edu-years mono">2010 – 2022</span>
-                                    <strong>K–12</strong>
-                                    <span>NSN Matriculation Higher Secondary School</span>
-                                </div>
-                                <div class="edu-span" style="--from:2022;--to:2025">
-                                    <span class="edu-years mono">2022 – 2025</span>
-                                    <strong>Diploma, ECE</strong>
-                                    <span>Electronics &amp; Communication Engineering</span>
-                                </div>
-                                <div class="edu-span current" style="--from:2025;--to:2027">
-                                    <span class="edu-years mono">2025 – 2027</span>
-                                    <strong>Zoho School of Business</strong>
-                                    <span>Business, analysis &amp; communication</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="skills reveal">
-                            <div>
-                                <h3 class="sub mono">Practising</h3>
-                                <ul class="skill-list">
-                                    <li>Observation &amp; critical thinking</li>
-                                    <li>Problem-solving</li>
-                                    <li>Adaptability</li>
-                                    <li>AI &amp; prompt engineering</li>
-                                    <li>Technology &amp; SaaS awareness</li>
-                                </ul>
-                            </div>
-                            <div>
-                                <h3 class="sub mono">Learning</h3>
-                                <ul class="skill-list learning">
-                                    <li>Deluge scripting</li>
-                                </ul>
-                                <h3 class="sub mono">Exploring</h3>
-                                <ul class="explore-tags">
-                                    <li>Product thinking</li>
-                                    <li>Technical writing</li>
-                                    <li>Accessibility</li>
-                                    <li>AI tools</li>
-                                    <li>SaaS products</li>
-                                    <li>Electronics</li>
-                                </ul>
-                            </div>
-                        </div>
                     </div>
                 </div>
+            </div>
+        </section>
+
+        <!-- ═══ Journal (appears once js/journal.js has entries) ═══ -->
+        <section id="journal" class="section" aria-labelledby="journal-title" hidden>
+            <div class="container">
+                <header class="section-head">
+                    <p class="section-index mono reveal"><span>05</span> Thinking out loud</p>
+                    <h2 id="journal-title" class="section-title" data-split>Notes from <span class="dim">the bench.</span></h2>
+                    <p class="section-note mono reveal" id="journal-count"></p>
+                </header>
+                <ol class="journal" id="journal-list"></ol>
             </div>
         </section>
 
         <!-- ═══ Contact ═══ -->
         <section id="contact" class="section contact" aria-labelledby="contact-title">
             <div class="container">
-                <p class="section-index mono reveal"><span>04</span> Contact</p>
+                <p class="section-index mono reveal"><span>—</span> Contact</p>
                 <h2 id="contact-title" class="contact-title" data-split>Have something <span class="accent-word">interesting</span> to build?</h2>
                 <p class="contact-lede reveal">I'm always interested in exploring ideas, learning something new and collaborating on meaningful projects.</p>
 
@@ -408,7 +487,7 @@
     <dialog class="sheet" id="sheet" aria-labelledby="sheet-title">
         <div class="sheet-bar">
             <span class="mono" id="sheet-count"></span>
-            <button class="sheet-close" type="button" aria-label="Close case study">
+            <button class="icon-btn sheet-close" type="button" aria-label="Close case study">
                 <svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
             </button>
         </div>
@@ -421,7 +500,8 @@
 
     <div class="toast mono" id="toast" role="status" aria-live="polite"></div>
 
-    <script src="js/projects.js?v=20261109b"></script>
-    <script src="js/main.js?v=20261109b"></script>
+    <script src="js/projects.js?v=20261110"></script>
+    <script src="js/journal.js?v=20261110"></script>
+    <script src="js/main.js?v=20261110"></script>
 </body>
 </html>

@@ -12,6 +12,8 @@
  *   summary       one or two sentences
  *   problem       the problem it addresses (optional)
  *   contribution  what you personally did (optional)
+ *   approach      how you went about it (optional)
+ *   learnings     what you learned, one sentence each: ["…", "…"] (optional)
  *   details       extra paragraphs for the case study (optional)
  *   tags          tools / skills used
  *   image         screenshot in Images/ (optional). Projects with an image
@@ -37,6 +39,9 @@ window.PROJECTS = [
       "Founders, especially students and first-time entrepreneurs, have no fast, structured and affordable way to check whether an idea is worth building. Market reports are costly, consultants are slow, and chatbots give free-form answers that can't be compared.",
     contribution:
       "Prototyped StartaPath in Google AI Studio and built it into a React 19 + TypeScript single-page app (about 6,900 lines across 33 components). Designed a fixed JSON schema so every Gemini 2.5 Flash audit has the same sections, then added on-demand SWOT, PEST and market-need analyses, a Google Maps-grounded local ecosystem scan, an action tracker that suggests the next step, text and real-time voice advisors, a Zoho Product Lab, version history and a full PDF report.",
+    approach:
+      "Prototyped in Google AI Studio, then exported to a Vite + React project. Instead of free-form chat, the model fills a fixed JSON response schema, so every audit has the same sections and can be rendered, edited, scored and compared.",
+    // TODO (optional): add `learnings: ["…"]` — what building StartaPath taught you
     details: [
       "Every audit includes a 0–10 viability score split into feasibility, market fit, readiness and risk; TAM/SAM/SOM market sizing; competitor analysis; MVP scope; pricing; a 90-day roadmap; a nine-block Business Model Canvas and a 7–10 slide pitch deck. Founders can edit all of it and export the whole audit as one printable report.",
       "The key design decision is schema-constrained generation. A general chatbot answers in a different shape every time; StartaPath makes the model fill a typed contract, so its output can be rendered, edited, scored and compared like regular app data.",
@@ -91,6 +96,9 @@ window.PROJECTS = [
       "Working with people across time zones means juggling clocks, converting times in your head and guessing when a meeting suits everyone.",
     contribution:
       "Built it as a Manifest V3 Chrome extension: about 400 built-in cities plus every IANA time zone and online town search, custom named locations, favourites and pinned clocks, a converter, and a meeting planner that suggests times across everyone's working hours. Added meeting reminders that ring as Chrome notifications, with snooze, even when the popup is closed.",
+    approach:
+      "Started from RandomZone's web tool and rethought it for a browser popup: everything one click away, data kept in the browser, and a background service worker that turns each reminder into a Chrome alarm so it rings even when the popup is closed.",
+    // TODO (optional): add `learnings: ["…"]`
     details: [
       "Everything stays in the browser with no account. Settings sync through Chrome storage, while reminders stay on each device so the same reminder doesn't ring on every computer you're signed in to.",
       "Daylight-saving offsets come from the browser's own time-zone data, so clocks stay correct without a hand-maintained table."
