@@ -17,7 +17,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300..800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/styles.css?v=20261110">
+    <link rel="stylesheet" href="css/styles.css?v=20261110c">
     <!-- Bump ?v= on the CSS/JS links whenever they change, so browsers fetch the new files -->
     <script>
         document.documentElement.classList.add('js');
@@ -162,7 +162,7 @@
                     <figcaption class="loop-card" aria-live="polite">
                         <span class="mono loop-card-num" id="loop-num">01 / 04</span>
                         <strong id="loop-title">Explore</strong>
-                        <span id="loop-text">Look closely first. Take the product, tool or problem apart to see how it really works.</span>
+                        <span id="loop-text">Find out how it really works, testing products to their limits.</span>
                     </figcaption>
                 </figure>
             </div>
@@ -182,7 +182,7 @@
                     </div>
                     <div class="snap reveal">
                         <dt class="mono"><span>B</span> Interested in</dt>
-                        <dd><ul class="snap-tags"><li>Product thinking</li><li>AI tools</li><li>Accessibility</li><li>SaaS products</li><li>Electronics</li></ul></dd>
+                        <dd><ul class="snap-tags"><li>How technology works</li><li>Emerging tech</li><li>SaaS platforms</li><li>APIs</li><li>AI-powered tools</li><li>Testing products</li></ul></dd>
                     </div>
                     <div class="snap reveal">
                         <dt class="mono"><span>C</span> Can do</dt>
@@ -192,13 +192,13 @@
                             <li>Adaptability</li>
                             <li>AI &amp; prompt engineering</li>
                             <li>Building web apps &amp; extensions</li>
-                            <li>Clear customer communication</li>
+                            <li>Drafting clear written replies</li>
                         </ul></dd>
                     </div>
                     <div class="snap reveal">
                         <dt class="mono"><span>D</span> Learning now</dt>
                         <dd><ul class="snap-list learning">
-                            <li>Technical documentation</li>
+                            <li>Technical writing (ZS trainee)</li>
                             <li>Deluge scripting</li>
                         </ul></dd>
                     </div>
@@ -237,51 +237,143 @@
                 <header class="section-head">
                     <p class="section-index mono reveal"><span>02</span> How I work</p>
                     <h2 id="process-title" class="section-title" data-split>Four steps, <span class="dim">on repeat.</span></h2>
+                    <p class="section-lede reveal">Explore, experiment, understand, build. Here is where each step shows up in my actual work, with evidence you can open.</p>
                 </header>
 
                 <div class="process-grid">
-                    <!-- Sticky visual (desktop): a vertical trace that fills as you scroll the steps -->
-                    <div class="process-visual" aria-hidden="true">
+                    <!-- Sticky summary (desktop): follows the step in view; stage buttons jump to a step -->
+                    <aside class="pv" aria-label="Process steps">
                         <div class="pv-inner">
-                            <span class="pv-num mono" id="pv-num">01</span>
-                            <span class="pv-name" id="pv-name">Explore</span>
-                            <div class="pv-track">
-                                <span class="pv-fill" id="pv-fill"></span>
-                                <i data-pv="0"></i><i data-pv="1"></i><i data-pv="2"></i><i data-pv="3"></i>
-                            </div>
+                            <p class="pv-kicker mono">Step <span id="pv-num">01</span> / 04</p>
+                            <p class="pv-name" id="pv-name">Explore</p>
+                            <p class="pv-line" id="pv-line">Find out how it really works.</p>
+                            <ol class="pv-nav">
+                                <li><button type="button" data-goto-step="0"><span class="mono">01</span>Explore</button></li>
+                                <li><button type="button" data-goto-step="1"><span class="mono">02</span>Experiment</button></li>
+                                <li><button type="button" data-goto-step="2"><span class="mono">03</span>Understand</button></li>
+                                <li><button type="button" data-goto-step="3"><span class="mono">04</span>Build</button></li>
+                            </ol>
                         </div>
-                    </div>
+                    </aside>
 
                     <ol class="steps">
-                        <li class="step" data-step-i="0">
-                            <p class="step-num mono">01 — Explore</p>
-                            <h3>Look closely first.</h3>
-                            <p class="step-text">I take a product, tool or problem apart to see how it really works before deciding anything.</p>
-                            <p class="step-practice"><span class="mono">In practice</span>Learning the Zoho Mail ecosystem one support ticket at a time, and searching for answers myself before asking.</p>
-                        </li>
-                        <li class="step" data-step-i="1">
-                            <p class="step-num mono">02 — Experiment</p>
-                            <h3>Try it cheaply and quickly.</h3>
-                            <p class="step-text">A rough prototype teaches more than a long plan. I'd rather test an idea than argue about it.</p>
-                            <p class="step-practice"><span class="mono">In practice</span>StartaPath and Warranty Vault Pro both began as prototypes in Google AI Studio. <button type="button" class="link-line inline-open" data-open="startapath">See StartaPath</button></p>
-                        </li>
-                        <li class="step" data-step-i="2">
-                            <p class="step-num mono">03 — Understand</p>
-                            <h3>Make it make sense.</h3>
-                            <p class="step-text">Writing things down shows me what I actually know, and what I only thought I knew.</p>
-                            <p class="step-practice"><span class="mono">In practice</span>Technical writing at Zoho Community Spaces, and documenting StartaPath in a full project report.</p>
-                        </li>
-                        <li class="step" data-step-i="3">
-                            <p class="step-num mono">04 — Build</p>
-                            <h3>Ship something people can use.</h3>
-                            <p class="step-text">Then keep improving it. Building is where the other three steps get tested for real.</p>
-                            <p class="step-practice"><span class="mono">In practice</span>GameRush and AlumniZone are live, and Time Zone Buddy is on version 1.1.0. <button type="button" class="link-line inline-open" data-open="gamerush">See GameRush</button></p>
-                        </li>
+                        <li class="step" id="step-0" data-step-i="0">
+                            <header class="step-head">
+                                <span class="step-num mono">01</span>
+                                <div>
+                                    <p class="step-kicker mono">Explore</p>
+                                    <h3>Find out how it really works.</h3>
+                                </div>
+                            </header>
+                            <p class="step-text">I enjoy exploring how technology works, and I like testing both physical and software products to their limits.</p>
+                            <div class="step-cols">
+                                <div class="step-box">
+                                    <p class="mono">What I do</p>
+                                    <ul class="step-list">
+                                        <li>Test products to their limits</li>
+                                        <li>Search for answers on my own before asking</li>
+                                        <li>Study an existing tool closely before building my own</li>
+                                    </ul>
+                                </div>
+                                <div class="step-box">
+                                    <p class="mono">Evidence</p>
+                                    <ul class="step-evidence">
+                                        <li><button type="button" data-journey="5"><strong>Zoho Mail support</strong><span>Internship. My mentor noted I searched for answers on my own before reaching out with doubts.</span></button></li>
+                                        <li><button type="button" data-open="time-zone-buddy"><strong>Time Zone Buddy</strong><span>Built after studying RandomZone's web tool of the same name.</span></button></li>
+                                    </ul>
+                                </div>
+                            </div>
+                                                    </li>
+
+                        <li class="step" id="step-1" data-step-i="1">
+                            <header class="step-head">
+                                <span class="step-num mono">02</span>
+                                <div>
+                                    <p class="step-kicker mono">Experiment</p>
+                                    <h3>Try ideas as working prototypes.</h3>
+                                </div>
+                            </header>
+                            <p class="step-text">I like learning through experimentation. AI tools and prompt engineering let me turn an idea into something that works.</p>
+                            <div class="step-cols">
+                                <div class="step-box">
+                                    <p class="mono">What I do</p>
+                                    <ul class="step-list">
+                                        <li>Prototype ideas in Google AI Studio</li>
+                                        <li>Write prompts that produce precise, high-quality output</li>
+                                        <li>Give AI output a fixed structure so results can be compared</li>
+                                    </ul>
+                                </div>
+                                <div class="step-box">
+                                    <p class="mono">Evidence</p>
+                                    <ul class="step-evidence">
+                                        <li><button type="button" data-open="startapath"><strong>StartaPath</strong><span>Began as an AI Studio prototype; a fixed JSON schema makes every audit the same shape.</span></button></li>
+                                        <li><button type="button" data-open="warranty-vault-pro"><strong>Warranty Vault Pro</strong><span>Designed and built in Google AI Studio.</span></button></li>
+                                    </ul>
+                                </div>
+                            </div>
+                                                    </li>
+
+                        <li class="step" id="step-2" data-step-i="2">
+                            <header class="step-head">
+                                <span class="step-num mono">03</span>
+                                <div>
+                                    <p class="step-kicker mono">Understand</p>
+                                    <h3>Explain it clearly.</h3>
+                                </div>
+                            </header>
+                            <p class="step-text">I write as a technical writer, document my projects in full, and have run a learning activity for others.</p>
+                            <div class="step-cols">
+                                <div class="step-box">
+                                    <p class="mono">What I do</p>
+                                    <ul class="step-list">
+                                        <li>Technical writing as a ZS trainee</li>
+                                        <li>Write projects up in full, limitations included</li>
+                                        <li>Turn a topic into an interactive learning activity</li>
+                                    </ul>
+                                </div>
+                                <div class="step-box">
+                                    <p class="mono">Evidence</p>
+                                    <ul class="step-evidence">
+                                        <li><button type="button" data-journey="6"><strong>Technical Writer</strong><span>ZS trainee, technical writer at Zoho Community Spaces.</span></button></li>
+                                        <li><button type="button" data-open="startapath"><strong>StartaPath report</strong><span>A full project report covering architecture, testing and limitations.</span></button></li>
+                                        <li><button type="button" data-journey="4"><strong>WCAG Treasure Hunt</strong><span>Organised and hosted it to promote accessibility awareness.</span></button></li>
+                                    </ul>
+                                </div>
+                            </div>
+                                                    </li>
+
+                        <li class="step" id="step-3" data-step-i="3">
+                            <header class="step-head">
+                                <span class="step-num mono">04</span>
+                                <div>
+                                    <p class="step-kicker mono">Build</p>
+                                    <h3>Build something people can use.</h3>
+                                </div>
+                            </header>
+                            <p class="step-text">My goal is to gain practical experience and solve real-world problems, so the loop ends with something real.</p>
+                            <div class="step-cols">
+                                <div class="step-box">
+                                    <p class="mono">What I do</p>
+                                    <ul class="step-list">
+                                        <li>Designed and built web apps and Chrome extensions</li>
+                                        <li>Put them online for anyone to use</li>
+                                        <li>No account needed for GameRush or Time Zone Buddy</li>
+                                    </ul>
+                                </div>
+                                <div class="step-box">
+                                    <p class="mono">Evidence</p>
+                                    <ul class="step-evidence">
+                                        <li><button type="button" data-open="gamerush"><strong>GameRush</strong><span>44 browser games, live, with online rooms and daily streaks.</span></button></li>
+                                        <li><button type="button" data-open="alumnizone"><strong>AlumniZone</strong><span>An alumni community platform, built as a demo with fictional data.</span></button></li>
+                                        <li><button type="button" data-open="time-zone-buddy"><strong>Time Zone Buddy</strong><span>A Chrome extension, now on version 1.1.0.</span></button></li>
+                                    </ul>
+                                </div>
+                            </div>
+                                                    </li>
                     </ol>
                 </div>
             </div>
         </section>
-
         <!-- ═══ Journey ═══ -->
         <section id="journey" class="section" aria-labelledby="journey-title">
             <div class="container">
@@ -298,8 +390,8 @@
                             <button role="tab" id="jt-1" aria-controls="jp-1" class="jr-stop"><span class="mono">2022 – 25</span><strong>Diploma, ECE</strong></button>
                             <button role="tab" id="jt-2" aria-controls="jp-2" class="jr-stop"><span class="mono">2025 – 27</span><strong>Zoho School of Business</strong></button>
                             <button role="tab" id="jt-3" aria-controls="jp-3" class="jr-stop"><span class="mono">2025</span><strong>ZS Sportsday</strong></button>
-                            <button role="tab" id="jt-4" aria-controls="jp-4" class="jr-stop"><span class="mono">At ZSB</span><strong>WCAG Treasure Hunt</strong></button>
-                            <button role="tab" id="jt-5" aria-controls="jp-5" class="jr-stop"><span class="mono">At ZSB</span><strong>Zoho Mail Support</strong></button>
+                            <button role="tab" id="jt-4" aria-controls="jp-4" class="jr-stop"><span class="mono">Event</span><strong>WCAG Treasure Hunt</strong></button>
+                            <button role="tab" id="jt-5" aria-controls="jp-5" class="jr-stop"><span class="mono">Internship</span><strong>Zoho Mail Support</strong></button>
                             <button role="tab" id="jt-6" aria-controls="jp-6" class="jr-stop now"><span class="mono">Now</span><strong>Technical Writer</strong></button>
                         </div>
                         <span class="jr-line" aria-hidden="true"><span class="jr-line-fill" id="jr-fill"></span></span>
@@ -310,7 +402,7 @@
                             <div class="jr-main">
                                 <p class="jr-kicker mono">Education · 2010 – 2022</p>
                                 <h3>NSN Matriculation Higher Secondary School</h3>
-                                <p>K–12. Primary and secondary education: the foundation for everything after.</p>
+                                <p>Completed primary and secondary education, laying the foundation for future academic and personal growth.</p>
                             </div>
                             <div class="jr-visual v-books" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
                         </article>
@@ -334,23 +426,23 @@
                         </article>
                         <article class="jr-panel" role="tabpanel" id="jp-3" aria-labelledby="jt-3">
                             <div class="jr-main">
-                                <p class="jr-kicker mono">Leadership · 2025 · Host</p>
+                                <p class="jr-kicker mono">Event · 2025 · Organiser &amp; host</p>
                                 <h3>ZS Sportsday 2025</h3>
-                                <p>Organised and hosted the sports day, end to end.</p>
+                                <p>Organised and hosted the ZS Sportsday event, managing logistics, vendor relations and the overall participant experience.</p>
                             </div>
                             <ul class="jr-visual v-runsheet mono" aria-label="Responsibilities">
-                                <li><span class="tick" aria-hidden="true"></span>Event organisation</li>
+                                <li><span class="tick" aria-hidden="true"></span>Organising</li>
                                 <li><span class="tick" aria-hidden="true"></span>Logistics</li>
-                                <li><span class="tick" aria-hidden="true"></span>Vendor coordination</li>
+                                <li><span class="tick" aria-hidden="true"></span>Vendor relations</li>
                                 <li><span class="tick" aria-hidden="true"></span>Participant experience</li>
                                 <li><span class="tick" aria-hidden="true"></span>Hosting</li>
                             </ul>
                         </article>
                         <article class="jr-panel" role="tabpanel" id="jp-4" aria-labelledby="jt-4">
                             <div class="jr-main">
-                                <p class="jr-kicker mono">Leadership · Organiser</p>
+                                <p class="jr-kicker mono">Awareness game · Organiser &amp; host</p>
                                 <h3>WCAG Treasure Hunt</h3>
-                                <p>An accessibility-themed interactive activity that taught WCAG principles through challenges.</p>
+                                <p>Organised and hosted the WCAG Treasure Hunt, promoting accessibility awareness and engaging participants in interactive learning activities.</p>
                             </div>
                             <div class="jr-visual v-clues" aria-hidden="true">
                                 <span><b class="mono">P</b>Perceivable</span><span><b class="mono">O</b>Operable</span>
@@ -359,13 +451,13 @@
                         </article>
                         <article class="jr-panel jr-panel-wide" role="tabpanel" id="jp-5" aria-labelledby="jt-5">
                             <div class="jr-main">
-                                <p class="jr-kicker mono">Professional · Customer support</p>
-                                <h3>Zoho Mail — Customer Support</h3>
+                                <p class="jr-kicker mono">Internship · Customer support</p>
+                                <h3>Intern, Zoho Mail Support</h3>
                                 <ul class="jr-points">
-                                    <li>Handled customer tickets and closed out every ticket in the bin each day</li>
-                                    <li>Troubleshot account issues</li>
-                                    <li>Clear, well-drafted customer communication</li>
-                                    <li>Product knowledge built through independent problem-solving</li>
+                                    <li>Supported customers and troubleshot their Zoho Mail accounts</li>
+                                    <li>Handled support tickets on time and completed every ticket in my bin before ending the day</li>
+                                    <li>Drafted replies to customers</li>
+                                    <li>Searched for answers on my own before reaching out with doubts</li>
                                 </ul>
                             </div>
                             <figure class="testimonial">
@@ -375,7 +467,7 @@
                                 </blockquote>
                                 <figcaption>
                                     <span class="avatar" aria-hidden="true">GD</span>
-                                    <span><strong>Gopinath D.</strong><span class="mono">Zoho Mail Lead, Technical Support</span></span>
+                                    <span><strong>Gopinath D.</strong><span class="mono">Zoho Mail Lead, Technical Support · My mentor during the internship</span></span>
                                 </figcaption>
                             </figure>
                         </article>
@@ -383,7 +475,7 @@
                             <div class="jr-main">
                                 <p class="jr-kicker mono"><span class="tag-now">Now</span> · ZS trainee</p>
                                 <h3>Technical Writer, Zoho Community Spaces</h3>
-                                <p>Writing and documenting: turning how a product works into clear, usable explanations.</p>
+                                <p>Currently a ZS trainee, working as a technical writer at Zoho Community Spaces.</p>
                             </div>
                             <div class="jr-visual v-doc" aria-hidden="true">
                                 <span class="doc-h"></span><span></span><span></span><span class="short"></span>
@@ -412,12 +504,12 @@
                     </figure>
 
                     <div class="about-body">
-                        <p class="about-lead reveal">I'm a curious learner who likes understanding how technology works and exploring different tools and ideas. I learn by experimenting, and I keep improving by trying new technologies.</p>
+                        <p class="about-lead reveal">I'm a curious learner who enjoys understanding how technology works and exploring different tools and ideas. I like learning through experimentation and continuously improving my skills by exploring new technologies.</p>
                         <blockquote class="philosophy reveal">
-                            <p>“I'd rather build knowledge across several domains than limit myself to one.”</p>
+                            <p>“I'm interested in building knowledge across multiple domains rather than limiting myself to a single field.”</p>
                             <footer class="mono">— Personal philosophy</footer>
                         </blockquote>
-                        <p class="reveal muted-p">I started in electronics, with circuits and communication systems, and moved on to business studies. Along the way: customer support, technical writing, hosting events and building products of my own. My goal is to keep learning, gain practical experience and get good at solving real-world problems.</p>
+                        <p class="reveal muted-p">I started in electronics, with circuits and communication systems, and moved on to business studies. Along the way: a Zoho Mail support internship, technical writing, hosting events and building products of my own. My goal is to keep learning, gain practical experience and get good at solving real-world problems.</p>
                     </div>
                 </div>
             </div>
@@ -500,8 +592,8 @@
 
     <div class="toast mono" id="toast" role="status" aria-live="polite"></div>
 
-    <script src="js/projects.js?v=20261110"></script>
-    <script src="js/journal.js?v=20261110"></script>
-    <script src="js/main.js?v=20261110"></script>
+    <script src="js/projects.js?v=20261110c"></script>
+    <script src="js/journal.js?v=20261110c"></script>
+    <script src="js/main.js?v=20261110c"></script>
 </body>
 </html>

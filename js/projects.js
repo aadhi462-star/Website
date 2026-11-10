@@ -112,13 +112,10 @@ window.PROJECTS = [
     title: "Warranty Vault Pro",
     category: "Tool",
     role: "Designed & built",
-    summary:
-      "A personal vault for product warranties: purchases, receipts and warranty periods kept in one place, so you can see at a glance what's still covered.",
-    problem:
-      "Warranty cards and receipts get lost, so when something breaks it's hard to know whether it's still under warranty.",
-    contribution:
-      "Designed and built the app in Google AI Studio, shaping how a warranty is added, stored and checked through prompting and iteration.",
-    tags: ["Google AI Studio", "Prompting", "Product design"],
+    // Verified: a tool you built (original site, "Tools I Built"), published as a Google AI Studio app.
+    // TODO: describe what it does in one or two sentences, plus problem / contribution if you like.
+    summary: "A tool I built and published as a Google AI Studio app.",
+    tags: ["Google AI Studio"],
     links: [{ label: "Open app", url: "https://ai.studio/apps/drive/1GHWw8ckcAHaHVOTmQuCD9ZB0Ew_MKRO3?fullscreenApplet=true" }]
   },
   {
@@ -126,13 +123,9 @@ window.PROJECTS = [
     title: "Jas Visual Scraper",
     category: "Tool",
     role: "Designed & built",
-    summary:
-      "A Chrome extension that collects data from web pages by pointing and clicking: pick the parts of a page you want and turn them into structured data, no code needed.",
-    problem:
-      "Copying information out of web pages by hand is slow, and most scraping tools assume you can write code.",
-    contribution:
-      "Designed and built the extension, from selecting elements visually on the page to gathering what you picked into a usable format.",
-    // Add a Chrome Web Store or GitHub link here when it's public
-    tags: ["Chrome extension", "JavaScript", "Automation"]
+    // Verified: a Chrome extension you built (original site, "Tools I Built").
+    // TODO: describe what it does, and add a store / GitHub link when it's public.
+    summary: "A Chrome extension I built for collecting information from web pages.",
+    tags: ["Chrome extension"]
   }
 ];

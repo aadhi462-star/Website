@@ -371,10 +371,10 @@
 
     /* ─── Hero: the working loop ───────────────────────────── */
     const STAGES = [
-        ['Explore', 'Look closely first. Take the product, tool or problem apart to see how it really works.'],
-        ['Experiment', 'Try it cheaply and quickly. A rough prototype teaches more than a long plan.'],
-        ['Understand', 'Make it make sense. Writing it down shows what I actually know.'],
-        ['Build', 'Ship something people can use, then keep improving it.']
+        ['Explore', 'Find out how it really works, testing products to their limits.'],
+        ['Experiment', 'Try ideas as working prototypes, using AI tools and prompting.'],
+        ['Understand', 'Explain it clearly, in writing and by helping others learn it.'],
+        ['Build', 'Build something people can use, and put it online.']
     ];
     const pulse = $('#lp-pulse');
     const nodes = $$('.lp-node');
@@ -421,18 +421,24 @@
 
     /* ─── Process: steps activate as they cross the middle ─── */
     const steps = $$('.step');
-    const pvNum = $('#pv-num'), pvName = $('#pv-name'), pvFill = $('#pv-fill');
-    const pvDots = $$('.pv-track i');
+    const PROCESS = [
+        ['Explore', 'Find out how it really works.'],
+        ['Experiment', 'Try ideas as working prototypes.'],
+        ['Understand', 'Explain it clearly.'],
+        ['Build', 'Build something people can use.']
+    ];
+    const pvNum = $('#pv-num'), pvName = $('#pv-name'), pvLine = $('#pv-line');
+    const pvBtns = $$('[data-goto-step]');
     let activeStep = -1;
     const setStep = i => {
         if (i === activeStep) return;
         activeStep = i;
         steps.forEach((s, k) => s.classList.toggle('on', k === i));
-        pvDots.forEach((d, k) => d.classList.toggle('on', k <= i));
-        pvFill.style.setProperty('--pf', i / 3);
+        pvBtns.forEach((b, k) => { b.classList.toggle('on', k === i); b.classList.toggle('done', k < i); b.setAttribute('aria-current', k === i ? 'step' : 'false'); });
         pvNum.textContent = pad(i + 1);
-        pvName.textContent = STAGES[i][0];
-        [pvNum, pvName].forEach(el => { el.classList.remove('swap'); void el.offsetWidth; el.classList.add('swap'); });
+        pvName.textContent = PROCESS[i][0];
+        pvLine.textContent = PROCESS[i][1];
+        [pvName, pvLine].forEach(el => { el.classList.remove('swap'); void el.offsetWidth; el.classList.add('swap'); });
     };
     setStep(0);
     // The active step is the last one whose top has passed the middle of the screen
@@ -442,6 +448,11 @@
         steps.forEach((s, k) => { if (s.getBoundingClientRect().top < mid) i = k; });
         setStep(i);
     }
+    pvBtns.forEach(b => b.addEventListener('click', () => {
+        const target = steps[+b.dataset.gotoStep];
+        const y = target.getBoundingClientRect().top + scrollY - innerHeight * 0.3;
+        scrollTo({ top: y, behavior: reduceMotion ? 'auto' : 'smooth' });
+    }));
 
     /* ─── Journey: an accessible tab list ──────────────────── */
     const stops = $$('.jr-stop');
@@ -489,6 +500,14 @@
         });
     });
     selectStop(stops.length - 1); // open on "Now"
+    document.addEventListener('click', e => {
+        const b = e.target.closest('[data-journey]');
+        if (!b) return;
+        const i = +b.dataset.journey;
+        $('#journey').scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth' });
+        selectStop(i);
+        setTimeout(() => stops[i].focus({ preventScroll: true }), reduceMotion ? 0 : 700);
+    });
 
     /* ─── Scroll reveals (staggered per batch) ─────────────── */
     const io = new IntersectionObserver(entries => {
