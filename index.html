@@ -20,13 +20,13 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300..800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/styles.css?v=20261111a">
+    <link rel="stylesheet" href="css/styles.css?v=20261111b">
     <!-- On every deploy: change SITE_VERSION here, the ?v= on the CSS/JS links, and version.json to the same value -->
     <script>
         // The host tells browsers to keep this page for a year, so a returning visitor can be shown an old copy.
         // Ask for version.json (never cached); if it's newer than this page, refetch the page and reload once.
         (function () {
-            var SITE_VERSION = '20261111a';
+            var SITE_VERSION = '20261111b';
             try {
                 fetch('version.json?nc=' + Date.now(), { cache: 'no-store' })
                     .then(function (r) { return r.ok ? r.json() : null; })
@@ -162,7 +162,7 @@
                     <figcaption class="stage-card" aria-live="polite">
                         <span class="mono stage-num" id="loop-num">01 / 04</span>
                         <strong id="loop-title">Explore</strong>
-                        <span id="loop-text">Find out how it really works, testing products to their limits.</span>
+                        <span id="loop-text">Open it up and test it to its limits.</span>
                     </figcaption>
                     <ol class="stage-nav">
                         <li><button type="button" class="st-btn" data-stage="0"><span class="mono">01</span>Explore</button></li>
@@ -386,7 +386,7 @@
                 <header class="section-head">
                     <p class="section-index mono reveal"><span>05</span> Process</p>
                     <h2 id="process-title" class="section-title" data-split>How I turn ideas <span class="dim">into reality.</span></h2>
-                    <p class="section-lede reveal">Explore, experiment, understand, build. Here is where each step shows up in my actual work, with evidence you can open.</p>
+                    <p class="section-lede reveal">Four steps I repeat on everything I make. Each one has a small demo you can try.</p>
                 </header>
 
                 <div class="process-grid">
@@ -394,8 +394,6 @@
                     <aside class="pv" aria-label="Process steps">
                         <div class="pv-inner">
                             <p class="pv-kicker mono">Step <span id="pv-num">01</span> / 04</p>
-                            <p class="pv-name" id="pv-name">Explore</p>
-                            <p class="pv-line" id="pv-line">Find out how it really works.</p>
                             <ol class="pv-nav">
                                 <li><button type="button" data-goto-step="0"><span class="mono">01</span>Explore</button></li>
                                 <li><button type="button" data-goto-step="1"><span class="mono">02</span>Experiment</button></li>
@@ -414,22 +412,26 @@
                                     <h3>Find out how it really works.</h3>
                                 </div>
                             </header>
-                            <p class="step-text">I enjoy exploring how technology works, and I like testing both physical and software products to their limits.</p>
+                            <p class="step-text">I test both physical and software products to their limits.</p>
                             <div class="step-cols">
                                 <div class="step-box">
                                     <p class="mono">What I do</p>
                                     <ul class="step-list">
-                                        <li>Test products to their limits</li>
                                         <li>Search for answers on my own before asking</li>
                                         <li>Study an existing tool closely before building my own</li>
                                     </ul>
                                 </div>
-                                <div class="step-box">
-                                    <p class="mono">Evidence</p>
-                                    <ul class="step-evidence">
-                                        <li><button type="button" data-journey="5"><strong>Zoho Mail support</strong><span>Internship. My mentor noted I searched for answers on my own before reaching out with doubts.</span></button></li>
-                                        <li><button type="button" data-open="time-zone-buddy"><strong>Time Zone Buddy</strong><span>Built after studying RandomZone's web tool of the same name.</span></button></li>
-                                    </ul>
+                                <div class="step-box demo" data-demo="explode">
+                                    <div class="demo-head">
+                                        <p class="mono">Try it · Take it apart</p>
+                                        <button type="button" class="demo-btn" aria-pressed="false" aria-controls="explode-0">Take it apart</button>
+                                    </div>
+                                    <div class="explode" id="explode-0">
+                                        <div class="layer"><span class="mono">What you see</span><span>44 browser games, no sign-up</span></div>
+                                        <div class="layer"><span class="mono">What it does</span><span>Online rooms for 30 games, two players on one device for 12 more</span></div>
+                                        <div class="layer"><span class="mono">What brings you back</span><span>Daily picks, missions, streaks and XP levels</span></div>
+                                    </div>
+                                    <p class="demo-cap">Layers of <button type="button" class="link-line" data-open="gamerush">GameRush</button></p>
                                 </div>
                             </div>
                                                     </li>
@@ -442,7 +444,7 @@
                                     <h3>Try ideas as working prototypes.</h3>
                                 </div>
                             </header>
-                            <p class="step-text">I like learning through experimentation. AI tools and prompt engineering let me turn an idea into something that works.</p>
+                            <p class="step-text">AI tools and prompt engineering let me turn an idea into something that works.</p>
                             <div class="step-cols">
                                 <div class="step-box">
                                     <p class="mono">What I do</p>
@@ -452,12 +454,18 @@
                                         <li>Give AI output a fixed structure so results can be compared</li>
                                     </ul>
                                 </div>
-                                <div class="step-box">
-                                    <p class="mono">Evidence</p>
-                                    <ul class="step-evidence">
-                                        <li><button type="button" data-open="startapath"><strong>StartaPath</strong><span>Began as an AI Studio prototype; a fixed JSON schema makes every audit the same shape.</span></button></li>
-                                        <li><button type="button" data-open="warranty-vault-pro"><strong>Warranty Vault Pro</strong><span>Designed and built in Google AI Studio.</span></button></li>
-                                    </ul>
+                                <div class="step-box demo" data-demo="schema">
+                                    <div class="demo-head">
+                                        <p class="mono">Try it · Same prompt, run again</p>
+                                        <button type="button" class="demo-btn">Run again</button>
+                                    </div>
+                                    <div class="schema">
+                                        <div class="sc"><p class="mono">Free-form chat</p><div class="sc-out sc-free" aria-hidden="true"><i style="--w:90%"></i><i style="--w:70%"></i><b></b><i style="--w:85%"></i><i style="--w:40%"></i></div></div>
+                                        <div class="sc"><p class="mono">Fixed schema</p><div class="sc-out sc-fixed" aria-hidden="true">
+                                            <span>Score<i style="--w:60%"></i></span><span>Market<i style="--w:80%"></i></span><span>Competitors<i style="--w:50%"></i></span><span>Roadmap<i style="--w:70%"></i></span>
+                                        </div></div>
+                                    </div>
+                                    <p class="demo-cap" aria-live="polite"><span class="mono run-count">Run 01</span> The chat answer changes shape every run; the schema keeps the same four sections. That's why <button type="button" class="link-line" data-open="startapath">StartaPath</button> uses one.</p>
                                 </div>
                             </div>
                                                     </li>
@@ -470,7 +478,7 @@
                                     <h3>Explain it clearly.</h3>
                                 </div>
                             </header>
-                            <p class="step-text">I write about technology, document my projects in full, and have run a learning activity for others.</p>
+                            <p class="step-text">I write about technology, and I share what I learn with others.</p>
                             <div class="step-cols">
                                 <div class="step-box">
                                     <p class="mono">What I do</p>
@@ -479,13 +487,14 @@
                                         <li>Turn a topic into an interactive learning activity</li>
                                     </ul>
                                 </div>
-                                <div class="step-box">
-                                    <p class="mono">Evidence</p>
-                                    <ul class="step-evidence">
-                                        <li><button type="button" data-journey="6"><strong>Zoho Community Spaces</strong><span>My current role, as a ZS trainee.</span></button></li>
-                                        <li><button type="button" data-open="startapath"><strong>StartaPath report</strong><span>A full project report covering architecture, testing and limitations.</span></button></li>
-                                        <li><button type="button" data-journey="4"><strong>WCAG Treasure Hunt</strong><span>Organised and hosted it to promote accessibility awareness.</span></button></li>
-                                    </ul>
+                                <div class="step-box demo" data-demo="explain">
+                                    <div class="demo-head">
+                                        <p class="mono">Try it · Explain it simpler</p>
+                                    </div>
+                                    <input type="range" class="explain-range" min="0" max="2" step="1" value="0" aria-label="How technical the explanation is" aria-valuetext="Technical">
+                                    <div class="explain-scale mono" aria-hidden="true"><span>Technical</span><span>Simpler</span><span>Plain</span></div>
+                                    <p class="explain-text" aria-live="polite">A Manifest V3 service worker turns each reminder into a Chrome alarm, which fires a notification with snooze.</p>
+                                    <p class="demo-cap">How reminders work in <button type="button" class="link-line" data-open="time-zone-buddy">Time Zone Buddy</button></p>
                                 </div>
                             </div>
                                                     </li>
@@ -503,18 +512,23 @@
                                 <div class="step-box">
                                     <p class="mono">What I do</p>
                                     <ul class="step-list">
-                                        <li>Designed and built web apps and Chrome extensions</li>
-                                        <li>Put them online for anyone to use</li>
+                                        <li>Put what I build online for anyone to use</li>
                                         <li>No account needed for GameRush or Time Zone Buddy</li>
                                     </ul>
                                 </div>
-                                <div class="step-box">
-                                    <p class="mono">Evidence</p>
-                                    <ul class="step-evidence">
-                                        <li><button type="button" data-open="gamerush"><strong>GameRush</strong><span>44 browser games, live, with online rooms and daily streaks.</span></button></li>
-                                        <li><button type="button" data-open="alumnizone"><strong>AlumniZone</strong><span>An alumni community platform, built as a demo with fictional data.</span></button></li>
-                                        <li><button type="button" data-open="time-zone-buddy"><strong>Time Zone Buddy</strong><span>A Chrome extension, now on version 1.1.0.</span></button></li>
-                                    </ul>
+                                <div class="step-box demo" data-demo="ship">
+                                    <div class="demo-head">
+                                        <p class="mono">Try it · Idea to live</p>
+                                        <button type="button" class="demo-btn">Next step</button>
+                                    </div>
+                                    <ol class="ship" style="--sp:0">
+                                        <li><button type="button" class="on" aria-pressed="true">Prototype</button></li>
+                                        <li><button type="button" aria-pressed="false">Rebuild</button></li>
+                                        <li><button type="button" aria-pressed="false">Extend</button></li>
+                                        <li><button type="button" aria-pressed="false">Live</button></li>
+                                    </ol>
+                                    <p class="ship-detail" aria-live="polite">Started as a prototype in Google AI Studio.</p>
+                                    <p class="demo-cap">The path of <button type="button" class="link-line" data-open="startapath">StartaPath</button></p>
                                 </div>
                             </div>
                                                     </li>
@@ -607,8 +621,8 @@
 
     <div class="toast mono" id="toast" role="status" aria-live="polite"></div>
 
-    <script src="js/projects.js?v=20261111a"></script>
-    <script src="js/journal.js?v=20261111a"></script>
-    <script src="js/main.js?v=20261111a"></script>
+    <script src="js/projects.js?v=20261111b"></script>
+    <script src="js/journal.js?v=20261111b"></script>
+    <script src="js/main.js?v=20261111b"></script>
 </body>
 </html>

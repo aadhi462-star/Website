@@ -132,8 +132,8 @@
     }
 
     $('#cases').innerHTML = featured.map(caseHTML).join('');
-    // Evidence that points at a project not on the page (e.g. a draft) is hidden rather than left broken
-    $$('.step-evidence [data-open]').forEach(b => { if (!order.some(p => p.id === b.dataset.open)) b.closest('li').hidden = true; });
+    // A link to a project that isn't on the page (e.g. a draft) becomes plain text rather than a broken button
+    $$('.demo [data-open]').forEach(b => { if (!order.some(p => p.id === b.dataset.open)) b.replaceWith(b.textContent); });
     $('#index').innerHTML = rest.map(indexHTML).join('');
     $('#work-count').textContent = projects.length ? `(${pad(projects.length)}) projects` : '';
     if (!projects.length) $('#empty-state').hidden = false;
@@ -361,10 +361,11 @@
 
     /* ─── Hero: four stages, one word, four type treatments ── */
     const STAGES = [
-        ['Explore', 'Find out how it really works, testing products to their limits.'],
-        ['Experiment', 'Try ideas as working prototypes, using AI tools and prompting.'],
-        ['Understand', 'Explain it clearly, in writing and by helping others learn it.'],
-        ['Build', 'Build something people can use, and put it online.']
+        // Short lines here; the Process section has the full version of each step
+        ['Explore', 'Open it up and test it to its limits.'],
+        ['Experiment', 'Prototype the idea with AI tools.'],
+        ['Understand', 'Put it into clear words.'],
+        ['Build', 'Put it online for anyone to use.']
     ];
     const stageEl = $('.stage');
     const word = $('#stage-word');
@@ -416,13 +417,7 @@
 
     /* ─── Process: steps activate as they cross the middle ─── */
     const steps = $$('.step');
-    const PROCESS = [
-        ['Explore', 'Find out how it really works.'],
-        ['Experiment', 'Try ideas as working prototypes.'],
-        ['Understand', 'Explain it clearly.'],
-        ['Build', 'Build something people can use.']
-    ];
-    const pvNum = $('#pv-num'), pvName = $('#pv-name'), pvLine = $('#pv-line');
+    const pvNum = $('#pv-num');
     const pvBtns = $$('[data-goto-step]');
     let activeStep = -1;
     const setStep = i => {
@@ -431,9 +426,6 @@
         steps.forEach((s, k) => { s.classList.toggle('on', k === i); s.classList.toggle('done', k < i); });
         pvBtns.forEach((b, k) => { b.classList.toggle('on', k === i); b.classList.toggle('done', k < i); b.setAttribute('aria-current', k === i ? 'step' : 'false'); });
         pvNum.textContent = pad(i + 1);
-        pvName.textContent = PROCESS[i][0];
-        pvLine.textContent = PROCESS[i][1];
-        [pvName, pvLine].forEach(el => { el.classList.remove('swap'); void el.offsetWidth; el.classList.add('swap'); });
     };
     setStep(0);
     // The active step is the last one whose top has passed the middle of the screen
@@ -448,6 +440,66 @@
         const y = target.getBoundingClientRect().top + scrollY - innerHeight * 0.3;
         scrollTo({ top: y, behavior: reduceMotion ? 'auto' : 'smooth' });
     }));
+
+    /* ─── Process demos: one small interaction per step ───── */
+    // Explore: take a product apart into its layers
+    $$('[data-demo="explode"]').forEach(d => {
+        const btn = $('.demo-btn', d), box = $('.explode', d);
+        btn.addEventListener('click', () => {
+            const open = box.classList.toggle('open');
+            btn.setAttribute('aria-pressed', open);
+            btn.textContent = open ? 'Put it back' : 'Take it apart';
+        });
+    });
+    // Experiment: free-form output changes shape on every run; the schema doesn't
+    $$('[data-demo="schema"]').forEach(d => {
+        const free = $('.sc-free', d), fixed = $$('.sc-fixed i', d), count = $('.run-count', d);
+        let runs = 1;
+        const w = () => `${Math.round(30 + Math.random() * 65)}%`;
+        $('.demo-btn', d).addEventListener('click', () => {
+            runs++;
+            const n = 3 + Math.floor(Math.random() * 5);
+            free.innerHTML = Array.from({ length: n }, () => Math.random() < .22 ? '<b></b>' : `<i style="--w:${w()}"></i>`).join('');
+            free.classList.remove('swap'); void free.offsetWidth; free.classList.add('swap');
+            fixed.forEach(i => i.style.setProperty('--w', w()));
+            count.textContent = `Run ${pad(runs)}`;
+        });
+    });
+    // Understand: the same fact, three levels of plain
+    $$('[data-demo="explain"]').forEach(d => {
+        const LEVELS = [
+            ['Technical', 'A Manifest V3 service worker turns each reminder into a Chrome alarm, which fires a notification with snooze.'],
+            ['Simpler', 'A background script hands each reminder to Chrome, which shows it as a notification you can snooze.'],
+            ['Plain', 'Your meeting reminder rings even when the extension is closed.']
+        ];
+        const range = $('.explain-range', d), text = $('.explain-text', d);
+        range.addEventListener('input', () => {
+            const [label, line] = LEVELS[+range.value];
+            range.setAttribute('aria-valuetext', label);
+            text.textContent = line;
+            text.classList.remove('swap'); void text.offsetWidth; text.classList.add('swap');
+        });
+    });
+    // Build: idea to live, one stop at a time
+    $$('[data-demo="ship"]').forEach(d => {
+        const STOPS = [
+            'Started as a prototype in Google AI Studio.',
+            'Rebuilt as a React 19 + TypeScript app with Vite.',
+            'Added voice advisors, version history and a full PDF report.',
+            'Live at startapath-ai-businessvalidator.onslate.in.'
+        ];
+        const list = $('.ship', d), btns = $$('.ship button', d), detail = $('.ship-detail', d), next = $('.demo-btn', d);
+        let at = 0;
+        const go = i => {
+            at = i;
+            list.style.setProperty('--sp', i / (STOPS.length - 1));
+            btns.forEach((b, k) => { b.classList.toggle('on', k === i); b.classList.toggle('done', k < i); b.setAttribute('aria-pressed', k === i); });
+            detail.textContent = STOPS[i];
+            next.textContent = i === STOPS.length - 1 ? 'Start over' : 'Next step';
+        };
+        btns.forEach((b, k) => b.addEventListener('click', () => go(k)));
+        next.addEventListener('click', () => go((at + 1) % STOPS.length));
+    });
 
     /* ─── Journey: an accessible tab list ──────────────────── */
     const stops = $$('.jr-stop');
