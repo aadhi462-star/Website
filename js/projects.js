@@ -11,6 +11,10 @@
  *   platforms     where it works, e.g. "Desktop & mobile" (optional)
  *   role          what you did, e.g. "Designed & built" (optional)
  *   summary       one or two sentences
+ *   oneLiner      the single line shown on the project card (falls back to summary)
+ *   status        current state, e.g. "Live", "Live demo", "v1.1.0" (optional)
+ *   why           why you decided to build it (optional)
+ *   challenges    what was hard, one sentence each: ["…", "…"] (optional)
  *   problem       the problem it addresses (optional)
  *   contribution  what you personally did (optional)
  *   approach      how you went about it (optional)
@@ -23,6 +27,7 @@
  *   links         [{ label, url }] (optional)
  *   featured      true = large case study (optional)
  *   inspiredBy    { label, url } credit for an idea you built on (optional)
+ *   draft         true = kept off the page until its content is confirmed
  *
  * Only write what's true — leave a field out rather than guess.
  * ──────────────────────────────────────────────────────────────────
@@ -34,6 +39,8 @@ window.PROJECTS = [
     category: "Product",
     featured: true,
     role: "Designed & built",
+    status: "Live", // site checked on 11 Nov 2026
+    oneLiner: "Turns a short startup idea into a structured venture audit.",
     summary:
       "An AI decision-intelligence platform that turns a short description of a startup idea into a structured venture audit: viability score, market sizing, competitors, a 90-day roadmap, a Business Model Canvas and a pitch deck.",
     problem:
@@ -59,6 +66,8 @@ window.PROJECTS = [
     featured: true,
     platforms: "Desktop & mobile", // platforms: checked at phone width (390px) on 10 Nov 2026, and confirmed by you
     role: "Designed & built",
+    status: "Live", // site checked on 11 Nov 2026
+    oneLiner: "44 free browser games. No downloads, no sign-up.",
     summary:
       "44 free browser games — typing races, board classics, puzzles and arcade — with no downloads and no sign-up.",
     problem:
@@ -76,6 +85,8 @@ window.PROJECTS = [
     featured: true,
     platforms: "Desktop & mobile", // platforms: checked at phone width (390px) on 10 Nov 2026, and confirmed by you
     role: "Designed & built",
+    status: "Live demo", // runs on fictional data
+    oneLiner: "An all-in-one alumni community, built as a demo with fictional data.",
     summary:
       "An all-in-one alumni community: a wall, groups, events, real-time channels, forums and manuals under one login.",
     problem:
@@ -89,10 +100,12 @@ window.PROJECTS = [
   {
     id: "time-zone-buddy",
     title: "Time Zone Buddy",
-    category: "Tool",
+    category: "Extension",
     featured: true,
     year: "2026",
     role: "Designed & built",
+    status: "v1.1.0",
+    oneLiner: "World clocks, a converter and a meeting planner in one Chrome popup.",
     summary:
       "A Chrome extension that puts world clocks, a time converter and a meeting planner in one popup, with daylight saving handled for you.",
     problem:
@@ -114,6 +127,7 @@ window.PROJECTS = [
     id: "warranty-vault-pro",
     title: "Warranty Vault Pro",
     category: "Tool",
+    draft: true, // hidden until the description below is confirmed
     platforms: "Desktop & mobile", // platforms: confirmed by you (the app needs a Google sign-in, so not checked here)
     role: "Designed & built",
     // Verified: a tool you built (original site, "Tools I Built"), published as a Google AI Studio app.
@@ -125,7 +139,8 @@ window.PROJECTS = [
   {
     id: "jas-visual-scraper",
     title: "Jas Visual Scraper",
-    category: "Tool",
+    category: "Extension",
+    draft: true, // hidden until the description and publication status are confirmed
     role: "Designed & built",
     // Verified: a Chrome extension you built (original site, "Tools I Built").
     // TODO: describe what it does, and add a store / GitHub link when it's public.

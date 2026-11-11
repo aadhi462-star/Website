@@ -1,5 +1,6 @@
 (() => {
-    const projects = window.PROJECTS || [];
+    // Projects marked draft stay in projects.js but off the page until their content is confirmed
+    const projects = (window.PROJECTS || []).filter(p => !p.draft);
     const journal = window.JOURNAL || [];
     const root = document.documentElement;
     const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -87,36 +88,32 @@
             <strong>${esc(p.title)}</strong>
         </div>`;
 
-    function caseHTML(p) {
+    // Layout per position: a lead piece, a staggered pair, then alternating rows; extensions get their own band
+    const layoutOf = (p, i) => p.category === 'Extension' ? 'ext' : i === 0 ? 'lead' : i === 1 ? 'pair-a' : i === 2 ? 'pair-b' : 'alt';
+
+    function caseHTML(p, i) {
         const link = (p.links || [])[0];
         const meta = [
-            p.platforms && ['Works on', p.platforms],
-            p.problem && ['Problem', p.problem],
-            p.tags && p.tags.length && ['Built with', p.tags.join(', ')],
-            p.inspiredBy && ['Inspired by', p.inspiredBy.label]
+            p.platforms && `<span><b>Works on</b>${esc(p.platforms)}</span>`,
+            p.inspiredBy && `<span><b>Inspired by</b><a class="link-line" href="${esc(p.inspiredBy.url)}" target="_blank" rel="noopener noreferrer">${esc(p.inspiredBy.label)}</a></span>`
         ].filter(Boolean);
-        const peek = p.contribution || p.problem || p.summary;
         return `
-        <article class="case" id="case-${esc(p.id)}">
+        <article class="case case--${layoutOf(p, i)}" id="case-${esc(p.id)}">
             <div class="case-media">
                 <button type="button" class="case-frame" data-open="${esc(p.id)}" aria-label="Open case study: ${esc(p.title)}">
                     <span class="case-chrome" aria-hidden="true"><i></i><i></i><i></i><span class="mono">${esc(link ? host(link.url) : (p.tags || [])[0] || '')}</span></span>
                     <span class="case-shot"><img src="${esc(p.image)}" alt="Screenshot of ${esc(p.title)}" loading="lazy" width="1440" height="900"></span>
-                    <span class="case-reveal" aria-hidden="true">
-                        <span class="mono">${p.contribution ? 'What I did' : 'The problem'}</span>
-                        <p>${esc(peek.length > 150 ? peek.slice(0, peek.lastIndexOf(' ', 150)) + '…' : peek)}</p>
-                        <b>Case study ${arrow}</b>
-                    </span>
+                    <span class="case-open" aria-hidden="true">Case study ${arrow}</span>
                 </button>
             </div>
             <div class="case-text reveal">
-                <p class="case-num mono"><b>Nº ${numberOf(p)}</b><span>${esc(p.category || '')}</span></p>
+                <p class="case-num mono"><b>Nº ${numberOf(p)}</b><span>${esc(p.category || '')}</span><i class="sep" aria-hidden="true"></i>${p.status ? `<span class="status-pill"><span class="sr-only">Status: </span>${esc(p.status)}</span>` : ''}</p>
                 <h3 class="case-title">${esc(p.title)}</h3>
-                <p class="case-summary">${esc(p.summary)}</p>
-                ${meta.length ? `<dl class="case-meta">${meta.map(([k, v]) => `<div><dt class="mono">${k}</dt><dd>${esc(v)}</dd></div>`).join('')}</dl>` : ''}
+                <p class="case-summary">${esc(p.oneLiner || p.summary)}</p>
+                ${meta.length ? `<p class="case-meta">${meta.join('')}</p>` : ''}
                 <div class="case-actions">
                     <button type="button" class="link-line primary" data-open="${esc(p.id)}">Read case study</button>
-                    ${link ? `<a class="link-line" href="${esc(link.url)}" target="_blank" rel="noopener">${esc(link.label)} ${arrow}</a>` : ''}
+                    ${link ? `<a class="link-line" href="${esc(link.url)}" target="_blank" rel="noopener noreferrer">${esc(link.label)} ${arrow}</a>` : ''}
                 </div>
             </div>
         </article>`;
@@ -135,6 +132,8 @@
     }
 
     $('#cases').innerHTML = featured.map(caseHTML).join('');
+    // Evidence that points at a project not on the page (e.g. a draft) is hidden rather than left broken
+    $$('.step-evidence [data-open]').forEach(b => { if (!order.some(p => p.id === b.dataset.open)) b.closest('li').hidden = true; });
     $('#index').innerHTML = rest.map(indexHTML).join('');
     $('#work-count').textContent = projects.length ? `(${pad(projects.length)}) projects` : '';
     if (!projects.length) $('#empty-state').hidden = false;
@@ -145,19 +144,24 @@
     const sheetBody = $('#sheet-body');
     let currentId = null;
 
+    // Case study: intro, then numbered sections in a fixed order. Only fields that exist are shown.
     function sheetHTML(p) {
-        const facts = [['Category', p.category], ['Role', p.role], ['Works on', p.platforms], ['Year', p.year]].filter(([, v]) => v);
+        const facts = [['Category', p.category], ['Status', p.status], ['Role', p.role], ['Works on', p.platforms], ['Year', p.year]].filter(([, v]) => v);
+        const list = items => `<ul>${items.map(t => `<li>${esc(t)}</li>`).join('')}</ul>`;
         const blocks = [
             p.problem && ['Problem', `<p class="lead">${esc(p.problem)}</p>`],
+            p.why && ['Why I built it', `<p>${esc(p.why)}</p>`],
+            p.contribution && ['My contribution', `<p>${esc(p.contribution)}</p>`],
             p.approach && ['Approach', `<p>${esc(p.approach)}</p>`],
-            p.contribution && ['Contribution', `<p>${esc(p.contribution)}</p>`],
-            p.details && p.details.length && ['Overview', p.details.map(t => `<p>${esc(t)}</p>`).join('')],
-            p.learnings && p.learnings.length && ['Learnings', `<ul>${p.learnings.map(t => `<li>${esc(t)}</li>`).join('')}</ul>`],
+            p.details && p.details.length && ['How it works', p.details.map(t => `<p>${esc(t)}</p>`).join('')],
+            p.gallery && p.gallery.length && ['Walkthrough', `<div class="sheet-gallery">${p.gallery.map(g => `<img src="${esc(g.src || g)}" alt="${esc(g.alt || 'Screenshot of ' + p.title)}" loading="lazy">`).join('')}</div>`],
+            p.challenges && p.challenges.length && ['Challenges', list(p.challenges)],
+            p.learnings && p.learnings.length && ['Learnings', list(p.learnings)],
             p.tags && p.tags.length && ['Tools & skills', `<p>${esc(p.tags.join(' · '))}</p>`],
-            p.inspiredBy && ['Inspired by', `<p><a class="link-line" href="${esc(p.inspiredBy.url)}" target="_blank" rel="noopener">${esc(p.inspiredBy.label)} ${arrow}</a></p>`]
+            p.inspiredBy && ['Inspired by', `<p><a class="link-line" href="${esc(p.inspiredBy.url)}" target="_blank" rel="noopener noreferrer">${esc(p.inspiredBy.label)} ${arrow}</a></p>`]
         ].filter(Boolean);
         const links = (p.links || []).map(l =>
-            `<a class="btn btn-accent" href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.label)} ${arrow}</a>`).join('');
+            `<a class="btn btn-accent" href="${esc(l.url)}" target="_blank" rel="noopener noreferrer">${esc(l.label)} ${arrow}</a>`).join('');
         return `
             <p class="sheet-cat mono">Nº ${numberOf(p)} — Case study</p>
             <h2 class="sheet-title" id="sheet-title">${esc(p.title)}</h2>
@@ -165,7 +169,7 @@
             ${links ? `<div class="sheet-links">${links}</div>` : ''}
             <div class="sheet-media">${p.image ? `<img src="${esc(p.image)}" alt="Screenshot of ${esc(p.title)}">` : typeCover(p)}</div>
             ${facts.length ? `<dl class="sheet-facts">${facts.map(([k, v]) => `<div><dt class="mono">${k}</dt><dd>${esc(v)}</dd></div>`).join('')}</dl>` : ''}
-            ${blocks.map(([h, body]) => `<section class="sheet-block"><h3>${h}</h3><div>${body}</div></section>`).join('')}`;
+            ${blocks.map(([h, body], k) => `<section class="sheet-block"><h3><b>${pad(k + 1)}</b>${h}</h3><div>${body}</div></section>`).join('')}`;
     }
 
     let opener = null;
@@ -223,33 +227,6 @@
     });
     const deep = location.hash.match(/^#work\/(.+)$/);
     if (deep) openProject(decodeURIComponent(deep[1]), { push: false });
-
-    /* ─── Index hover preview (follows the pointer) ────────── */
-    const preview = $('.index-preview');
-    if (finePointer && !reduceMotion && preview) {
-        const inner = $('.index-preview-inner', preview);
-        let tx = 0, ty = 0, x = 0, y = 0, raf = 0, active = false;
-        const loop = () => {
-            x += (tx - x) * 0.18;
-            y += (ty - y) * 0.18;
-            preview.style.setProperty('--x', `${x}px`);
-            preview.style.setProperty('--y', `${y}px`);
-            if (active || Math.abs(tx - x) > .5) raf = requestAnimationFrame(loop);
-            else raf = 0;
-        };
-        $$('[data-preview]').forEach(row => {
-            row.addEventListener('pointerenter', e => {
-                const p = order.find(q => q.id === row.dataset.preview);
-                inner.innerHTML = p.image ? `<img src="${esc(p.image)}" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:inherit">` : typeCover(p);
-                if (!active) { x = tx = e.clientX + 24; y = ty = e.clientY - 120; }
-                active = true;
-                preview.classList.add('show');
-                if (!raf) raf = requestAnimationFrame(loop);
-            });
-            row.addEventListener('pointermove', e => { tx = e.clientX + 24; ty = e.clientY - 120; });
-            row.addEventListener('pointerleave', () => { active = false; preview.classList.remove('show'); });
-        });
-    }
 
     /* ─── Journal (only shown when entries exist) ──────────── */
     if (journal.length) {
@@ -309,16 +286,17 @@
     };
     const setActive = id => {
         activeLink = navLinks.find(a => a.dataset.nav === id) || activeLink;
-        navLinks.forEach(a => a.classList.toggle('active', a === activeLink));
+        navLinks.forEach(a => { a.classList.toggle('active', a === activeLink); a.toggleAttribute('aria-current', a === activeLink); });
         moveIndicator(activeLink);
     };
     navLinks.forEach(a => a.addEventListener('pointerenter', () => moveIndicator(a)));
     nav.addEventListener('pointerleave', () => moveIndicator(activeLink));
     const spy = new IntersectionObserver(entries => {
-        // The snapshot band sits under About, so it lights up About in the nav
-        entries.forEach(en => { if (en.isIntersecting) setActive(en.target.id === 'snapshot' ? 'about' : en.target.id); });
+        // Journey and Snapshot have no nav link of their own; they belong to About
+        const group = { journey: 'about', snapshot: 'about' };
+        entries.forEach(en => { if (en.isIntersecting) setActive(group[en.target.id] || en.target.id); });
     }, { rootMargin: '-45% 0px -50% 0px' });
-    ['home', 'about', 'snapshot', 'work', 'process', 'journal', 'contact'].forEach(id => {
+    ['home', 'about', 'journey', 'snapshot', 'work', 'process', 'journal', 'contact'].forEach(id => {
         const el = document.getElementById(id);
         if (el && !el.hidden) spy.observe(el);
     });
@@ -331,7 +309,7 @@
     const isDark = () => root.dataset.theme === 'dark';
     const syncTheme = () => {
         themeBtn.setAttribute('aria-label', isDark() ? 'Switch to light mode' : 'Switch to dark mode');
-        metaTheme.setAttribute('content', isDark() ? '#121312' : '#F5F2EB');
+        metaTheme.setAttribute('content', isDark() ? '#101817' : '#F5F3EC');
     };
     syncTheme();
     themeBtn.addEventListener('click', () => {
@@ -354,14 +332,25 @@
         } else {
             root.classList.add('theme-anim');
             apply();
-            setTimeout(() => root.classList.remove('theme-anim'), 450);
+            setTimeout(() => root.classList.remove('theme-anim'), 350);
         }
+    });
+    // With no saved choice, keep following the system setting
+    matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+        let saved = null;
+        try { saved = localStorage.getItem('jr-theme'); } catch (err) {}
+        if (saved) return;
+        root.dataset.theme = e.matches ? 'dark' : 'light';
+        syncTheme();
     });
 
     /* ─── Mobile menu ──────────────────────────────────────── */
     const menu = $('#menu');
-    $('.menu-btn').addEventListener('click', () => menu.showModal());
+    // Number only the links that are showing (Journal appears later)
+    $$('.menu-links a:not([hidden]) .mono').forEach((n, k) => { n.textContent = pad(k + 1); });
+    $('.menu-btn').addEventListener('click', () => { menu.showModal(); document.body.style.overflow = 'hidden'; });
     $('.menu-close').addEventListener('click', () => menu.close());
+    menu.addEventListener('close', () => { document.body.style.overflow = ''; }); // also runs on Escape
     $$('.menu-links a').forEach(a => a.addEventListener('click', e => {
         e.preventDefault();
         menu.close();
@@ -370,55 +359,60 @@
         history.replaceState(null, '', a.getAttribute('href'));
     }));
 
-    /* ─── Hero: the working loop ───────────────────────────── */
+    /* ─── Hero: four stages, one word, four type treatments ── */
     const STAGES = [
         ['Explore', 'Find out how it really works, testing products to their limits.'],
         ['Experiment', 'Try ideas as working prototypes, using AI tools and prompting.'],
         ['Understand', 'Explain it clearly, in writing and by helping others learn it.'],
         ['Build', 'Build something people can use, and put it online.']
     ];
-    const pulse = $('#lp-pulse');
-    const nodes = $$('.lp-node');
-    const lpBtns = $$('.lp-btn');
-    const card = $('.loop-card');
-    let stage = -1;
+    const stageEl = $('.stage');
+    const word = $('#stage-word');
+    const stBtns = $$('.st-btn');
+    const stageCard = $('.stage-card');
+    const CYCLE = parseFloat(getComputedStyle(root).getPropertyValue('--cycle')) || 3600;
+    const rand = (a, b) => (a + Math.random() * (b - a)).toFixed(2);
+    let stage = -1, timer = 0, held = false, heroVisible = true;
     function showStage(i) {
-        if (i === stage) return;
         stage = i;
-        nodes.forEach((n, k) => n.classList.toggle('on', k === i));
-        lpBtns.forEach((b, k) => b.classList.toggle('on', k === i));
+        const name = STAGES[i][0];
+        // One span per letter; random offsets feed the Experiment and Understand treatments
+        word.innerHTML = [...name].map((c, k) =>
+            `<span class="ch" style="--i:${k};--rx:${rand(-.25, .25)}em;--ry:${rand(-.3, .3)}em;--rr:${rand(-14, 14)}deg">${esc(c)}</span>`).join('');
+        word.className = `stage-word s-${name.toLowerCase()}`;
+        stBtns.forEach((b, k) => {
+            b.classList.remove('on');
+            b.setAttribute('aria-pressed', k === i);
+        });
+        void stageCard.offsetWidth; // restart the progress fill on the new button
+        stBtns[i].classList.add('on');
         $('#loop-num').textContent = `${pad(i + 1)} / 04`;
-        $('#loop-title').textContent = STAGES[i][0];
+        $('#loop-title').textContent = name;
         $('#loop-text').textContent = STAGES[i][1];
-        card.classList.remove('swap'); void card.offsetWidth; card.classList.add('swap');
+        stageCard.classList.remove('swap'); void stageCard.offsetWidth; stageCard.classList.add('swap');
     }
-    // The pulse travels the loop once every 8s; the node it last passed is the active stage
-    const CYCLE = 8000;
-    let progress = 0, last = 0, held = false, running = false, heroVisible = true;
-    const setPulse = p => pulse.style.strokeDashoffset = (7 - p * 100).toFixed(2);
-    function frame(now) {
-        if (!running) return;
-        // rAF timestamps can precede the performance.now() taken at start, so never step backwards
-        if (!held) progress = (progress + Math.max(0, now - last) / CYCLE) % 1;
-        last = Math.max(last, now);
-        setPulse(progress);
-        showStage(Math.floor(progress * 4) % 4);
-        requestAnimationFrame(frame);
-    }
-    const startLoop = () => { if (running || reduceMotion || !heroVisible || document.hidden) return; running = true; last = performance.now(); requestAnimationFrame(frame); };
-    const stopLoop = () => { running = false; };
-    const hold = i => { held = true; progress = i / 4 + 0.001; setPulse(progress); showStage(i); };
-    lpBtns.forEach(b => {
+    const schedule = () => {
+        clearTimeout(timer);
+        if (held || reduceMotion || !heroVisible || document.hidden) return;
+        timer = setTimeout(() => { showStage((stage + 1) % 4); schedule(); }, CYCLE);
+    };
+    const hold = i => { held = true; stageEl.classList.add('held'); if (i !== stage) showStage(i); clearTimeout(timer); };
+    const release = () => { held = false; stageEl.classList.remove('held'); showStage(stage); schedule(); };
+    stBtns.forEach(b => {
         const i = +b.dataset.stage;
-        b.addEventListener('pointerenter', () => hold(i));
-        b.addEventListener('focus', () => hold(i));
         b.addEventListener('click', () => hold(i));
-        b.addEventListener('pointerleave', () => { if (document.activeElement !== b) held = false; });
-        b.addEventListener('blur', () => { held = false; });
+        b.addEventListener('focus', () => hold(i));
+        b.addEventListener('blur', release);
     });
+    stageEl.addEventListener('pointerenter', () => { if (!held) { held = true; stageEl.classList.add('held'); clearTimeout(timer); } });
+    stageEl.addEventListener('pointerleave', () => { if (!stageEl.contains(document.activeElement)) release(); });
+    if (reduceMotion) stageEl.classList.add('static');
     showStage(0);
-    new IntersectionObserver(([en]) => { heroVisible = en.isIntersecting; heroVisible ? startLoop() : stopLoop(); }).observe($('.loop'));
-    document.addEventListener('visibilitychange', () => document.hidden ? stopLoop() : startLoop());
+    new IntersectionObserver(([en]) => { heroVisible = en.isIntersecting; schedule(); }).observe(stageEl);
+    document.addEventListener('visibilitychange', () => {
+        root.classList.toggle('page-hidden', document.hidden);
+        schedule();
+    });
 
     /* ─── Process: steps activate as they cross the middle ─── */
     const steps = $$('.step');
@@ -434,7 +428,7 @@
     const setStep = i => {
         if (i === activeStep) return;
         activeStep = i;
-        steps.forEach((s, k) => s.classList.toggle('on', k === i));
+        steps.forEach((s, k) => { s.classList.toggle('on', k === i); s.classList.toggle('done', k < i); });
         pvBtns.forEach((b, k) => { b.classList.toggle('on', k === i); b.classList.toggle('done', k < i); b.setAttribute('aria-current', k === i ? 'step' : 'false'); });
         pvNum.textContent = pad(i + 1);
         pvName.textContent = PROCESS[i][0];
@@ -490,9 +484,19 @@
         jrLine.style.setProperty('--jw', `${lastX - first}px`);
         jrFill.style.setProperty('--jf', journeyI < 0 ? 0 : (dot(stops[journeyI]) - first) / (lastX - first));
     }
+    // Phones show the timeline vertically
+    const mqPhone = matchMedia('(max-width: 767px)');
+    const syncOrientation = () => $('.jr-track').setAttribute('aria-orientation', mqPhone.matches ? 'vertical' : 'horizontal');
+    syncOrientation();
+    mqPhone.addEventListener('change', syncOrientation);
     addEventListener('resize', layoutJourneyLine);
     stops.forEach((s, k) => {
-        s.addEventListener('click', () => selectStop(k));
+        s.addEventListener('click', () => {
+            selectStop(k);
+            // On phones the panel sits below the list: bring it into view if it's off-screen
+            const panel = panels[k];
+            if (mqPhone.matches && panel.getBoundingClientRect().top > innerHeight * .8) panel.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
+        });
         s.addEventListener('keydown', e => {
             const keys = { ArrowRight: 1, ArrowDown: 1, ArrowLeft: -1, ArrowUp: -1 };
             if (e.key in keys) { e.preventDefault(); selectStop((journeyI + keys[e.key] + stops.length) % stops.length, true); }
@@ -534,23 +538,8 @@
     }
     onScroll();
 
-    /* ─── Pointer effects: spotlight + magnetic buttons ────── */
+    /* ─── Pointer effects: magnetic buttons ────────────────── */
     if (finePointer && !reduceMotion) {
-        const spot = $('.spotlight');
-        let px = 0, py = 0, queued = false;
-        addEventListener('pointermove', e => {
-            px = e.clientX; py = e.clientY;
-            if (!queued) {
-                queued = true;
-                requestAnimationFrame(() => {
-                    queued = false;
-                    spot.style.setProperty('--px', `${px}px`);
-                    spot.style.setProperty('--py', `${py}px`);
-                });
-            }
-        }, { passive: true });
-        root.classList.add('has-pointer');
-
         $$('[data-magnetic]').forEach(el => {
             el.addEventListener('pointermove', e => {
                 const r = el.getBoundingClientRect();
@@ -581,7 +570,7 @@
             btn.classList.add('copied');
             label.textContent = 'Copied';
             showToast('Email copied to clipboard');
-            setTimeout(() => { btn.classList.remove('copied'); label.textContent = 'Copy'; }, 2200);
+            setTimeout(() => { btn.classList.remove('copied'); label.textContent = 'Copy email'; }, 2200);
         } catch (err) {
             showToast(btn.dataset.email);
         }

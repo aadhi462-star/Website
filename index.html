@@ -3,27 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jaswant R — Explorer, learner, builder</title>
-    <meta name="description" content="Jaswant R — a curious generalist at Zoho School of Business. I explore how things work, then build with what I learn. Projects, process, journey and contact.">
-    <meta name="theme-color" content="#F5F2EB">
+    <title>Jaswant R — Curious builder</title>
+    <meta name="description" content="Jaswant R explores how technology works, experiments with ideas and builds them into working products: web apps, browser extensions and more.">
+    <meta name="theme-color" content="#F5F3EC">
     <link rel="canonical" href="https://jaswantrportfolio.onslate.in/">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://jaswantrportfolio.onslate.in/">
-    <meta property="og:title" content="Jaswant R — Explorer, learner, builder">
-    <meta property="og:description" content="I explore how things work. Then I build with what I learn.">
+    <meta property="og:title" content="Jaswant R — Curious builder">
+    <meta property="og:description" content="I don't just explore ideas. I build them.">
     <meta property="og:image" content="https://jaswantrportfolio.onslate.in/Images/gamerush.jpg">
     <meta name="twitter:card" content="summary_large_image">
-    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23F5F2EB'/%3E%3Ctext x='50%25' y='56%25' text-anchor='middle' dominant-baseline='middle' font-family='Manrope,Arial,sans-serif' font-weight='800' font-size='30' fill='%23191918'%3EJR%3C/text%3E%3Ccircle cx='50' cy='16' r='5' fill='%23087F75'/%3E%3C/svg%3E">
+    <meta name="twitter:title" content="Jaswant R — Curious builder">
+    <meta name="twitter:description" content="I don't just explore ideas. I build them.">
+    <meta name="twitter:image" content="https://jaswantrportfolio.onslate.in/Images/gamerush.jpg">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23171C1B'/%3E%3Ctext x='50%25' y='56%25' text-anchor='middle' dominant-baseline='middle' font-family='Manrope,Arial,sans-serif' font-weight='800' font-size='30' fill='%23F5F3EC'%3EJR%3C/text%3E%3Ccircle cx='50' cy='16' r='5' fill='%233CC2B1'/%3E%3C/svg%3E">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300..800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/styles.css?v=20261110i">
+    <link rel="stylesheet" href="css/styles.css?v=20261111a">
     <!-- On every deploy: change SITE_VERSION here, the ?v= on the CSS/JS links, and version.json to the same value -->
     <script>
         // The host tells browsers to keep this page for a year, so a returning visitor can be shown an old copy.
         // Ask for version.json (never cached); if it's newer than this page, refetch the page and reload once.
         (function () {
-            var SITE_VERSION = '20261110i';
+            var SITE_VERSION = '20261111a';
             try {
                 fetch('version.json?nc=' + Date.now(), { cache: 'no-store' })
                     .then(function (r) { return r.ok ? r.json() : null; })
@@ -39,8 +42,12 @@
     </script>
     <script>
         document.documentElement.classList.add('js');
-        // Light is the default; a saved choice wins
-        try { var t = localStorage.getItem('jr-theme'); if (t === 'dark' || t === 'light') document.documentElement.dataset.theme = t; } catch (e) {}
+        // A saved choice wins; otherwise follow the system setting (light if none). Set before paint, so no flash.
+        try {
+            var t = localStorage.getItem('jr-theme');
+            if (t !== 'dark' && t !== 'light') t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+            document.documentElement.dataset.theme = t;
+        } catch (e) {}
         // Safety net: if main.js fails or is slow, show everything instead of a blank page
         setTimeout(function () { if (!window.__jrReady) document.documentElement.classList.remove('js'); }, 3000);
     </script>
@@ -57,12 +64,11 @@
     </script>
 </head>
 <body>
-    <a class="skip-link" href="#work">Skip to work</a>
+    <a class="skip-link" href="#main">Skip to content</a>
 
-    <!-- Ambient layers: page-wide column guides, paper grain, pointer spotlight -->
+    <!-- Ambient layers: page-wide column guides and paper grain -->
     <div class="ambient" aria-hidden="true">
         <div class="guides container"><i></i><i></i><i></i><i></i><i></i><i></i></div>
-        <span class="spotlight"></span>
     </div>
 
     <!-- First-visit loader -->
@@ -80,18 +86,16 @@
         <div class="container header-inner">
             <a href="#home" class="wordmark" aria-label="Jaswant R, home">Jaswant R<span>.</span></a>
 
-            <nav class="nav" aria-label="Main">
-                <span class="nav-indicator" aria-hidden="true"></span>
-                <a href="#home" data-nav="home">Home</a>
-                <a href="#about" data-nav="about">About</a>
-                <a href="#work" data-nav="work">Work</a>
-                <a href="#process" data-nav="process">Process</a>
-                <a href="#journal" data-nav="journal" hidden>Journal</a>
-                <a href="#contact" data-nav="contact">Contact</a>
-            </nav>
-
             <div class="header-right">
-                <a class="header-cta link-line" href="mailto:jaswant0520@zohomail.in">Say hello <svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+                <nav class="nav" aria-label="Main">
+                    <a href="#home" data-nav="home">Home</a>
+                    <a href="#about" data-nav="about">About</a>
+                    <a href="#work" data-nav="work">Work</a>
+                    <a href="#process" data-nav="process">Process</a>
+                    <a href="#journal" data-nav="journal" hidden>Journal</a>
+                    <a href="#contact" data-nav="contact">Contact</a>
+                    <span class="nav-indicator" aria-hidden="true"></span>
+                </nav>
                 <button class="theme-btn" type="button" aria-label="Switch to dark mode">
                     <svg class="i icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
                     <svg class="i icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
@@ -124,63 +128,51 @@
         </div>
     </dialog>
 
-    <main>
+    <main id="main">
         <!-- ═══ Hero ═══ -->
         <section id="home" class="hero" aria-labelledby="hero-title">
             <div class="container hero-grid">
                 <div class="hero-meta mono reveal">
                     <span>Jaswant R</span>
-                    <span class="hero-meta-right">Nº 2026 / Explorer · Learner · Builder</span>
+                    <span class="hero-meta-right">Nº 2026 / Curious builder</span>
                 </div>
 
-                <div class="hero-copy">
-                    <p class="status reveal"><span class="pulse" aria-hidden="true"></span>Currently Technical Writer trainee, Zoho Community Spaces</p>
-                    <h1 id="hero-title" class="hero-title" data-split>
-                        I <em>explore</em> how things work.<br> <span class="dim">Then I <em>build</em> with what I learn.</span>
-                    </h1>
-                    <p class="hero-lede reveal">Curious about technology, products and ideas. I experiment with tools, explore different domains and turn what I discover into practical experiences.</p>
+                <p class="status reveal"><span class="pulse" aria-hidden="true"></span>Currently Technical Writer trainee, Zoho Community Spaces</p>
+                <h1 id="hero-title" class="hero-title" data-split>
+                    <span class="ht-line">I don't just</span>
+                    <span class="ht-line ht-indent">explore ideas.</span>
+                    <span class="ht-line">I <em>build</em> them.</span>
+                </h1>
+
+                <div class="hero-intro">
+                    <p class="hero-lede reveal">I'm Jaswant R, a curious builder exploring technology, products and practical solutions. I enjoy understanding how things work, experimenting with possibilities and turning ideas into working experiences.</p>
                     <div class="hero-ctas reveal">
                         <a href="#work" class="btn btn-accent" data-magnetic>Explore my work
                             <svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg>
                         </a>
-                        <a href="#contact" class="btn btn-line" data-magnetic>Get in touch</a>
+                        <a href="#journey" class="btn btn-line" data-magnetic>Discover my journey</a>
                     </div>
                 </div>
 
-                <!-- Signature interaction: the working loop. A pulse travels the traces; each node lights in turn.
-                     Hover, focus or tap a stage to read about it. -->
-                <figure class="loop reveal" data-parallax="0.05">
-                    <div class="loop-stage">
-                        <svg viewBox="0 0 440 440" aria-hidden="true">
-                            <g class="lp-grid"><path d="M20 20h400v400H20z"/><path d="M20 220h20M400 220h20M220 20v20M220 400v20"/></g>
-                            <path class="lp-trace" d="M100 100H340V340H100Z"/>
-                            <path class="lp-trace thin" d="M220 170V100M270 220H340M220 270V340M170 220H100"/>
-                            <circle class="lp-via" cx="220" cy="100" r="4"/><circle class="lp-via" cx="340" cy="220" r="4"/>
-                            <circle class="lp-via" cx="220" cy="340" r="4"/><circle class="lp-via" cx="100" cy="220" r="4"/>
-                            <path class="lp-pulse" id="lp-pulse" pathLength="100" d="M100 100H340V340H100Z"/>
-                            <g class="lp-chip">
-                                <rect x="170" y="170" width="100" height="100" rx="10"/>
-                                <path d="M185 170v-10M205 170v-10M235 170v-10M255 170v-10M185 270v10M205 270v10M235 270v10M255 270v10M170 185h-10M170 205h-10M170 235h-10M170 255h-10M270 185h10M270 205h10M270 235h10M270 255h10"/>
-                                <text x="220" y="218" text-anchor="middle">JR</text>
-                                <text x="220" y="242" text-anchor="middle" class="lp-small">ECE · ZSB</text>
-                            </g>
-                            <circle class="lp-node" data-node="0" cx="100" cy="100" r="9"/>
-                            <circle class="lp-node" data-node="1" cx="340" cy="100" r="9"/>
-                            <circle class="lp-node" data-node="2" cx="340" cy="340" r="9"/>
-                            <circle class="lp-node" data-node="3" cx="100" cy="340" r="9"/>
-                        </svg>
-                        <!-- Real buttons over the nodes, so the diagram works with keyboard and touch -->
-                        <button type="button" class="lp-btn n0" data-stage="0"><span class="mono">01</span> Explore</button>
-                        <button type="button" class="lp-btn n1" data-stage="1"><span class="mono">02</span> Experiment</button>
-                        <button type="button" class="lp-btn n2" data-stage="2"><span class="mono">03</span> Understand</button>
-                        <button type="button" class="lp-btn n3" data-stage="3"><span class="mono">04</span> Build</button>
-                    </div>
-                    <figcaption class="loop-card" aria-live="polite">
-                        <span class="mono loop-card-num" id="loop-num">01 / 04</span>
+                <!-- Signature interaction: four stages, each with its own type treatment.
+                     Cycles while in view; hover, focus or tap a stage to hold it. -->
+                <figure class="stage reveal" aria-labelledby="stage-label">
+                    <p class="stage-label mono" id="stage-label">How I work</p>
+                    <div class="stage-word s-explore" id="stage-word" aria-hidden="true">Explore</div>
+                    <figcaption class="stage-card" aria-live="polite">
+                        <span class="mono stage-num" id="loop-num">01 / 04</span>
                         <strong id="loop-title">Explore</strong>
                         <span id="loop-text">Find out how it really works, testing products to their limits.</span>
                     </figcaption>
+                    <ol class="stage-nav">
+                        <li><button type="button" class="st-btn" data-stage="0"><span class="mono">01</span>Explore</button></li>
+                        <li><button type="button" class="st-btn" data-stage="1"><span class="mono">02</span>Experiment</button></li>
+                        <li><button type="button" class="st-btn" data-stage="2"><span class="mono">03</span>Understand</button></li>
+                        <li><button type="button" class="st-btn" data-stage="3"><span class="mono">04</span>Build</button></li>
+                    </ol>
                 </figure>
+
+                <a href="#about" class="scroll-cue mono" aria-label="Scroll to About"><span>Scroll</span><i aria-hidden="true"></i></a>
             </div>
         </section>
 
@@ -189,7 +181,7 @@
             <div class="container">
                 <header class="section-head">
                     <p class="section-index mono reveal"><span>01</span> About</p>
-                    <h2 id="about-title" class="section-title" data-split>A curious <span class="dim">generalist.</span></h2>
+                    <h2 id="about-title" class="section-title" data-split>A little curiosity. <span class="dim">A lot of experimentation.</span></h2>
                 </header>
 
                 <div class="about">
@@ -197,156 +189,170 @@
                         <div class="portrait-frame" data-parallax="-0.04">
                             <img src="Images/User%20Original%20from%20Zoho%20Cliq.png" alt="Portrait of Jaswant R" width="400" height="400" loading="lazy">
                         </div>
-                        <figcaption class="mono">Jaswant R. — ECE → Business</figcaption>
+                        <figcaption class="portrait-tag mono">Jaswant R. — ECE → Business</figcaption>
                     </figure>
 
                     <div class="about-body">
                         <p class="about-lead reveal">I enjoy understanding how technology works and exploring different tools and ideas. I like learning through experimentation and continuously improving my skills by exploring new technologies.</p>
+                        <p class="about-context reveal">I studied Electronics &amp; Communication Engineering, then moved into business studies at Zoho School of Business. Today I write technical content as a ZS trainee, and I build web apps and browser extensions of my own.</p>
                         <blockquote class="philosophy reveal">
                             <p>“I'm interested in building knowledge across multiple domains rather than limiting myself to a single field.”</p>
                             <footer class="mono">— Personal philosophy</footer>
                         </blockquote>
+                        <a href="#journey" class="link-line about-cta reveal">How I got here
+                            <svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg>
+                        </a>
                     </div>
                 </div>
+            </div>
+        </section>
 
-                <div id="journey" class="about-journey" aria-labelledby="journey-title">
-                    <header class="section-head sub-head">
-                        <p class="section-index mono reveal"><span>—</span> How I got here</p>
-                        <h3 id="journey-title" class="section-title" data-split>From circuits <span class="dim">to products.</span></h3>
-                        <p class="section-note mono reveal">Select a stop · ← → keys</p>
-                    </header>
+        <!-- ═══ Journey ═══ -->
+        <section id="journey" class="section" aria-labelledby="journey-title">
+            <div class="container">
+                <header class="section-head">
+                    <p class="section-index mono reveal"><span>02</span> Journey</p>
+                    <h2 id="journey-title" class="section-title" data-split>Every experience <span class="dim">shaped something.</span></h2>
+                    <p class="section-note mono reveal">Select a stop · arrow keys</p>
+                </header>
 
-                    <div class="journey reveal">
-                        <div class="jr-track-wrap">
-                            <div class="jr-track" role="tablist" aria-label="Journey stops">
-                                <button role="tab" id="jt-0" aria-controls="jp-0" class="jr-stop"><span class="mono">2010 – 22</span><strong>School</strong></button>
-                                <button role="tab" id="jt-1" aria-controls="jp-1" class="jr-stop"><span class="mono">2022 – 25</span><strong>Diploma, ECE</strong></button>
-                                <button role="tab" id="jt-2" aria-controls="jp-2" class="jr-stop"><span class="mono">2025 – 27</span><strong>Zoho School of Business</strong></button>
-                                <button role="tab" id="jt-3" aria-controls="jp-3" class="jr-stop"><span class="mono">2025</span><strong>ZS Sportsday</strong></button>
-                                <button role="tab" id="jt-4" aria-controls="jp-4" class="jr-stop"><span class="mono">Event</span><strong>WCAG Treasure Hunt</strong></button>
-                                <button role="tab" id="jt-5" aria-controls="jp-5" class="jr-stop"><span class="mono">Internship</span><strong>Zoho Mail Support</strong></button>
-                                <button role="tab" id="jt-6" aria-controls="jp-6" class="jr-stop now"><span class="mono">Now</span><strong>Technical Writer</strong></button>
+                <div class="journey reveal">
+                    <div class="jr-track-wrap">
+                        <div class="jr-track" role="tablist" aria-label="Journey stops">
+                            <button role="tab" id="jt-0" aria-controls="jp-0" class="jr-stop"><span class="mono">2010 – 22</span><strong>School</strong></button>
+                            <button role="tab" id="jt-1" aria-controls="jp-1" class="jr-stop"><span class="mono">2022 – 25</span><strong>Diploma, ECE</strong></button>
+                            <button role="tab" id="jt-2" aria-controls="jp-2" class="jr-stop"><span class="mono">2025 – 27</span><strong>Zoho School of Business</strong></button>
+                            <button role="tab" id="jt-3" aria-controls="jp-3" class="jr-stop"><span class="mono">2025</span><strong>ZS Sportsday</strong></button>
+                            <button role="tab" id="jt-4" aria-controls="jp-4" class="jr-stop"><span class="mono">Event</span><strong>WCAG Treasure Hunt</strong></button>
+                            <button role="tab" id="jt-5" aria-controls="jp-5" class="jr-stop"><span class="mono">Internship</span><strong>Zoho Mail Support</strong></button>
+                            <button role="tab" id="jt-6" aria-controls="jp-6" class="jr-stop now"><span class="mono">Now</span><strong>Technical Writer</strong></button>
+                        </div>
+                        <span class="jr-line" aria-hidden="true"><span class="jr-line-fill" id="jr-fill"></span></span>
+                    </div>
+
+                    <div class="jr-panels">
+                        <article class="jr-panel" role="tabpanel" id="jp-0" aria-labelledby="jt-0">
+                            <div class="jr-main">
+                                <p class="jr-kicker mono">Education · 2010 – 2022</p>
+                                <h3>NSN Matriculation Higher Secondary School</h3>
+                                <p>Completed primary and secondary education, laying the foundation for future academic and personal growth.</p>
                             </div>
-                            <span class="jr-line" aria-hidden="true"><span class="jr-line-fill" id="jr-fill"></span></span>
-                        </div>
-
-                        <div class="jr-panels">
-                            <article class="jr-panel" role="tabpanel" id="jp-0" aria-labelledby="jt-0">
-                                <div class="jr-main">
-                                    <p class="jr-kicker mono">Education · 2010 – 2022</p>
-                                    <h3>NSN Matriculation Higher Secondary School</h3>
-                                    <p>Completed primary and secondary education, laying the foundation for future academic and personal growth.</p>
-                                </div>
-                                <div class="jr-visual v-books" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
-                            </article>
-                            <article class="jr-panel" role="tabpanel" id="jp-1" aria-labelledby="jt-1">
-                                <div class="jr-main">
-                                    <p class="jr-kicker mono">Education · 2022 – 2025</p>
-                                    <h3>Diploma in Electronics &amp; Communication Engineering</h3>
-                                    <p>Foundational knowledge in electronic circuits and communication systems, plus practical technical skills through academic projects and hands-on learning.</p>
-                                </div>
-                                <div class="jr-visual v-signal" aria-hidden="true">
-                                    <svg viewBox="0 0 240 90"><path class="sig-grid" d="M0 45h240"/><path class="sig" d="M0 45 C20 5, 40 5, 60 45 S100 85, 120 45 S160 5, 180 45 S220 85, 240 45"/><path class="sig sq" d="M0 75h30v-20h30v20h30v-20h30v20h30v-20h30v20h30"/></svg>
-                                </div>
-                            </article>
-                            <article class="jr-panel" role="tabpanel" id="jp-2" aria-labelledby="jt-2">
-                                <div class="jr-main">
-                                    <p class="jr-kicker mono">Education · 2025 – 2027</p>
-                                    <h3>Zoho School of Business</h3>
-                                    <p>Fundamental business concepts, while developing skills in analysis, communication and practical problem-solving through real-world applications.</p>
-                                </div>
-                                <div class="jr-visual v-shift" aria-hidden="true"><span class="mono">ECE</span><i></i><span class="mono">Business</span></div>
-                            </article>
-                            <article class="jr-panel" role="tabpanel" id="jp-3" aria-labelledby="jt-3">
-                                <div class="jr-main">
-                                    <p class="jr-kicker mono">Event · 2025 · Organiser &amp; host</p>
-                                    <h3>ZS Sportsday 2025</h3>
-                                    <p>Organised and hosted the ZS Sportsday event, managing logistics, vendor relations and the overall participant experience.</p>
-                                </div>
-                                <ul class="jr-visual v-runsheet mono" aria-label="Responsibilities">
-                                    <li><span class="tick" aria-hidden="true"></span>Organising</li>
-                                    <li><span class="tick" aria-hidden="true"></span>Logistics</li>
-                                    <li><span class="tick" aria-hidden="true"></span>Vendor relations</li>
-                                    <li><span class="tick" aria-hidden="true"></span>Participant experience</li>
-                                    <li><span class="tick" aria-hidden="true"></span>Hosting</li>
+                            <div class="jr-visual v-books" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
+                        </article>
+                        <article class="jr-panel" role="tabpanel" id="jp-1" aria-labelledby="jt-1">
+                            <div class="jr-main">
+                                <p class="jr-kicker mono">Education · 2022 – 2025</p>
+                                <h3>Diploma in Electronics &amp; Communication Engineering</h3>
+                                <p>Foundational knowledge in electronic circuits and communication systems, plus practical technical skills through academic projects and hands-on learning.</p>
+                            </div>
+                            <div class="jr-visual v-signal" aria-hidden="true">
+                                <svg viewBox="0 0 240 90"><path class="sig-grid" d="M0 45h240"/><path class="sig" d="M0 45 C20 5, 40 5, 60 45 S100 85, 120 45 S160 5, 180 45 S220 85, 240 45"/><path class="sig sq" d="M0 75h30v-20h30v20h30v-20h30v20h30v-20h30v20h30"/></svg>
+                            </div>
+                        </article>
+                        <article class="jr-panel" role="tabpanel" id="jp-2" aria-labelledby="jt-2">
+                            <div class="jr-main">
+                                <p class="jr-kicker mono">Education · 2025 – 2027</p>
+                                <h3>Zoho School of Business</h3>
+                                <p>Fundamental business concepts, while developing skills in analysis, communication and practical problem-solving through real-world applications.</p>
+                            </div>
+                            <div class="jr-visual v-shift" aria-hidden="true"><span class="mono">ECE</span><i></i><span class="mono">Business</span></div>
+                        </article>
+                        <article class="jr-panel" role="tabpanel" id="jp-3" aria-labelledby="jt-3">
+                            <div class="jr-main">
+                                <p class="jr-kicker mono">Event · 2025 · Organiser &amp; host</p>
+                                <h3>ZS Sportsday 2025</h3>
+                                <p>Organised and hosted the ZS Sportsday event, managing logistics, vendor relations and the overall participant experience.</p>
+                            </div>
+                            <ul class="jr-visual v-runsheet mono" aria-label="Responsibilities">
+                                <li><span class="tick" aria-hidden="true"></span>Organising</li>
+                                <li><span class="tick" aria-hidden="true"></span>Logistics</li>
+                                <li><span class="tick" aria-hidden="true"></span>Vendor relations</li>
+                                <li><span class="tick" aria-hidden="true"></span>Participant experience</li>
+                                <li><span class="tick" aria-hidden="true"></span>Hosting</li>
+                            </ul>
+                        </article>
+                        <article class="jr-panel" role="tabpanel" id="jp-4" aria-labelledby="jt-4">
+                            <div class="jr-main">
+                                <p class="jr-kicker mono">Awareness game · Organiser &amp; host</p>
+                                <h3>WCAG Treasure Hunt</h3>
+                                <p>Organised and hosted the WCAG Treasure Hunt, promoting accessibility awareness and engaging participants in interactive learning activities.</p>
+                            </div>
+                            <div class="jr-visual v-clues" aria-hidden="true">
+                                <span><b class="mono">P</b>Perceivable</span><span><b class="mono">O</b>Operable</span>
+                                <span><b class="mono">U</b>Understandable</span><span><b class="mono">R</b>Robust</span>
+                            </div>
+                        </article>
+                        <article class="jr-panel jr-panel-wide" role="tabpanel" id="jp-5" aria-labelledby="jt-5">
+                            <div class="jr-main">
+                                <p class="jr-kicker mono">Internship · Customer support</p>
+                                <h3>Intern, Zoho Mail Support</h3>
+                                <ul class="jr-points">
+                                    <li>Supported customers and troubleshot their Zoho Mail accounts</li>
+                                    <li>Handled support tickets on time and completed every ticket in my bin before ending the day</li>
+                                    <li>Drafted replies to customers</li>
+                                    <li>Searched for answers on my own before reaching out with doubts</li>
                                 </ul>
-                            </article>
-                            <article class="jr-panel" role="tabpanel" id="jp-4" aria-labelledby="jt-4">
-                                <div class="jr-main">
-                                    <p class="jr-kicker mono">Awareness game · Organiser &amp; host</p>
-                                    <h3>WCAG Treasure Hunt</h3>
-                                    <p>Organised and hosted the WCAG Treasure Hunt, promoting accessibility awareness and engaging participants in interactive learning activities.</p>
-                                </div>
-                                <div class="jr-visual v-clues" aria-hidden="true">
-                                    <span><b class="mono">P</b>Perceivable</span><span><b class="mono">O</b>Operable</span>
-                                    <span><b class="mono">U</b>Understandable</span><span><b class="mono">R</b>Robust</span>
-                                </div>
-                            </article>
-                            <article class="jr-panel jr-panel-wide" role="tabpanel" id="jp-5" aria-labelledby="jt-5">
-                                <div class="jr-main">
-                                    <p class="jr-kicker mono">Internship · Customer support</p>
-                                    <h3>Intern, Zoho Mail Support</h3>
-                                    <ul class="jr-points">
-                                        <li>Supported customers and troubleshot their Zoho Mail accounts</li>
-                                        <li>Handled support tickets on time and completed every ticket in my bin before ending the day</li>
-                                        <li>Drafted replies to customers</li>
-                                        <li>Searched for answers on my own before reaching out with doubts</li>
-                                    </ul>
-                                </div>
-                                <figure class="testimonial">
-                                    <span class="quote-mark" aria-hidden="true">“</span>
-                                    <blockquote>
-                                        <p>Jaswant was very much proactive and showed his interest in learning new things right from day one. He consistently handled support tickets on time and ensured that all tickets in his bin were completed before ending the day. His drafting skills were also very good, and he showed curiosity about the product. He always made an effort to search for answers on his own before reaching out with any doubts, which was truly impressive.</p>
-                                    </blockquote>
-                                    <figcaption>
-                                        <span class="avatar" aria-hidden="true">GD</span>
-                                        <span><strong>Gopinath D.</strong><span class="mono">Zoho Mail Lead, Technical Support · My mentor during the internship</span></span>
-                                    </figcaption>
-                                </figure>
-                            </article>
-                            <article class="jr-panel" role="tabpanel" id="jp-6" aria-labelledby="jt-6">
-                                <div class="jr-main">
-                                    <p class="jr-kicker mono"><span class="tag-now">Now</span> · ZS trainee</p>
-                                    <h3>Technical Writer, Zoho Community Spaces</h3>
-                                    <p>Where I am now, as part of my ZS traineeship.</p>
-                                </div>
-                                <div class="jr-visual v-doc" aria-hidden="true">
-                                    <span class="doc-h"></span><span></span><span></span><span class="short"></span>
-                                    <span class="doc-h2"></span><span></span><span class="short"></span><span class="doc-caret"></span>
-                                </div>
-                            </article>
-                        </div>
+                            </div>
+                            <figure class="testimonial">
+                                <span class="quote-mark" aria-hidden="true">“</span>
+                                <blockquote>
+                                    <p>Jaswant was very much proactive and showed his interest in learning new things right from day one. He consistently handled support tickets on time and ensured that all tickets in his bin were completed before ending the day. His drafting skills were also very good, and he showed curiosity about the product. He always made an effort to search for answers on his own before reaching out with any doubts, which was truly impressive.</p>
+                                </blockquote>
+                                <figcaption>
+                                    <span class="avatar" aria-hidden="true">GD</span>
+                                    <span><strong>Gopinath D.</strong><span class="mono">Zoho Mail Lead, Technical Support · My mentor during the internship</span></span>
+                                </figcaption>
+                            </figure>
+                        </article>
+                        <article class="jr-panel" role="tabpanel" id="jp-6" aria-labelledby="jt-6">
+                            <div class="jr-main">
+                                <p class="jr-kicker mono"><span class="tag-now">Now</span> · ZS trainee</p>
+                                <h3>Technical Writer, Zoho Community Spaces</h3>
+                                <p>Where I am now, as part of my ZS traineeship.</p>
+                            </div>
+                            <div class="jr-visual v-doc" aria-hidden="true">
+                                <span class="doc-h"></span><span></span><span></span><span class="short"></span>
+                                <span class="doc-h2"></span><span></span><span class="short"></span><span class="doc-caret"></span>
+                            </div>
+                        </article>
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- ═══ Snapshot ═══ -->
-        <section id="snapshot" class="snapshot" aria-label="Personal snapshot">
+        <section id="snapshot" class="section" aria-labelledby="snapshot-title">
             <div class="container">
-                <dl class="snap-grid">
-                    <div class="snap reveal">
-                        <dt class="mono"><span>A</span> Interested in</dt>
-                        <dd><ul class="snap-tags"><li>Emerging tech</li><li>SaaS platforms</li><li>APIs</li><li>AI-powered tools</li><li>Testing products</li></ul></dd>
+                <header class="section-head">
+                    <p class="section-index mono reveal"><span>03</span> Snapshot</p>
+                    <h2 id="snapshot-title" class="section-title" data-split>What moves <span class="dim">my curiosity.</span></h2>
+                </header>
+
+                <div class="bento">
+                    <div class="bento-cell b-interest reveal">
+                        <h3 class="bento-label mono"><span>A</span> Interested in</h3>
+                        <ul class="bento-words">
+                            <li>Emerging tech</li><li>SaaS platforms</li><li>APIs</li><li>AI-powered tools</li><li>Testing products</li>
+                        </ul>
                     </div>
-                    <div class="snap reveal">
-                        <dt class="mono"><span>B</span> Can do</dt>
-                        <dd><ul class="snap-list">
+                    <div class="bento-cell b-contribute reveal">
+                        <h3 class="bento-label mono"><span>B</span> Can contribute</h3>
+                        <ul class="bento-list">
                             <li>Observation &amp; critical thinking</li>
                             <li>Problem-solving</li>
                             <li>Adaptability</li>
                             <li>AI &amp; prompt engineering</li>
                             <li>Building web apps &amp; extensions</li>
                             <li>Drafting clear written replies</li>
-                        </ul></dd>
+                        </ul>
                     </div>
-                    <div class="snap reveal">
-                        <dt class="mono"><span>C</span> Learning now</dt>
-                        <dd><ul class="snap-list learning">
-                            <li>Deluge scripting</li>
-                        </ul></dd>
+                    <div class="bento-cell b-learning reveal">
+                        <h3 class="bento-label mono"><span>C</span> Learning now</h3>
+                        <ul class="bento-learning">
+                            <li><span class="half" aria-hidden="true"></span>Deluge scripting</li>
+                        </ul>
                     </div>
-                </dl>
+                </div>
             </div>
         </section>
 
@@ -354,8 +360,8 @@
         <section id="work" class="section" aria-labelledby="work-title">
             <div class="container">
                 <header class="section-head">
-                    <p class="section-index mono reveal"><span>02</span> Selected explorations</p>
-                    <h2 id="work-title" class="section-title" data-split>Things I've designed <span class="dim">&amp; built.</span></h2>
+                    <p class="section-index mono reveal"><span>04</span> Selected work</p>
+                    <h2 id="work-title" class="section-title" data-split>Things I've explored. <span class="dim">Things I've built.</span></h2>
                     <p class="section-note mono reveal" id="work-count"></p>
                 </header>
 
@@ -372,15 +378,14 @@
                     <p>New work is on the bench. Check back soon.</p>
                 </div>
             </div>
-            <div class="index-preview" aria-hidden="true"><div class="index-preview-inner"></div></div>
         </section>
 
         <!-- ═══ Process ═══ -->
         <section id="process" class="section process" aria-labelledby="process-title">
             <div class="container">
                 <header class="section-head">
-                    <p class="section-index mono reveal"><span>03</span> How I work</p>
-                    <h2 id="process-title" class="section-title" data-split>Four steps, <span class="dim">on repeat.</span></h2>
+                    <p class="section-index mono reveal"><span>05</span> Process</p>
+                    <h2 id="process-title" class="section-title" data-split>How I turn ideas <span class="dim">into reality.</span></h2>
                     <p class="section-lede reveal">Explore, experiment, understand, build. Here is where each step shows up in my actual work, with evidence you can open.</p>
                 </header>
 
@@ -517,12 +522,13 @@
                 </div>
             </div>
         </section>
+
         <!-- ═══ Journal (appears once js/journal.js has entries) ═══ -->
         <section id="journal" class="section" aria-labelledby="journal-title" hidden>
             <div class="container">
                 <header class="section-head">
-                    <p class="section-index mono reveal"><span>04</span> Thinking out loud</p>
-                    <h2 id="journal-title" class="section-title" data-split>Notes from <span class="dim">the bench.</span></h2>
+                    <p class="section-index mono reveal"><span>06</span> Journal</p>
+                    <h2 id="journal-title" class="section-title" data-split>Notes from <span class="dim">the process.</span></h2>
                     <p class="section-note mono reveal" id="journal-count"></p>
                 </header>
                 <ol class="journal" id="journal-list"></ol>
@@ -532,8 +538,8 @@
         <!-- ═══ Contact ═══ -->
         <section id="contact" class="section contact" aria-labelledby="contact-title">
             <div class="container">
-                <p class="section-index mono reveal"><span>—</span> Contact</p>
-                <h2 id="contact-title" class="contact-title" data-split>Have something <span class="accent-word">interesting</span> to build?</h2>
+                <p class="section-index mono reveal"><span>07</span> Contact</p>
+                <h2 id="contact-title" class="contact-title" data-split>Something interesting starts with a <span class="accent-word">conversation.</span></h2>
                 <p class="contact-lede reveal">I'm always interested in exploring ideas, learning something new and collaborating on meaningful projects.</p>
 
                 <div class="contact-email reveal">
@@ -543,19 +549,19 @@
                     </a>
                     <button type="button" class="copy-btn mono" data-email="jaswant0520@zohomail.in">
                         <svg class="i" viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
-                        <span class="copy-label">Copy</span>
+                        <span class="copy-label">Copy email</span>
                     </button>
                 </div>
 
                 <ul class="contact-links">
                     <li class="reveal">
-                        <a href="https://www.linkedin.com/in/jaswant-r-0a90192a8/" target="_blank" rel="noopener">
+                        <a href="https://www.linkedin.com/in/jaswant-r-0a90192a8/" target="_blank" rel="noopener noreferrer">
                             <span class="mono">01</span><span class="cl-name">LinkedIn</span><span class="cl-hint">Connect</span>
                             <svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
                         </a>
                     </li>
                     <li class="reveal">
-                        <a href="https://github.com/aadhi462-star" target="_blank" rel="noopener">
+                        <a href="https://github.com/aadhi462-star" target="_blank" rel="noopener noreferrer">
                             <span class="mono">02</span><span class="cl-name">GitHub</span><span class="cl-hint">aadhi462-star</span>
                             <svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
                         </a>
@@ -571,10 +577,17 @@
         </section>
     </main>
 
-    <footer class="footer container mono">
-        <span>© <span id="year"></span> Jaswant R</span>
-        <span class="footer-mid">Explore · Experiment · Understand · Build</span>
-        <a href="#home" class="link-line">Back to top ↑</a>
+    <footer class="footer">
+        <div class="container footer-inner">
+            <span class="footer-name">Jaswant R<span>.</span></span>
+            <span class="footer-copy mono">© <span id="year">2026</span></span>
+            <ul class="footer-links mono">
+                <li><a class="link-line" href="https://www.linkedin.com/in/jaswant-r-0a90192a8/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+                <li><a class="link-line" href="https://github.com/aadhi462-star" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+                <li><a class="link-line" href="mailto:jaswant0520@zohomail.in">Email</a></li>
+            </ul>
+            <a href="#home" class="to-top mono">Back to top <span aria-hidden="true">↑</span></a>
+        </div>
     </footer>
 
     <!-- Case study sheet -->
@@ -587,15 +600,15 @@
         </div>
         <article class="sheet-body" id="sheet-body" tabindex="-1"></article>
         <div class="sheet-nav">
-            <button type="button" data-step="-1"><span class="mono">← Prev</span><span class="sheet-nav-title" id="prev-title"></span></button>
+            <button type="button" data-step="-1"><span class="mono">← Previous</span><span class="sheet-nav-title" id="prev-title"></span></button>
             <button type="button" data-step="1"><span class="mono">Next →</span><span class="sheet-nav-title" id="next-title"></span></button>
         </div>
     </dialog>
 
     <div class="toast mono" id="toast" role="status" aria-live="polite"></div>
 
-    <script src="js/projects.js?v=20261110i"></script>
-    <script src="js/journal.js?v=20261110i"></script>
-    <script src="js/main.js?v=20261110i"></script>
+    <script src="js/projects.js?v=20261111a"></script>
+    <script src="js/journal.js?v=20261111a"></script>
+    <script src="js/main.js?v=20261111a"></script>
 </body>
 </html>
