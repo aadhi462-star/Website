@@ -21,6 +21,8 @@
  *   learnings     what you learned, one sentence each: ["…", "…"] (optional)
  *   details       extra paragraphs for the case study (optional)
  *   tags          tools / skills used
+ *   imageSize     [width, height] of the screenshot (optional, default
+ *                 [1440, 900]); keeps the space reserved before it loads
  *   image         screenshot in Images/ (optional). Projects with an image
  *                 and featured: true get a large case-study layout; the
  *                 rest appear in the index list below them.
@@ -57,6 +59,7 @@ window.PROJECTS = [
     ],
     tags: ["React 19", "TypeScript", "Gemini 2.5 Flash", "Gemini Live API", "Vite", "Tailwind CSS"],
     image: "Images/StartaPath.png",
+    imageSize: [1440, 810],
     links: [{ label: "Visit website", url: "https://startapath-ai-businessvalidator.onslate.in/" }]
   },
   {
@@ -122,29 +125,5 @@ window.PROJECTS = [
     tags: ["Chrome extension", "Manifest V3", "JavaScript", "Intl API"],
     image: "Images/timezonebuddy.jpg",
     inspiredBy: { label: "RandomZone's Time Zone Buddy", url: "https://randomzone.buildbetter.co.in/timezone-buddy/" }
-  },
-  {
-    id: "warranty-vault-pro",
-    title: "Warranty Vault Pro",
-    category: "Tool",
-    draft: true, // hidden until the description below is confirmed
-    platforms: "Desktop & mobile", // platforms: confirmed by you (the app needs a Google sign-in, so not checked here)
-    role: "Designed & built",
-    // Verified: a tool you built (original site, "Tools I Built"), published as a Google AI Studio app.
-    // TODO: describe what it does in one or two sentences, plus problem / contribution if you like.
-    summary: "A tool I built and published as a Google AI Studio app.",
-    tags: ["Google AI Studio"],
-    links: [{ label: "Open app", url: "https://ai.studio/apps/drive/1GHWw8ckcAHaHVOTmQuCD9ZB0Ew_MKRO3?fullscreenApplet=true" }]
-  },
-  {
-    id: "jas-visual-scraper",
-    title: "Jas Visual Scraper",
-    category: "Extension",
-    draft: true, // hidden until the description and publication status are confirmed
-    role: "Designed & built",
-    // Verified: a Chrome extension you built (original site, "Tools I Built").
-    // TODO: describe what it does, and add a store / GitHub link when it's public.
-    summary: "A Chrome extension I built for collecting information from web pages.",
-    tags: ["Chrome extension"]
   }
 ];

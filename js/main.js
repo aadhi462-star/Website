@@ -98,11 +98,11 @@
             p.inspiredBy && `<span><b>Inspired by</b><a class="link-line" href="${esc(p.inspiredBy.url)}" target="_blank" rel="noopener noreferrer">${esc(p.inspiredBy.label)}</a></span>`
         ].filter(Boolean);
         return `
-        <article class="case case--${layoutOf(p, i)}" id="case-${esc(p.id)}">
+        <article class="case case--${layoutOf(p, i)}" id="case-${esc(p.id)}" data-n="${numberOf(p)}">
             <div class="case-media">
                 <button type="button" class="case-frame" data-open="${esc(p.id)}" aria-label="Open case study: ${esc(p.title)}">
                     <span class="case-chrome" aria-hidden="true"><i></i><i></i><i></i><span class="mono">${esc(link ? host(link.url) : (p.tags || [])[0] || '')}</span></span>
-                    <span class="case-shot"><img src="${esc(p.image)}" alt="Screenshot of ${esc(p.title)}" loading="lazy" width="1440" height="900"></span>
+                    <span class="case-shot"><img src="${esc(p.image)}" alt="Screenshot of ${esc(p.title)}" loading="lazy" width="${(p.imageSize || [1440, 900])[0]}" height="${(p.imageSize || [1440, 900])[1]}"></span>
                     <span class="case-open" aria-hidden="true">Case study ${arrow}</span>
                 </button>
             </div>
