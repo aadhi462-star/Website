@@ -20,13 +20,13 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300..800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/styles.css?v=20261111b">
+    <link rel="stylesheet" href="css/styles.css?v=20261111c">
     <!-- On every deploy: change SITE_VERSION here, the ?v= on the CSS/JS links, and version.json to the same value -->
     <script>
         // The host tells browsers to keep this page for a year, so a returning visitor can be shown an old copy.
         // Ask for version.json (never cached); if it's newer than this page, refetch the page and reload once.
         (function () {
-            var SITE_VERSION = '20261111b';
+            var SITE_VERSION = '20261111c';
             try {
                 fetch('version.json?nc=' + Date.now(), { cache: 'no-store' })
                     .then(function (r) { return r.ok ? r.json() : null; })
@@ -222,10 +222,7 @@
                             <button role="tab" id="jt-0" aria-controls="jp-0" class="jr-stop"><span class="mono">2010 – 22</span><strong>School</strong></button>
                             <button role="tab" id="jt-1" aria-controls="jp-1" class="jr-stop"><span class="mono">2022 – 25</span><strong>Diploma, ECE</strong></button>
                             <button role="tab" id="jt-2" aria-controls="jp-2" class="jr-stop"><span class="mono">2025 – 27</span><strong>Zoho School of Business</strong></button>
-                            <button role="tab" id="jt-3" aria-controls="jp-3" class="jr-stop"><span class="mono">2025</span><strong>ZS Sportsday</strong></button>
-                            <button role="tab" id="jt-4" aria-controls="jp-4" class="jr-stop"><span class="mono">Event</span><strong>WCAG Treasure Hunt</strong></button>
-                            <button role="tab" id="jt-5" aria-controls="jp-5" class="jr-stop"><span class="mono">Internship</span><strong>Zoho Mail Support</strong></button>
-                            <button role="tab" id="jt-6" aria-controls="jp-6" class="jr-stop now"><span class="mono">Now</span><strong>Technical Writer</strong></button>
+                            <button role="tab" id="jt-3" aria-controls="jp-3" class="jr-stop now"><span class="mono">Now</span><strong>Technical Writer</strong></button>
                         </div>
                         <span class="jr-line" aria-hidden="true"><span class="jr-line-fill" id="jr-fill"></span></span>
                     </div>
@@ -259,53 +256,6 @@
                         </article>
                         <article class="jr-panel" role="tabpanel" id="jp-3" aria-labelledby="jt-3">
                             <div class="jr-main">
-                                <p class="jr-kicker mono">Event · 2025 · Organiser &amp; host</p>
-                                <h3>ZS Sportsday 2025</h3>
-                                <p>Organised and hosted the ZS Sportsday event, managing logistics, vendor relations and the overall participant experience.</p>
-                            </div>
-                            <ul class="jr-visual v-runsheet mono" aria-label="Responsibilities">
-                                <li><span class="tick" aria-hidden="true"></span>Organising</li>
-                                <li><span class="tick" aria-hidden="true"></span>Logistics</li>
-                                <li><span class="tick" aria-hidden="true"></span>Vendor relations</li>
-                                <li><span class="tick" aria-hidden="true"></span>Participant experience</li>
-                                <li><span class="tick" aria-hidden="true"></span>Hosting</li>
-                            </ul>
-                        </article>
-                        <article class="jr-panel" role="tabpanel" id="jp-4" aria-labelledby="jt-4">
-                            <div class="jr-main">
-                                <p class="jr-kicker mono">Awareness game · Organiser &amp; host</p>
-                                <h3>WCAG Treasure Hunt</h3>
-                                <p>Organised and hosted the WCAG Treasure Hunt, promoting accessibility awareness and engaging participants in interactive learning activities.</p>
-                            </div>
-                            <div class="jr-visual v-clues" aria-hidden="true">
-                                <span><b class="mono">P</b>Perceivable</span><span><b class="mono">O</b>Operable</span>
-                                <span><b class="mono">U</b>Understandable</span><span><b class="mono">R</b>Robust</span>
-                            </div>
-                        </article>
-                        <article class="jr-panel jr-panel-wide" role="tabpanel" id="jp-5" aria-labelledby="jt-5">
-                            <div class="jr-main">
-                                <p class="jr-kicker mono">Internship · Customer support</p>
-                                <h3>Intern, Zoho Mail Support</h3>
-                                <ul class="jr-points">
-                                    <li>Supported customers and troubleshot their Zoho Mail accounts</li>
-                                    <li>Handled support tickets on time and completed every ticket in my bin before ending the day</li>
-                                    <li>Drafted replies to customers</li>
-                                    <li>Searched for answers on my own before reaching out with doubts</li>
-                                </ul>
-                            </div>
-                            <figure class="testimonial">
-                                <span class="quote-mark" aria-hidden="true">“</span>
-                                <blockquote>
-                                    <p>Jaswant was very much proactive and showed his interest in learning new things right from day one. He consistently handled support tickets on time and ensured that all tickets in his bin were completed before ending the day. His drafting skills were also very good, and he showed curiosity about the product. He always made an effort to search for answers on his own before reaching out with any doubts, which was truly impressive.</p>
-                                </blockquote>
-                                <figcaption>
-                                    <span class="avatar" aria-hidden="true">GD</span>
-                                    <span><strong>Gopinath D.</strong><span class="mono">Zoho Mail Lead, Technical Support · My mentor during the internship</span></span>
-                                </figcaption>
-                            </figure>
-                        </article>
-                        <article class="jr-panel" role="tabpanel" id="jp-6" aria-labelledby="jt-6">
-                            <div class="jr-main">
                                 <p class="jr-kicker mono"><span class="tag-now">Now</span> · ZS trainee</p>
                                 <h3>Technical Writer, Zoho Community Spaces</h3>
                                 <p>Where I am now, as part of my ZS traineeship.</p>
@@ -320,11 +270,72 @@
             </div>
         </section>
 
+        <!-- ═══ Experience ═══ -->
+        <section id="experience" class="section" aria-labelledby="experience-title">
+            <div class="container">
+                <header class="section-head">
+                    <p class="section-index mono reveal"><span>03</span> Experience</p>
+                    <h2 id="experience-title" class="section-title" data-split>Learning <span class="dim">by doing.</span></h2>
+                </header>
+
+                <div class="xp">
+                    <!-- Internship: the role on one card, my mentor's words layered beside it -->
+                    <article class="xp-card reveal">
+                        <p class="xp-tag mono"><span>Internship</span> Customer support</p>
+                        <h3>Intern, Zoho Mail Support</h3>
+                        <ul class="jr-points">
+                            <li>Supported customers and troubleshot their Zoho Mail accounts</li>
+                            <li>Drafted replies to customers</li>
+                        </ul>
+                    </article>
+                    <figure class="testimonial xp-quote reveal">
+                        <span class="quote-mark" aria-hidden="true">“</span>
+                        <blockquote>
+                            <p>Jaswant was very much proactive and showed his interest in learning new things right from day one. He consistently handled support tickets on time and ensured that all tickets in his bin were completed before ending the day. His drafting skills were also very good, and he showed curiosity about the product. He always made an effort to search for answers on his own before reaching out with any doubts, which was truly impressive.</p>
+                        </blockquote>
+                        <figcaption>
+                            <span class="avatar" aria-hidden="true">GD</span>
+                            <span><strong>Gopinath D.</strong><span class="mono">Zoho Mail Lead, Technical Support · My mentor during the internship</span></span>
+                        </figcaption>
+                    </figure>
+
+                    <!-- Events: two passes, slightly askew; they straighten on hover -->
+                    <article class="xp-ticket t-sports reveal">
+                        <div class="ticket-stub mono" aria-hidden="true"><span>Event</span><b>2025</b></div>
+                        <div class="ticket-main">
+                            <p class="xp-tag mono"><span>Organiser &amp; host</span></p>
+                            <h3>ZS Sportsday 2025</h3>
+                            <p>Organised and hosted the ZS Sportsday event, managing logistics, vendor relations and the overall participant experience.</p>
+                            <ul class="v-runsheet mono" aria-label="Responsibilities">
+                                <li><span class="tick" aria-hidden="true"></span>Organising</li>
+                                <li><span class="tick" aria-hidden="true"></span>Logistics</li>
+                                <li><span class="tick" aria-hidden="true"></span>Vendor relations</li>
+                                <li><span class="tick" aria-hidden="true"></span>Participant experience</li>
+                                <li><span class="tick" aria-hidden="true"></span>Hosting</li>
+                            </ul>
+                        </div>
+                    </article>
+                    <article class="xp-ticket t-wcag reveal">
+                        <div class="ticket-stub mono" aria-hidden="true"><span>Game</span><b>POUR</b></div>
+                        <div class="ticket-main">
+                            <p class="xp-tag mono"><span>Organiser &amp; host</span> Awareness game</p>
+                            <h3>WCAG Treasure Hunt</h3>
+                            <p>Organised and hosted the WCAG Treasure Hunt, promoting accessibility awareness and engaging participants in interactive learning activities.</p>
+                            <div class="v-clues" aria-hidden="true">
+                                <span><b class="mono">P</b>Perceivable</span><span><b class="mono">O</b>Operable</span>
+                                <span><b class="mono">U</b>Understandable</span><span><b class="mono">R</b>Robust</span>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
         <!-- ═══ Snapshot ═══ -->
         <section id="snapshot" class="section" aria-labelledby="snapshot-title">
             <div class="container">
                 <header class="section-head">
-                    <p class="section-index mono reveal"><span>03</span> Snapshot</p>
+                    <p class="section-index mono reveal"><span>04</span> Snapshot</p>
                     <h2 id="snapshot-title" class="section-title" data-split>What moves <span class="dim">my curiosity.</span></h2>
                 </header>
 
@@ -343,13 +354,6 @@
                             <li>Adaptability</li>
                             <li>AI &amp; prompt engineering</li>
                             <li>Building web apps &amp; extensions</li>
-                            <li>Drafting clear written replies</li>
-                        </ul>
-                    </div>
-                    <div class="bento-cell b-learning reveal">
-                        <h3 class="bento-label mono"><span>C</span> Learning now</h3>
-                        <ul class="bento-learning">
-                            <li><span class="half" aria-hidden="true"></span>Deluge scripting</li>
                         </ul>
                     </div>
                 </div>
@@ -360,7 +364,7 @@
         <section id="work" class="section" aria-labelledby="work-title">
             <div class="container">
                 <header class="section-head">
-                    <p class="section-index mono reveal"><span>04</span> Selected work</p>
+                    <p class="section-index mono reveal"><span>05</span> Selected work</p>
                     <h2 id="work-title" class="section-title" data-split>Things I've explored. <span class="dim">Things I've built.</span></h2>
                     <p class="section-note mono reveal" id="work-count"></p>
                 </header>
@@ -384,7 +388,7 @@
         <section id="process" class="section process" aria-labelledby="process-title">
             <div class="container">
                 <header class="section-head">
-                    <p class="section-index mono reveal"><span>05</span> Process</p>
+                    <p class="section-index mono reveal"><span>06</span> Process</p>
                     <h2 id="process-title" class="section-title" data-split>How I turn ideas <span class="dim">into reality.</span></h2>
                     <p class="section-lede reveal">Four steps I repeat on everything I make. Each one has a small demo you can try.</p>
                 </header>
@@ -541,7 +545,7 @@
         <section id="journal" class="section" aria-labelledby="journal-title" hidden>
             <div class="container">
                 <header class="section-head">
-                    <p class="section-index mono reveal"><span>06</span> Journal</p>
+                    <p class="section-index mono reveal"><span>07</span> Journal</p>
                     <h2 id="journal-title" class="section-title" data-split>Notes from <span class="dim">the process.</span></h2>
                     <p class="section-note mono reveal" id="journal-count"></p>
                 </header>
@@ -552,7 +556,7 @@
         <!-- ═══ Contact ═══ -->
         <section id="contact" class="section contact" aria-labelledby="contact-title">
             <div class="container">
-                <p class="section-index mono reveal"><span>07</span> Contact</p>
+                <p class="section-index mono reveal"><span>08</span> Contact</p>
                 <h2 id="contact-title" class="contact-title" data-split>Something interesting starts with a <span class="accent-word">conversation.</span></h2>
                 <p class="contact-lede reveal">I'm always interested in exploring ideas, learning something new and collaborating on meaningful projects.</p>
 
@@ -621,8 +625,8 @@
 
     <div class="toast mono" id="toast" role="status" aria-live="polite"></div>
 
-    <script src="js/projects.js?v=20261111b"></script>
-    <script src="js/journal.js?v=20261111b"></script>
-    <script src="js/main.js?v=20261111b"></script>
+    <script src="js/projects.js?v=20261111c"></script>
+    <script src="js/journal.js?v=20261111c"></script>
+    <script src="js/main.js?v=20261111c"></script>
 </body>
 </html>

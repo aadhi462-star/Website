@@ -460,7 +460,7 @@ em { font-style: normal; }
 
 /* ─── Journey (interactive timeline) ─────────────────────── */
 .jr-track-wrap { position: relative; }
-.jr-track { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 8px; position: relative; z-index: 1; padding-bottom: 30px; }
+.jr-track { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; position: relative; z-index: 1; padding-bottom: 30px; }
 .jr-stop {
     position: relative; text-align: left;
     display: flex; flex-direction: column; gap: 4px;
@@ -500,7 +500,6 @@ em { font-style: normal; }
 .jr-points li { display: grid; grid-template-columns: 16px 1fr; gap: 10px; }
 .jr-points li::before { content: "→"; color: var(--accent); }
 .jr-visual { grid-column: 8 / -1; }
-.jr-panel-wide .testimonial { grid-column: 1 / -1; }
 .tag-now { display: inline-flex; align-items: center; gap: 8px; }
 .tag-now::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
 
@@ -533,8 +532,8 @@ em { font-style: normal; }
 .v-runsheet li:last-child { border-bottom: 0; }
 .tick { width: 16px; height: 16px; border-radius: 4px; border: 1px solid var(--line-2); position: relative; flex-shrink: 0; transition: background .3s, border-color .3s; }
 .tick::after { content: ""; position: absolute; left: 4.5px; top: 1.5px; width: 5px; height: 9px; border: solid var(--accent-ink); border-width: 0 2px 2px 0; transform: rotate(45deg) scale(0); transition: transform .3s var(--ease-out); }
-.jr-panel:not([hidden]) .tick { background: var(--accent); border-color: var(--accent); }
-.jr-panel:not([hidden]) .tick::after { transform: rotate(45deg) scale(1); }
+.xp-ticket.in .tick { background: var(--accent); border-color: var(--accent); }
+.xp-ticket.in .tick::after { transform: rotate(45deg) scale(1); }
 .v-runsheet li:nth-child(1) .tick, .v-runsheet li:nth-child(1) .tick::after { transition-delay: .2s; }
 .v-runsheet li:nth-child(2) .tick, .v-runsheet li:nth-child(2) .tick::after { transition-delay: .35s; }
 .v-runsheet li:nth-child(3) .tick, .v-runsheet li:nth-child(3) .tick::after { transition-delay: .5s; }
@@ -554,6 +553,58 @@ em { font-style: normal; }
 .testimonial figcaption .mono { color: var(--muted); }
 .avatar { width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; flex-shrink: 0; border: 1px solid var(--accent); color: var(--accent); font-family: var(--mono); font-size: .8rem; }
 
+/* ─── Experience: a layered internship card + two event tickets ─ */
+.xp { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); row-gap: clamp(56px, 7vw, 104px); align-items: start; }
+.xp-tag { display: flex; flex-wrap: wrap; gap: 10px; color: var(--muted); }
+.xp-tag span { color: var(--accent); }
+.xp-card h3, .ticket-main h3 { font-size: var(--fs-h3); letter-spacing: -0.035em; font-weight: 750; }
+.xp-card {
+    grid-column: 1 / 6; grid-row: 1; z-index: 2; margin-top: clamp(32px, 5vw, 80px);
+    display: grid; gap: var(--s2);
+    padding: clamp(24px, 3vw, 40px);
+    background: var(--card); border: 1px solid var(--line); border-radius: var(--r-lg); box-shadow: var(--shadow);
+}
+/* The mentor's words sit on a deep-teal panel tucked under the card */
+.xp-quote {
+    grid-column: 5 / -1; grid-row: 1;
+    margin: 0; border: 0;
+    padding: clamp(56px, 6vw, 80px) clamp(24px, 4vw, 56px) clamp(28px, 3vw, 44px) clamp(40px, 10vw, 150px);
+    border-radius: var(--r-lg);
+    background: var(--color-primary-deep); color: #F1F2EB;
+}
+.xp-quote .quote-mark { top: 10px; left: auto; right: clamp(20px, 3vw, 44px); color: var(--color-primary-bright); }
+.xp-quote blockquote p, .xp-quote figcaption { padding-left: 0; }
+.xp-quote figcaption .mono { color: #A9C9C1; }
+.xp-quote .avatar { border-color: var(--color-primary-bright); color: var(--color-primary-bright); }
+
+.xp-ticket {
+    position: relative; display: grid; grid-template-columns: 88px 1fr;
+    background: var(--card); border: 1px solid var(--line); border-radius: var(--r-lg); box-shadow: var(--shadow);
+    transition: rotate .6s var(--ease-out), opacity .7s var(--ease-out), transform .8s var(--ease-out);
+}
+.t-sports { grid-column: 1 / 7; rotate: -1.5deg; }
+.t-wcag {
+    grid-column: 7 / -1; rotate: 1.2deg; margin-top: clamp(40px, 7vw, 112px);
+    background: var(--color-primary-deep); border-color: var(--color-primary-deep);
+    --text: #F1F2EB; --muted: #A9C9C1; --dim: #8DB3AA; --line-2: rgba(241, 242, 235, .28); --card: #1E4A44; --accent: var(--color-primary-bright);
+    color: var(--text);
+}
+.xp-ticket:hover { rotate: 0deg; }
+.ticket-stub {
+    position: relative;
+    display: flex; flex-direction: column; justify-content: space-between; align-items: center;
+    padding: 24px 0; color: var(--muted);
+    border-right: 2px dashed var(--line-2);
+}
+.ticket-stub span, .ticket-stub b { writing-mode: vertical-rl; rotate: 180deg; }
+.ticket-stub b { font-family: var(--font-display); font-size: 1.15rem; font-weight: 800; letter-spacing: .02em; color: var(--accent); }
+/* Punched notches where the stub tears off */
+.ticket-stub::before, .ticket-stub::after { content: ""; position: absolute; right: -11px; width: 20px; height: 20px; border-radius: 50%; background: var(--bg); }
+.ticket-stub::before { top: -11px; }
+.ticket-stub::after { bottom: -11px; }
+.ticket-main { display: grid; gap: var(--s2); padding: clamp(22px, 3vw, 36px); }
+.ticket-main > p:not(.xp-tag) { color: var(--muted); }
+
 /* ─── Snapshot (asymmetric bento) ────────────────────────── */
 .bento { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: var(--gutter); }
 .bento-cell {
@@ -566,8 +617,7 @@ em { font-style: normal; }
 .bento-label { display: flex; gap: 10px; color: var(--muted); margin-bottom: var(--s3); }
 .bento-label span { color: var(--accent); }
 .b-interest { grid-column: 1 / 8; }
-.b-contribute { grid-column: 8 / -1; grid-row: 1 / 3; }
-.b-learning { grid-column: 3 / 8; }
+.b-contribute { grid-column: 8 / -1; }
 .bento-words { display: flex; flex-wrap: wrap; gap: .1em .4em; }
 .bento-words li { font-size: clamp(1.6rem, 3.2vw, 2.9rem); font-weight: 750; letter-spacing: -0.045em; line-height: 1.12; transition: color .18s; }
 .bento-words li:not(:last-child)::after { content: "/"; margin-left: .35em; color: var(--line-2); font-weight: 400; }
@@ -576,13 +626,6 @@ em { font-style: normal; }
 .bento-list li { counter-increment: c; display: grid; grid-template-columns: 36px 1fr; padding: 12px 0; border-bottom: 1px solid var(--line); font-weight: 600; letter-spacing: -0.01em; }
 .bento-list li:last-child { border-bottom: 0; }
 .bento-list li::before { content: counter(c, decimal-leading-zero); font-family: var(--mono); font-size: var(--fs-meta); color: var(--accent); padding-top: 4px; }
-/* Learning now: the one deep-teal block */
-.b-learning { background: var(--color-primary-deep); border-color: var(--color-primary-deep); color: #F1F2EB; }
-.b-learning .bento-label { color: var(--color-primary-soft); }
-.b-learning .bento-label span { color: var(--color-primary-bright); }
-.b-learning:hover { border-color: var(--color-primary-bright); }
-.bento-learning li { display: flex; align-items: center; gap: 14px; font-size: clamp(1.6rem, 3.2vw, 2.6rem); font-weight: 750; letter-spacing: -0.045em; line-height: 1.1; }
-.half { width: .55em; height: .55em; border-radius: 50%; border: 2px solid var(--color-primary-bright); background: linear-gradient(90deg, var(--color-primary-bright) 50%, transparent 50%); flex-shrink: 0; }
 
 /* ─── Work ───────────────────────────────────────────────── */
 .cases { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); row-gap: clamp(80px, 10vw, 152px); }
@@ -965,7 +1008,6 @@ em { font-style: normal; }
     .stage { grid-column: 7 / -1; }
     .case--lead .case-media { grid-column: 1 / 9; }
     .case--lead .case-text { grid-column: 7 / -1; }
-    .jr-track { grid-template-columns: repeat(7, minmax(110px, 1fr)); }
 }
 
 /* Tablet (768–1023) */
@@ -982,8 +1024,10 @@ em { font-style: normal; }
     .portrait-tag { right: auto; left: 16px; bottom: 16px; }
     .about-body { grid-column: 7 / -1; padding-top: 0; }
     .b-interest { grid-column: 1 / -1; }
-    .b-contribute { grid-column: 1 / 8; grid-row: auto; }
-    .b-learning { grid-column: 8 / -1; }
+    .xp-card { grid-column: 1 / 9; margin-top: 0; }
+    .xp-quote { grid-column: 2 / -1; grid-row: 2; margin-top: -40px; padding-left: clamp(24px, 4vw, 56px); padding-top: 72px; }
+    .t-sports, .t-wcag { grid-column: 1 / -1; margin-top: 0; }
+    .b-contribute { grid-column: 1 / -1; }
     .case--lead .case-media, .case--alt .case-media, .case--ext .case-media { grid-column: 1 / -1; grid-row: 1; }
     .case--lead .case-text, .case--alt .case-text, .case--ext .case-text { grid-column: 1 / -1; grid-row: 2; margin: 0; }
     .case--lead .case-text { margin-top: -64px; margin-inline: var(--s4); }
@@ -993,7 +1037,7 @@ em { font-style: normal; }
     /* Journey becomes a horizontally scrolling rail */
     .jr-track-wrap { overflow-x: auto; scroll-snap-type: x mandatory; margin-inline: calc(var(--pad) * -1); padding-inline: var(--pad); scrollbar-width: none; }
     .jr-track-wrap::-webkit-scrollbar { display: none; }
-    .jr-track { grid-template-columns: repeat(7, 150px); width: max-content; }
+    .jr-track { grid-template-columns: repeat(4, minmax(150px, 1fr)); width: max(100%, 624px); }
     .jr-stop { scroll-snap-align: start; }
     .jr-main { grid-column: 1 / 8; }
     .jr-visual { grid-column: 8 / -1; }
@@ -1026,7 +1070,11 @@ em { font-style: normal; }
     .section-head { margin-bottom: var(--s5); }
     .portrait { grid-column: 1 / -1; max-width: 300px; margin-bottom: var(--s5); }
     .about-body { grid-column: 1 / -1; }
-    .b-interest, .b-contribute, .b-learning { grid-column: 1 / -1; }
+    .b-interest, .b-contribute { grid-column: 1 / -1; }
+    .xp-card, .xp-quote { grid-column: 1 / -1; }
+    .xp-quote { margin-top: -24px; }
+    .t-sports, .t-wcag { rotate: 0deg; }
+    .xp-ticket { grid-template-columns: 56px 1fr; }
     .case--pair-a, .case--pair-b { grid-column: 1 / -1; margin-top: 0; }
     .case--lead .case-text { margin: -32px 12px 0; }
     .case--ext { padding: 20px; }
@@ -1084,3 +1132,6 @@ em { font-style: normal; }
 
 /* Visually hidden, still read by screen readers */
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+
+/* Tickets reveal like everything else, and also ease their tilt on hover */
+.js .xp-ticket.reveal { transition: opacity .7s var(--ease-out) var(--delay, 0s), transform .8s var(--ease-out) var(--delay, 0s), rotate .6s var(--ease-out); }

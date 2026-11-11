@@ -292,11 +292,11 @@
     navLinks.forEach(a => a.addEventListener('pointerenter', () => moveIndicator(a)));
     nav.addEventListener('pointerleave', () => moveIndicator(activeLink));
     const spy = new IntersectionObserver(entries => {
-        // Journey and Snapshot have no nav link of their own; they belong to About
-        const group = { journey: 'about', snapshot: 'about' };
+        // Journey, Experience and Snapshot have no nav link of their own; they belong to About
+        const group = { journey: 'about', experience: 'about', snapshot: 'about' };
         entries.forEach(en => { if (en.isIntersecting) setActive(group[en.target.id] || en.target.id); });
     }, { rootMargin: '-45% 0px -50% 0px' });
-    ['home', 'about', 'journey', 'snapshot', 'work', 'process', 'journal', 'contact'].forEach(id => {
+    ['home', 'about', 'journey', 'experience', 'snapshot', 'work', 'process', 'journal', 'contact'].forEach(id => {
         const el = document.getElementById(id);
         if (el && !el.hidden) spy.observe(el);
     });
