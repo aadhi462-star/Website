@@ -82,23 +82,39 @@ window.PROJECTS = [
     links: [{ label: "Play now", url: "https://gamerush.onslate.in/" }]
   },
   {
-    id: "alumnizone",
-    title: "AlumniZone",
+    id: "communityone",
+    title: "CommunityOne",
     category: "Product",
+    year: "2026",
     featured: true,
-    platforms: "Desktop & mobile", // platforms: checked at phone width (390px) on 10 Nov 2026, and confirmed by you
-    role: "Designed & built",
+    platforms: "Desktop & mobile", // audited at 375, 768 and 1280px on 12 Nov 2026
+    role: "Product direction, built with Claude Code",
     status: "Live demo", // runs on fictional data
-    oneLiner: "An all-in-one alumni community, built as a demo with fictional data.",
+    oneLiner: "A platform where anyone can create and run a community.",
     summary:
-      "An all-in-one alumni community: a wall, groups, events, real-time channels, forums and manuals under one login.",
+      "A community platform with one account for every community you belong to, with discussions, events, resources, courses with certificates, moderation and platform administration.",
     problem:
-      "Alumni networks end up scattered across WhatsApp groups and separate tools that don't talk to each other.",
+      "Groups of every kind, from alumni networks and classes to hobby clubs and organisations, end up running on chat groups and separate tools. Nobody can see who belongs where, and there\u2019s no shared way to learn, moderate or look after members.",
+    why:
+      "I started from an earlier community demo of mine that kept all its data in the browser and served one kind of group. I wanted to see it become a real product: its own server and database, any kind of community, and rules for privacy and safety from the start.",
     contribution:
-      "Designed and built a working demo of the full platform with fictional data: Mandatory Read posts with acknowledgement tracking, groups with their own feeds, events with RSVPs, channels that auto-join group members, forums with upvotes and a shared manual.",
-    tags: ["Web app", "Community platform", "Product design"],
-    image: "Images/alumnizone.jpg",
-    links: [{ label: "Visit website", url: "https://community.onslate.in/" }]
+      "I set the direction and made the product decisions. I wrote the briefs, supplied the source documents (a product conversation, a 244-case edge-case list and a roadmap) and approved every stage before it was built: the design boards, each decision and the scope. Claude Code, an AI coding agent, wrote the code from those briefs. Each stage ended with tests and browser checks that I reviewed before it went to GitHub.",
+    approach:
+      "The work ran in stages, each with the same loop: a proposal and design boards, my approval, then the server and database, tests named after the edge cases, the screens, and checks at phone width. When I sent a new brief midway, reversing two earlier decisions, the work paused for an audit and an estimate, then continued in eight workstreams, A to H.",
+    details: [
+      "Communities are Public, Private (people ask to join) or Closed (invitation only, and invisible to outsiders). One rule runs through all of it: nobody is ever added to a community they didn\u2019t choose. Adding people sends invitations.",
+      "New communities start from one of eight templates (alumni, education, professional networking, technology, business, hobbies, organisations, general) or from scratch. A short questionnaire fills in the sections, categories and roles.",
+      "Each community can run courses with lessons, quizzes, graded assignments and certificates that anyone can verify. Moderation covers reports, cases, appeals and time-limited restrictions, and reporters are never named.",
+      "Under it sit a Node.js and Fastify server, PostgreSQL (PGlite) and React. It has 447 automated server tests and browser tests at desktop and phone size, and it\u2019s deployed on Zoho Catalyst AppSail.",
+      "The final pass audited 161 screens against WCAG 2.2 AA at three widths and in dark mode, and a security review found and fixed ten issues. Every one now has its own test."
+    ],
+    challenges: [
+      "A new brief partway through reversed earlier decisions (no community would be joined by default any more, and the colour scheme changed), so existing data had to move without losing anyone.",
+      "Keeping privacy consistent across many screens: a profile must never reveal a Private or Closed membership, and a block must never be revealed to the person blocked."
+    ],
+    tags: ["Product direction", "Claude Code", "React", "Node.js", "PostgreSQL", "Zoho Catalyst", "WCAG 2.2"],
+    image: "Images/communityone.jpg",
+    links: [{ label: "Visit website", url: "https://communityone.development.catalystappsail.in/" }]
   },
   {
     id: "time-zone-buddy",
