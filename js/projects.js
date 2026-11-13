@@ -141,5 +141,35 @@ window.PROJECTS = [
     tags: ["Chrome extension", "Manifest V3", "JavaScript", "Intl API"],
     image: "Images/timezonebuddy.jpg",
     inspiredBy: { label: "RandomZone's Time Zone Buddy", url: "https://randomzone.buildbetter.co.in/timezone-buddy/" }
+  },
+  {
+    id: "screenly",
+    title: "Screenly",
+    category: "Mac app",
+    year: "2026",
+    featured: true,
+    platforms: "macOS 12 or later",
+    role: "Designed & built",
+    status: "Open source", // MIT licence; no release yet, built from the code
+    oneLiner: "Animated characters that live on your Mac's desktop.",
+    summary:
+      "A macOS app that puts animated animals and your own characters on your desktop. They walk along the Dock, hang from the top of the screen, stand on your windows and react to your cursor. The overlay is click-through, so they never get in the way of your work.",
+    details: [
+      "Characters land on window tops and ride along when you move a window, fall when it closes, look at your cursor and greet each other. Petting and meals make them happier, and they get sleepy in the evening by your Mac's clock.",
+      "Each animal has its own diet. Food drops nearby, prey like flies and mice moves and has to be caught, and crumbs fall as they eat.",
+      "Character Studio turns any image into a character: background removal that runs on the Mac (images are never uploaded), brushes, crop, a frame timeline for animation and an editor for hanging characters.",
+      "It's an Electron app written in TypeScript with React and PixiJS, with Vitest tests for behaviour, feeding, validation and file safety.",
+      "The Spider-Man in the walkthrough is an image I imported to test the Studio; Spider-Man is a trademark of Marvel, and the character isn't part of Screenly."
+    ],
+    tags: ["Electron", "TypeScript", "React", "PixiJS", "Vitest"],
+    image: "Images/screenly.jpg",
+    gallery: [
+      { src: "Images/screenly-spiderman.jpg", alt: "Spider-Man, made from an imported image, hanging by a thread from the top of a Mac desktop next to Screenly's Active Characters window" },
+      { src: "Images/screenly-hanging-editor.jpg", alt: "Character Studio's hanging editor: the thread's attachment point on Spider-Man, thread and swing settings, and a live preview" },
+      { src: "Images/screenly-library.jpg", alt: "Screenly's Character Library: animal characters with Add to desktop and Customise buttons" },
+      { src: "Images/screenly-studio.jpg", alt: "Character Studio's live preview: a ginger cat walking on a simulated desktop" },
+      { src: "Images/screenly-active.jpg", alt: "Active Characters: each character's behaviour, mood, size and opacity controls" }
+    ],
+    links: [{ label: "View on GitHub", url: "https://github.com/aadhi462-star/hangly" }]
   }
 ];
